@@ -3,8 +3,6 @@ import { MAX_COLS, MAX_ROWS } from '../Constants';
 const generateCells = () => {
   let cells = [];
 
-
-
   //generate entire map empty
   for (let row = 0; row < MAX_ROWS; row++) {
     cells.push([]);
@@ -15,8 +13,6 @@ const generateCells = () => {
   }
   return cells;
 };
-
-
 
 export default generateCells;
 

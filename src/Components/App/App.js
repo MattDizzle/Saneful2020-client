@@ -14,16 +14,15 @@ Grid
 const App = () => {
   const [cells, setCells] = useState(generateCells());
 
-  console.log(cells);
+
 
   const renderCells = () => {
     return cells.map((row, rowIndex) =>
       row.map((cell, colIndex) => (
         <Cell
           key={`${rowIndex}-${colIndex}`}
-          row={rowIndex}
-          col={colIndex}
           walkable={cell.walkable}
+          name={cell.name}
         />
       ))
     );
