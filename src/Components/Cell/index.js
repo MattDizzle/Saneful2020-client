@@ -6,7 +6,6 @@ const Cell = () => {
 
   return (
     <div className='Cell'>
-      test
     </div>
   );
 };

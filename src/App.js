@@ -29,10 +29,8 @@ const App = () => {
 
   return (
     <main className='App'>
-      <canvas>
-        <img className='background' src='images/background'></img>;
-        <div className="cells">{renderCells()}</div>
-      </canvas>
+      <img className='background' src='images/background'></img>;
+      <div className="cells">{renderCells()}</div>
     </main>
   );
 };
