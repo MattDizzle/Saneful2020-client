@@ -1,8 +1,8 @@
-import { MAX_COLS, MAX_ROWS } from '../constants';
+import { MAX_COLS, MAX_ROWS } from '../Constants';
 import cellData from '../Data/cell-data';
 
-export const generateCells = () => {
-  let cells;
+const generateCells = () => {
+  let cells = [];
   let count = cellData.length;
 
   //generate entire map
@@ -15,4 +15,7 @@ export const generateCells = () => {
       count--;
     }
   }
+  return cells;
 };
+
+export default generateCells;

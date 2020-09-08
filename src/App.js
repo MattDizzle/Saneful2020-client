@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import generateCells from './Utils/generate-cells';
+import Cell from './Components/Cell';
 
 /* 
 Grid 
@@ -11,12 +12,26 @@ Grid
 const App = () => {
   const [cells, setCells] = useState(generateCells());
 
+  console.log(cells);
 
+  const renderCells = () => {
+    return cells.map((row, rowIndex) =>
+      row.map((cell, colIndex) => (
+        <Cell
+          key={`${rowIndex}-${colIndex}`}
+          row={rowIndex}
+          col={colIndex}
+          walkable={cell.walkable}
+        />
+      ))
+    );
+  };
 
   return (
     <main className='App'>
       <canvas>
-
+        <img className='background' src='images/background'></img>;
+        <div className="cells">{renderCells()}</div>
       </canvas>
     </main>
   );
