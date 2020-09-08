@@ -1,5 +1,12 @@
 .cells{
   display: grid;
-  grid-template-rows: repeat(15, 1fr);
+  grid-template-rows: repeat(10, 1fr);
   grid-template-columns: repeat(10, 1fr);
+  position: absolute; 
+  top: 5vh; 
+  left: 5vw;
+}
+
+.background{
+  position: relative;
 }

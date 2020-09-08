@@ -24,5 +24,6 @@ class Tile {
     this.name = name;
     this.hasPlayer = hasPlayer;
     this.walkable = walkable;
+
   }
 };

@@ -6,20 +6,19 @@ import './App.scss';
 
 /* 
 Grid 
-- 520px by 780px 
 - each square 52px
-- 10x15
+- 10x10
 */
 
 const App = () => {
   const [cells, setCells] = useState(generateCells());
-  const [playerPosX, setPlayerPosX] = useState(0);
-  const [playerPosY, setPlayerPosY] = useState(0);
+  const [playerPos, setPlayerPos] = useState({ x: 0, y: 0 });
+  const [playerTarget, setPplayerTarget] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    if (playerPosX < 9 && playerPosY < 9) {
+    if (playerPos.x !== playerTarget.x && playerPos.y !== playerTarget.y) {
       const interval = setInterval(() => {
-        movePlayer(1, 0);
+        movePlayer(0, 0);
       }, 1000);
 
       return () => {
@@ -27,20 +26,24 @@ const App = () => {
       };
     }
 
-  }, [playerPosX, playerPosY]);
+  }, [playerPos]);
 
   const movePlayer = (xDir, yDir) => {
     const newCells = cells.slice(); //copy cells
-    const currentCell = newCells[playerPosX][playerPosY];
+    const currentCell = newCells[playerPos.x][playerPos.y];
 
-    setPlayerPosX(playerPosX + xDir);
-    setPlayerPosY(playerPosY + yDir);
+    setPlayerPos({ x: playerPos.x + xDir, y: playerPos.y + yDir });
 
-    newCells[playerPosX][playerPosY].name = 'Player';
+    newCells[playerPos.x][playerPos.y].name = 'Player';
 
     setCells(newCells);
 
     currentCell.name = 'empty';
+  };
+
+  const setPlayerTarget = (xTarget, yTarget) => {
+    console.log('x', xTarget);
+    console.log('y', yTarget);
   };
 
   const renderCells = () => {
@@ -50,6 +53,10 @@ const App = () => {
           key={`${rowIndex}-${colIndex}`}
           walkable={cell.walkable}
           name={cell.name}
+          hasPlayer={cell.hasPlayer}
+          x={cell.x}
+          y={cell.y}
+          onClick={setPlayerTarget}
         />
       ))
     );
@@ -57,7 +64,7 @@ const App = () => {
 
   return (
     <main className='App'>
-      <img className='background' src='images/background'></img>;
+      <img className='cells' src='images/grid_10x10.png' alt='background'></img>
       <div className="cells">{renderCells()}</div>
     </main>
   );

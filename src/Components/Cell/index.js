@@ -5,7 +5,7 @@ import './Cell.scss';
 const Cell = (props) => {
 
   return (
-    <div className='Cell'>
+    <div onClick={() => props.onClick(props.x, props.y)} className='Cell'>
       {props.name}
     </div>
   );
