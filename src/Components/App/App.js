@@ -13,43 +13,34 @@ Grid
 
 const App = () => {
   const [cells, setCells] = useState(generateCells());
-  const [playerPos, setPlayerPos] = useState({ x: 0, y: 0 });
+  const [playerPosX, setPlayerPosX] = useState(0);
+  const [playerPosY, setPlayerPosY] = useState(0);
 
   useEffect(() => {
-    const handleMouseDown = () => {
-      movePlayer(1, 0);
-    };
+    if (playerPosX < 9 && playerPosY < 9) {
+      const interval = setInterval(() => {
+        movePlayer(1, 0);
+      }, 1000);
 
-    const handleMouseUp = () => {
-      //movePlayer(0, 0);
-    };
+      return () => {
+        clearInterval(interval);
+      };
+    }
 
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
-
-    return () => {
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-
-  }, []);
+  }, [playerPosX, playerPosY]);
 
   const movePlayer = (xDir, yDir) => {
-    const currentCells = cells.slice(); //copy cells
-    let currentCell = currentCells[playerPos.x][playerPos.y];
+    const newCells = cells.slice(); //copy cells
+    const currentCell = newCells[playerPosX][playerPosY];
 
-    setPlayerPos({
-      x: playerPos.x + xDir,
-      y: playerPos.y + yDir
-    });
+    setPlayerPosX(playerPosX + xDir);
+    setPlayerPosY(playerPosY + yDir);
 
-    currentCells[playerPos.x][playerPos.y].name = 'Player';
+    newCells[playerPosX][playerPosY].name = 'Player';
 
-    setCells(currentCells);
+    setCells(newCells);
 
     currentCell.name = 'empty';
-
-    console.log(cells);
   };
 
   const renderCells = () => {
