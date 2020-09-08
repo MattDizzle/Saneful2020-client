@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
+import generateCells from './Utils/generate-cells';
 
-function App() {
+/* 
+Grid 
+- 520px by 780px 
+- each square 52px
+- 10x15
+*/
+
+const App = () => {
+  const [cells, setCells] = useState(generateCells());
+
+
+
   return (
     <main className='App'>
-      {/* content goes here */}
+      <canvas>
+
+      </canvas>
     </main>
   );
-}
+};
 
 export default App;
