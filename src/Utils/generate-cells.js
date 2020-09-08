@@ -7,7 +7,7 @@ const generateCells = () => {
   for (let row = 0; row < MAX_ROWS; row++) {
     cells.push([]);
     for (let col = 0; col < MAX_COLS; col++) {
-      let newTile = new Tile(row, col);
+      let newTile = new Tile(row, col, 'empty', true, false);
       cells[row].push(newTile);
     }
   }
@@ -16,8 +16,9 @@ const generateCells = () => {
 
 export default generateCells;
 
+
 class Tile {
-  constructor(x = 0, y = 0, name = 'empty', walkable = true, hasPlayer = false) {
+  constructor(x, y, name, walkable, hasPlayer) {
     this.x = x;
     this.y = y;
     this.name = name;

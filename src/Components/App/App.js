@@ -44,8 +44,12 @@ const App = () => {
     });
 
     currentCells[playerPos.x][playerPos.y].name = 'Player';
-    currentCell.name = 'empty';
+
     setCells(currentCells);
+
+    currentCell.name = 'empty';
+
+    console.log(cells);
   };
 
   const renderCells = () => {
