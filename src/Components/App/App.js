@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import generateCells from './Utils/generate-cells';
-import Cell from './Components/Cell';
+import generateCells from '../../Utils/generate-cells';
+import Cell from '../Cell';
+
+import './App.scss';
 
 /* 
 Grid 
