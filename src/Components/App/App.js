@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import generateCells from '../../Utils/generate-cells';
 import Cell from '../Cell';
 
@@ -13,8 +13,40 @@ Grid
 
 const App = () => {
   const [cells, setCells] = useState(generateCells());
+  const [playerPos, setPlayerPos] = useState({ x: 0, y: 0 });
 
+  useEffect(() => {
+    const handleMouseDown = () => {
+      movePlayer(1, 0);
+    };
 
+    const handleMouseUp = () => {
+      //movePlayer(0, 0);
+    };
+
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+
+  }, []);
+
+  const movePlayer = (xDir, yDir) => {
+    const currentCells = cells.slice(); //copy cells
+    let currentCell = currentCells[playerPos.x][playerPos.y];
+
+    setPlayerPos({
+      x: playerPos.x + xDir,
+      y: playerPos.y + yDir
+    });
+
+    currentCells[playerPos.x][playerPos.y].name = 'Player';
+    currentCell.name = 'empty';
+    setCells(currentCells);
+  };
 
   const renderCells = () => {
     return cells.map((row, rowIndex) =>

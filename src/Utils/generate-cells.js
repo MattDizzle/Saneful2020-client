@@ -17,10 +17,11 @@ const generateCells = () => {
 export default generateCells;
 
 class Tile {
-  constructor(x = 0, y = 0, name = 'empty', walkable = true) {
+  constructor(x = 0, y = 0, name = 'empty', walkable = true, hasPlayer = false) {
     this.x = x;
     this.y = y;
     this.name = name;
+    this.hasPlayer = hasPlayer;
     this.walkable = walkable;
   }
 };
