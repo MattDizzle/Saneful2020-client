@@ -1,21 +1,30 @@
 import { MAX_COLS, MAX_ROWS } from '../Constants';
-import cellData from '../Data/cell-data';
 
 const generateCells = () => {
   let cells = [];
-  let count = cellData.length;
 
-  //generate entire map
+
+
+  //generate entire map empty
   for (let row = 0; row < MAX_ROWS; row++) {
     cells.push([]);
     for (let col = 0; col < MAX_COLS; col++) {
-      cells[row].push({
-        walkable: cellData[count - 1],
-      });
-      count--;
+      let newTile = new Tile(row, col);
+      cells[row].push(newTile);
     }
   }
   return cells;
 };
 
+
+
 export default generateCells;
+
+class Tile {
+  constructor(x = 0, y = 0, name = 'empty', walkable = true) {
+    this.x = x;
+    this.y = y;
+    this.name = name;
+    this.walkable = walkable;
+  }
+};
