@@ -4,9 +4,9 @@
 }
 
 .Player{
-  transition: 0.6s;
+  transition: 0.4s;
   z-index: 10;
   position: absolute;
-  top: calc(52px + calc(52px * var(--top-int)));
+  top: calc(40px + calc(52px * var(--top-int)));
   left: calc(40px + calc(52px * var(--left-int)));
 }

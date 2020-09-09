@@ -6,7 +6,7 @@ const Player = () => {
 
   return (
     <div className='player-animation'>
-      <img className='Player' src='images/pixel-elements/plant2.png' alt='player'></img>
+      <img className='Player' src='images/pixel-elements/char1-test.png' alt='player'></img>
     </div>
   );
 };

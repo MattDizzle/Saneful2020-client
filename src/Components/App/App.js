@@ -6,12 +6,6 @@ import Cell from '../Cell';
 
 import './App.scss';
 
-/* 
-Grid 
-- each square 52px
-- 10x10
-*/
-
 const App = () => {
   const [cells, setCells] = useState(generateCells());
   const [playerPos, setPlayerPos] = useState({ row: playerStartPos.row, col: playerStartPos.col });
@@ -26,9 +20,6 @@ const App = () => {
       if (!live) {
         start();
       }
-
-      movePlayer(0, 0);
-
       //move up
       if (playerPos.row < playerTarget.row) {
         movePlayer(1, 0);
@@ -56,7 +47,6 @@ const App = () => {
 
   const start = () => {
     setLive(true);
-    movePlayer(playerStartPos.row, playerStartPos.col);
   };
 
   const movePlayer = (rowDir, colDir) => {
@@ -80,13 +70,10 @@ const App = () => {
   };
 
   const handleCellClick = (rowTarget, colTarget, action) => {
+    console.log(rowTarget, colTarget);
     setPlayerTarget({ row: rowTarget, col: colTarget });
     setNextAction(() => action);
-
-    console.log(nextAction);
   };
-
-
 
   const renderCells = () => {
     return cells.map((row, rowIndex) =>
