@@ -2,11 +2,11 @@ import React from 'react';
 
 import './Player.scss';
 
-const Player = () => {
+const Player = (props) => {
 
   return (
     <div className='player-animation'>
-      <img className='Player' src='images/pixel-elements/char1-test.png' alt='player'></img>
+      <img className='Player' src={props.currentFrame} alt='player'></img>
     </div>
   );
 };
