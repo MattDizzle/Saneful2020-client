@@ -41,27 +41,25 @@ const App = () => {
       movePlayer(0, 0);
 
       //move up
-      if (playerPos.row < playerTarget.row) {
-        if (cells[playerPos.row + 1][playerPos.col].walkable) {
-          movePlayer(1, 0);
-          changePlayerMoveFrame();
-          setPlayerFrameLib(c1Frames.front);
-        }
+      if (playerPos.row < playerTarget.row && cells[playerPos.row + 1][playerPos.col].walkable) {
+        movePlayer(1, 0);
+        changePlayerMoveFrame();
+        setPlayerFrameLib(c1Frames.front);
       }
       //move down
-      else if (playerPos.row > playerTarget.row) {
+      else if (playerPos.row > playerTarget.row && cells[playerPos.row - 1][playerPos.col].walkable) {
         movePlayer(-1, 0);
         changePlayerMoveFrame();
         setPlayerFrameLib(c1Frames.back);
       }
       //move right
-      else if (playerPos.col < playerTarget.col) {
+      else if (playerPos.col < playerTarget.col && cells[playerPos.row][playerPos.col + 1].walkable) {
         movePlayer(0, 1);
         changePlayerMoveFrame();
         setPlayerFrameLib(c1Frames.right);
       }
       //move left
-      else if (playerPos.col > playerTarget.col) {
+      else if (playerPos.col > playerTarget.col && cells[playerPos.row][playerPos.col - 1].walkable) {
         movePlayer(0, -1);
         changePlayerMoveFrame();
         setPlayerFrameLib(c1Frames.left);

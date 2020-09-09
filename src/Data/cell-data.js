@@ -14,26 +14,26 @@ const getFood = () => {
 export const mainRoomData =
   [
     {
-      row: 3,
-      col: 4,
+      row: 4,
+      col: 2,
       name: 'couch1',
       hasPlayer: false,
-      walkable: true,
+      walkable: false,
       hasAction: true,
       action: relaxOnCouch
     },
     {
-      row: 3,
-      col: 5,
+      row: 4,
+      col: 3,
       name: 'couch2',
       hasPlayer: false,
-      walkable: true,
+      walkable: false,
       hasAction: true,
       action: relaxOnCouch
     },
     {
-      row: 5,
-      col: 4,
+      row: 6,
+      col: 2,
       name: 'tv',
       hasPlayer: false,
       walkable: false,
