@@ -4,7 +4,7 @@
 }
 
 .Player{
-  transition: 0.4s;
+  transition: 0.8s;
   z-index: 10;
   position: absolute;
   top: calc(35px + calc(52px * var(--top-int)));

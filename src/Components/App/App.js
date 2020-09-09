@@ -23,6 +23,7 @@ const App = () => {
   // look up use reducer
   const [nextAction, setNextAction] = useState(() => console.log('test'));
 
+  //TODO:
   const [health, setHealth] = useState(100);
   const [sanity, setSanity] = useState(100);
   const [money, setMoney] = useState(100);
@@ -41,9 +42,11 @@ const App = () => {
 
       //move up
       if (playerPos.row < playerTarget.row) {
-        movePlayer(1, 0);
-        changePlayerMoveFrame();
-        setPlayerFrameLib(c1Frames.front);
+        if (cells[playerPos.row + 1][playerPos.col].walkable) {
+          movePlayer(1, 0);
+          changePlayerMoveFrame();
+          setPlayerFrameLib(c1Frames.front);
+        }
       }
       //move down
       else if (playerPos.row > playerTarget.row) {
@@ -63,10 +66,11 @@ const App = () => {
         changePlayerMoveFrame();
         setPlayerFrameLib(c1Frames.left);
       }
+      else {
+        setCurrentPlayerFrame(0);
+      }
 
     }, playerMoveSpeed);
-
-    changePlayerMoveFrame();
 
     return () => {
       clearInterval(update);
@@ -101,7 +105,7 @@ const App = () => {
   };
 
   const changePlayerMoveFrame = () => {
-    if (currentPlayerFrame < 2)
+    if (currentPlayerFrame < 3)
       setCurrentPlayerFrame(currentPlayerFrame + 1);
     else
       setCurrentPlayerFrame(0);
