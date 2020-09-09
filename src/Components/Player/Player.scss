@@ -1,5 +1,5 @@
 :root{
-  --top-int: 3;
+  --top-int: 2;
   --left-int: 0;
 }
 
@@ -7,6 +7,6 @@
   transition: 0.4s;
   z-index: 10;
   position: absolute;
-  top: calc(40px + calc(52px * var(--top-int)));
-  left: calc(40px + calc(52px * var(--left-int)));
+  top: calc(35px + calc(52px * var(--top-int)));
+  left: calc(50px + calc(52px * var(--left-int)));
 }

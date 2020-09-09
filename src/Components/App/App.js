@@ -11,7 +11,12 @@ const App = () => {
   const [playerPos, setPlayerPos] = useState({ row: playerStartPos.row, col: playerStartPos.col });
   const [playerTarget, setPlayerTarget] = useState({ row: playerStartPos.row, col: playerStartPos.col });
   const [live, setLive] = useState(false);
-  const [nextAction, setNextAction] = useState(null);
+  // look up use reducer
+  const [nextAction, setNextAction] = useState(() => console.log('test'));
+  const [health, setHealth] = useState(100);
+  const [sanity, setSanity] = useState(100);
+  const [money, setMoney] = useState(100);
+  const [elapsedTime, setElapsedTime] = useState(0);
 
   let player = document.querySelector('.Player');
 
@@ -20,6 +25,9 @@ const App = () => {
       if (!live) {
         start();
       }
+
+      movePlayer(0, 0);
+
       //move up
       if (playerPos.row < playerTarget.row) {
         movePlayer(1, 0);
@@ -96,7 +104,7 @@ const App = () => {
   return (
     <main className='App'>
       <div>
-        <img className='cells' src='images/grid_10x10.png' alt='background'></img>
+        <img className='cells' src='images/grid/draft1nogrid.png' alt='background'></img>
         <div className="cells">{renderCells()}</div>
         <Player />
       </div>
