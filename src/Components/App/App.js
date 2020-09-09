@@ -47,19 +47,19 @@ const App = () => {
         setPlayerFrameLib(c1Frames.front);
       }
       //move down
-      else if (playerPos.row > playerTarget.row && cells[playerPos.row - 1][playerPos.col].walkable) {
+      if (playerPos.row > playerTarget.row && cells[playerPos.row - 1][playerPos.col].walkable) {
         movePlayer(-1, 0);
         changePlayerMoveFrame();
         setPlayerFrameLib(c1Frames.back);
       }
       //move right
-      else if (playerPos.col < playerTarget.col && cells[playerPos.row][playerPos.col + 1].walkable) {
+      if (playerPos.col < playerTarget.col && cells[playerPos.row][playerPos.col + 1].walkable) {
         movePlayer(0, 1);
         changePlayerMoveFrame();
         setPlayerFrameLib(c1Frames.right);
       }
       //move left
-      else if (playerPos.col > playerTarget.col && cells[playerPos.row][playerPos.col - 1].walkable) {
+      if (playerPos.col > playerTarget.col && cells[playerPos.row][playerPos.col - 1].walkable) {
         movePlayer(0, -1);
         changePlayerMoveFrame();
         setPlayerFrameLib(c1Frames.left);
@@ -73,7 +73,6 @@ const App = () => {
     return () => {
       clearInterval(update);
     };
-
   });
 
   const start = () => {
@@ -140,6 +139,10 @@ const App = () => {
         <div className="cells">{renderCells()}</div>
         <Player currentFrame={playerFrameLib[currentPlayerFrame]} />
       </div>
+      <p>S: 100</p>
+      <p>H: 100</p>
+      <p>$100</p>
+      <p>12:00PM</p>
     </main>
   );
 };
