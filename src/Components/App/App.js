@@ -11,12 +11,17 @@ const App = () => {
   const [playerPos, setPlayerPos] = useState({ row: playerStartPos.row, col: playerStartPos.col });
   const [playerTarget, setPlayerTarget] = useState({ row: playerStartPos.row, col: playerStartPos.col });
   const [live, setLive] = useState(false);
+
+  const [playerAnimFrame, setPlayerFrame] = useState();
+
   // look up use reducer
   const [nextAction, setNextAction] = useState(() => console.log('test'));
+
   const [health, setHealth] = useState(100);
   const [sanity, setSanity] = useState(100);
   const [money, setMoney] = useState(100);
   const [elapsedTime, setElapsedTime] = useState(0);
+
 
   let player = document.querySelector('.Player');
 
