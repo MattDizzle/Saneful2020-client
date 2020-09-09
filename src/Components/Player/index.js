@@ -1,10 +1,12 @@
 import React from 'react';
 
+import './Player.scss';
+
 const Player = () => {
 
   return (
     <div className='player-animation'>
-      <img src='images/pixel-elements/plant2' alt='player'></img>
+      <img className='Player' src='images/pixel-elements/plant2.png' alt='player'></img>
     </div>
   );
 };

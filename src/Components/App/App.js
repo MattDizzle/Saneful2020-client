@@ -18,6 +18,8 @@ const App = () => {
   const [playerTarget, setPlayerTarget] = useState({ row: playerStartPos.row, col: playerStartPos.col });
   const [live, setLive] = useState(false);
 
+  let player = document.querySelector('.Player');
+
   useEffect(() => {
     const update = setInterval(() => {
       if (!live) {
@@ -61,6 +63,11 @@ const App = () => {
     newCells[playerPos.row][playerPos.col].name = 'Player';
     newCells[playerPos.row][playerPos.col].hasPlayer = true;
 
+    if (player) {
+      player.style.setProperty('--top-int', playerPos.row);
+      player.style.setProperty('--left-int', playerPos.col);
+    }
+
     setCells(newCells);
 
     currentCell.name = 'empty';
@@ -91,8 +98,8 @@ const App = () => {
     <main className='App'>
       <div>
         <img className='cells' src='images/grid_10x10.png' alt='background'></img>
-        <Player />
         <div className="cells">{renderCells()}</div>
+        <Player />
       </div>
     </main>
   );
