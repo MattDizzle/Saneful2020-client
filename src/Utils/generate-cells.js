@@ -1,4 +1,5 @@
 import { MAX_COLS, MAX_ROWS } from '../Constants';
+import { mainRoomData } from '../Data/cell-data';
 
 const generateCells = () => {
   let cells = [];
@@ -7,7 +8,14 @@ const generateCells = () => {
   for (let row = 0; row < MAX_ROWS; row++) {
     cells.push([]);
     for (let col = 0; col < MAX_COLS; col++) {
-      let newTile = new Tile(row, col, 'empty', true, false);
+      let newTile = new Tile(row, col);
+
+      mainRoomData.forEach(object => {
+        if (object.row === row && object.col === col) {
+          newTile = object;
+        }
+      });
+
       cells[row].push(newTile);
     }
   }
@@ -17,15 +25,13 @@ const generateCells = () => {
 
 export default generateCells;
 
-
 class Tile {
-  constructor(row, col, name, walkable, hasPlayer) {
+  constructor(row, col) {
     this.row = row;
     this.col = col;
-    this.name = name;
-    this.hasPlayer = hasPlayer;
-    this.walkable = walkable;
-    this.image = '';
+    this.name = 'empty';
+    this.hasPlayer = false;
+    this.walkable = true;
     this.hasAction = false;
     this.action = () => { };
   }

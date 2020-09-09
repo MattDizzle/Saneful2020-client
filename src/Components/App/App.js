@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MAX_COLS, MAX_ROWS, playerMoveSpeed, playerStartPos } from '../../Constants';
+import { playerMoveSpeed, playerStartPos } from '../../Constants';
 import Player from '../Player';
 import generateCells from '../../Utils/generate-cells';
 import Cell from '../Cell';
@@ -17,6 +17,7 @@ const App = () => {
   const [playerPos, setPlayerPos] = useState({ row: playerStartPos.row, col: playerStartPos.col });
   const [playerTarget, setPlayerTarget] = useState({ row: playerStartPos.row, col: playerStartPos.col });
   const [live, setLive] = useState(false);
+  const [nextAction, setNextAction] = useState(() => () => console.log("default action"));
 
   let player = document.querySelector('.Player');
 
@@ -28,15 +29,19 @@ const App = () => {
 
       movePlayer(0, 0);
 
+      //move up
       if (playerPos.row < playerTarget.row) {
         movePlayer(1, 0);
       }
+      //move down
       else if (playerPos.row > playerTarget.row) {
         movePlayer(-1, 0);
       }
+      //move right
       else if (playerPos.col < playerTarget.col) {
         movePlayer(0, 1);
       }
+      //move left
       else if (playerPos.col > playerTarget.col) {
         movePlayer(0, -1);
       }
@@ -47,7 +52,7 @@ const App = () => {
       clearInterval(update);
     };
 
-  }, [playerPos]);
+  });
 
   const start = () => {
     setLive(true);
@@ -74,9 +79,16 @@ const App = () => {
     currentCell.hasPlayer = false;
   };
 
-  const handleCellClick = (rowTarget, colTarget) => {
+  const handleCellClick = (rowTarget, colTarget, action) => {
     setPlayerTarget({ row: rowTarget, col: colTarget });
+    setNextAction(action);
+
+    const trigger = () => nextAction;
+    trigger();
+    // console.log(action);
   };
+
+
 
   const renderCells = () => {
     return cells.map((row, rowIndex) =>
@@ -89,6 +101,8 @@ const App = () => {
           row={cell.row}
           col={cell.col}
           onClick={handleCellClick}
+          hasAction={cell.hasAction}
+          action={cell.action}
         />
       ))
     );
