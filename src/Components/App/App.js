@@ -4,15 +4,21 @@ import Player from '../Player';
 import generateCells from '../../Utils/generate-cells';
 import Cell from '../Cell';
 
+import { c1Frames } from '../../Data/animation-data';
+
 import './App.scss';
 
 const App = () => {
   const [cells, setCells] = useState(generateCells());
-  const [playerPos, setPlayerPos] = useState({ row: playerStartPos.row, col: playerStartPos.col });
-  const [playerTarget, setPlayerTarget] = useState({ row: playerStartPos.row, col: playerStartPos.col });
   const [live, setLive] = useState(false);
 
-  const [playerAnimFrame, setPlayerFrame] = useState();
+  //movement
+  const [playerPos, setPlayerPos] = useState({ row: playerStartPos.row, col: playerStartPos.col });
+  const [playerTarget, setPlayerTarget] = useState({ row: playerStartPos.row, col: playerStartPos.col });
+
+  // animation
+  const [currentPlayerFrame, setCurrentPlayerFrame] = useState(0);
+  const [playerFrameLib, setPlayerFrameLib] = useState(c1Frames.right);
 
   // look up use reducer
   const [nextAction, setNextAction] = useState(() => console.log('test'));
@@ -36,21 +42,31 @@ const App = () => {
       //move up
       if (playerPos.row < playerTarget.row) {
         movePlayer(1, 0);
+        changePlayerMoveFrame();
+        setPlayerFrameLib(c1Frames.front);
       }
       //move down
       else if (playerPos.row > playerTarget.row) {
         movePlayer(-1, 0);
+        changePlayerMoveFrame();
+        setPlayerFrameLib(c1Frames.back);
       }
       //move right
       else if (playerPos.col < playerTarget.col) {
         movePlayer(0, 1);
+        changePlayerMoveFrame();
+        setPlayerFrameLib(c1Frames.right);
       }
       //move left
       else if (playerPos.col > playerTarget.col) {
         movePlayer(0, -1);
+        changePlayerMoveFrame();
+        setPlayerFrameLib(c1Frames.left);
       }
 
     }, playerMoveSpeed);
+
+    changePlayerMoveFrame();
 
     return () => {
       clearInterval(update);
@@ -60,6 +76,8 @@ const App = () => {
 
   const start = () => {
     setLive(true);
+    setCurrentPlayerFrame(0);
+    setPlayerFrameLib(c1Frames.right);
   };
 
   const movePlayer = (rowDir, colDir) => {
@@ -80,6 +98,13 @@ const App = () => {
 
     currentCell.name = 'empty';
     currentCell.hasPlayer = false;
+  };
+
+  const changePlayerMoveFrame = () => {
+    if (currentPlayerFrame < 2)
+      setCurrentPlayerFrame(currentPlayerFrame + 1);
+    else
+      setCurrentPlayerFrame(0);
   };
 
   const handleCellClick = (rowTarget, colTarget, action) => {
@@ -111,7 +136,7 @@ const App = () => {
       <div>
         <img className='cells' src='images/grid/draft1nogrid.png' alt='background'></img>
         <div className="cells">{renderCells()}</div>
-        <Player />
+        <Player currentFrame={playerFrameLib[currentPlayerFrame]} />
       </div>
     </main>
   );
