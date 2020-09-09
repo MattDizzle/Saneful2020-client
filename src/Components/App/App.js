@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { MAX_COLS, MAX_ROWS, playerMoveSpeed, playerStartPos } from '../../Constants';
 import generateCells from '../../Utils/generate-cells';
 import Cell from '../Cell';
 
@@ -12,38 +13,61 @@ Grid
 
 const App = () => {
   const [cells, setCells] = useState(generateCells());
-  const [playerPos, setPlayerPos] = useState({ x: 0, y: 0 });
-  const [playerTarget, setPplayerTarget] = useState({ x: 0, y: 0 });
+  const [playerPos, setPlayerPos] = useState({ row: 0, col: 0 });
+  const [playerTarget, setPlayerTarget] = useState({ row: 0, col: 0 });
+  const [live, setLive] = useState(false);
 
   useEffect(() => {
-    if (playerPos.x !== playerTarget.x && playerPos.y !== playerTarget.y) {
-      const interval = setInterval(() => {
-        movePlayer(0, 0);
-      }, 1000);
+    const update = setInterval(() => {
+      if (!live) {
+        start();
+      }
 
-      return () => {
-        clearInterval(interval);
-      };
-    }
+      movePlayer(0, 0);
+
+      if (playerPos.row < playerTarget.row) {
+        movePlayer(1, 0);
+      }
+      else if (playerPos.row > playerTarget.row) {
+        movePlayer(-1, 0);
+      }
+      else if (playerPos.col < playerTarget.col) {
+        movePlayer(0, 1);
+      }
+      else if (playerPos.col > playerTarget.col) {
+        movePlayer(0, -1);
+      }
+
+    }, playerMoveSpeed);
+
+    return () => {
+      clearInterval(update);
+    };
 
   }, [playerPos]);
 
-  const movePlayer = (xDir, yDir) => {
+  const start = () => {
+    setLive(true);
+    movePlayer(playerStartPos.row, playerStartPos.col);
+  };
+
+  const movePlayer = (rowDir, colDir) => {
     const newCells = cells.slice(); //copy cells
-    const currentCell = newCells[playerPos.x][playerPos.y];
+    const currentCell = newCells[playerPos.row][playerPos.col];
 
-    setPlayerPos({ x: playerPos.x + xDir, y: playerPos.y + yDir });
+    setPlayerPos({ row: playerPos.row + rowDir, col: playerPos.col + colDir });
 
-    newCells[playerPos.x][playerPos.y].name = 'Player';
+    newCells[playerPos.row][playerPos.col].name = 'Player';
+    newCells[playerPos.row][playerPos.col].hasPlayer = true;
 
     setCells(newCells);
 
     currentCell.name = 'empty';
+    currentCell.hasPlayer = false;
   };
 
-  const setPlayerTarget = (xTarget, yTarget) => {
-    console.log('x', xTarget);
-    console.log('y', yTarget);
+  const handleCellClick = (rowTarget, colTarget) => {
+    setPlayerTarget({ row: rowTarget, col: colTarget });
   };
 
   const renderCells = () => {
@@ -54,9 +78,9 @@ const App = () => {
           walkable={cell.walkable}
           name={cell.name}
           hasPlayer={cell.hasPlayer}
-          x={cell.x}
-          y={cell.y}
-          onClick={setPlayerTarget}
+          row={cell.row}
+          col={cell.col}
+          onClick={handleCellClick}
         />
       ))
     );
@@ -64,8 +88,10 @@ const App = () => {
 
   return (
     <main className='App'>
-      <img className='cells' src='images/grid_10x10.png' alt='background'></img>
-      <div className="cells">{renderCells()}</div>
+      <div>
+        <img className='cells' src='images/grid_10x10.png' alt='background'></img>
+        <div className="cells">{renderCells()}</div>
+      </div>
     </main>
   );
 };

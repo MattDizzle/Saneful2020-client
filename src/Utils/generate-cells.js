@@ -18,12 +18,11 @@ export default generateCells;
 
 
 class Tile {
-  constructor(x, y, name, walkable, hasPlayer) {
-    this.x = x;
-    this.y = y;
+  constructor(row, col, name, walkable, hasPlayer) {
+    this.row = row;
+    this.col = col;
     this.name = name;
     this.hasPlayer = hasPlayer;
     this.walkable = walkable;
-
   }
 };
