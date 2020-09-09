@@ -17,7 +17,7 @@ const App = () => {
   const [playerPos, setPlayerPos] = useState({ row: playerStartPos.row, col: playerStartPos.col });
   const [playerTarget, setPlayerTarget] = useState({ row: playerStartPos.row, col: playerStartPos.col });
   const [live, setLive] = useState(false);
-  const [nextAction, setNextAction] = useState(() => () => console.log("default action"));
+  const [nextAction, setNextAction] = useState(null);
 
   let player = document.querySelector('.Player');
 
@@ -81,11 +81,9 @@ const App = () => {
 
   const handleCellClick = (rowTarget, colTarget, action) => {
     setPlayerTarget({ row: rowTarget, col: colTarget });
-    setNextAction(action);
+    setNextAction(() => action);
 
-    const trigger = () => nextAction;
-    trigger();
-    // console.log(action);
+    console.log(nextAction);
   };
 
 

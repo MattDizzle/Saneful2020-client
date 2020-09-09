@@ -1,4 +1,3 @@
-
 const relaxOnCouch = () => {
   console.log('so relaxing...');
   return 'so relaxing...';
