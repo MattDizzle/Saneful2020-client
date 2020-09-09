@@ -12,6 +12,7 @@ const generateCells = () => {
     }
   }
   return cells;
+
 };
 
 export default generateCells;
@@ -24,5 +25,8 @@ class Tile {
     this.name = name;
     this.hasPlayer = hasPlayer;
     this.walkable = walkable;
+    this.image = '';
+    this.hasAction = false;
+    this.action = () => { };
   }
 };

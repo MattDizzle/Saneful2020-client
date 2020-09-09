@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MAX_COLS, MAX_ROWS, playerMoveSpeed, playerStartPos } from '../../Constants';
+import Player from '../Player';
 import generateCells from '../../Utils/generate-cells';
 import Cell from '../Cell';
 
@@ -13,8 +14,8 @@ Grid
 
 const App = () => {
   const [cells, setCells] = useState(generateCells());
-  const [playerPos, setPlayerPos] = useState({ row: 0, col: 0 });
-  const [playerTarget, setPlayerTarget] = useState({ row: 0, col: 0 });
+  const [playerPos, setPlayerPos] = useState({ row: playerStartPos.row, col: playerStartPos.col });
+  const [playerTarget, setPlayerTarget] = useState({ row: playerStartPos.row, col: playerStartPos.col });
   const [live, setLive] = useState(false);
 
   useEffect(() => {
@@ -90,6 +91,7 @@ const App = () => {
     <main className='App'>
       <div>
         <img className='cells' src='images/grid_10x10.png' alt='background'></img>
+        <Player />
         <div className="cells">{renderCells()}</div>
       </div>
     </main>
