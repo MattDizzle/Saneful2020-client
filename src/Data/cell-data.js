@@ -1,14 +1,23 @@
 const relaxOnCouch = () => {
   console.log('so relaxing...');
-  return 'so relaxing...';
+  // walk to couch 
+  // face tv
+  // increment sanity
+  // decrement health
 };
 
 const workOnComp = () => {
   console.log('yay time to work...');
+  // face computer
+  // increment money
+  // decrement sanity
 };
 
 const getFood = () => {
   console.log('yesss fooddd!!');
+  // face fridge
+  // increment health
+  // decrement money
 };
 
 export const mainRoomData =
@@ -36,9 +45,9 @@ export const mainRoomData =
       col: 2,
       name: 'tv',
       hasPlayer: false,
-      walkable: false,
+      walkable: true,
       hasAction: false,
-      action: () => { }
+      action: relaxOnCouch
     },
     {
       row: 6,
@@ -79,7 +88,16 @@ export const mainRoomData =
     {
       row: 0,
       col: 2,
-      name: 'computer',
+      name: 'computerBack',
+      hasPlayer: false,
+      walkable: false,
+      hasAction: true,
+      action: workOnComp
+    },
+    {
+      row: 1,
+      col: 2,
+      name: 'computerFront',
       hasPlayer: false,
       walkable: false,
       hasAction: true,
@@ -106,9 +124,18 @@ export const mainRoomData =
     {
       row: 0,
       col: 5,
-      name: 'fridge',
+      name: 'fridgeBack',
       hasPlayer: false,
       walkable: false,
+      hasAction: true,
+      action: getFood
+    },
+    {
+      row: 1,
+      col: 5,
+      name: 'fridgeFront',
+      hasPlayer: false,
+      walkable: true,
       hasAction: true,
       action: getFood
     },

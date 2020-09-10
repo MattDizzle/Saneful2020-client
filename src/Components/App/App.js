@@ -21,7 +21,7 @@ const App = () => {
   const [playerFrameLib, setPlayerFrameLib] = useState(c1Frames.right);
 
   // look up use reducer
-  const [nextAction, setNextAction] = useState(() => console.log('test'));
+  const [nextAction, setNextAction] = useState(() => { });
 
   // TODO:
   const [health, setHealth] = useState(100);
@@ -109,6 +109,7 @@ const App = () => {
     // console.log(rowTarget, colTarget);
     setPlayerTarget({ row: rowTarget, col: colTarget });
     setNextAction(() => action);
+
   };
 
   const renderCells = () => {
