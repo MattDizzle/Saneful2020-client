@@ -12,9 +12,8 @@ export const sanityInterval = 40;
 export const moneyInterval = 40;
 
 
-
 //TIME
-export const timeInterval = 20;
+export const timeInterval = 15;
 
 
 //GENERAL

@@ -5,7 +5,7 @@ import './MoneyMeter.scss';
 const MoneyMeter = (props) => {
 
   return (
-    <p>M:$100</p>
+    <p>{`M:$${props.currentMoney}`}</p>
   );
 };
 

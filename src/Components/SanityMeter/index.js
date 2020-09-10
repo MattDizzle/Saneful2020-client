@@ -5,7 +5,7 @@ import './SanityMeter.scss';
 const SanityMeter = (props) => {
 
   return (
-    <p>S:100</p>
+    <p>{`S:${props.currentSanity}`}</p>
   );
 };
 

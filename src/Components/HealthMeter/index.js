@@ -5,7 +5,7 @@ import './HealthMeter.scss';
 const HealthMeter = (props) => {
 
   return (
-    <p>H:100</p>
+    <p>{`H:${props.currentHealth}`}</p>
   );
 };
 

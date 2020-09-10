@@ -1,6 +1,14 @@
 //GENERAL
 import React, { useState, useEffect } from 'react';
-import { playerMoveSpeed, playerStartPos, updateRate } from '../../Constants';
+import {
+  playerMoveSpeed,
+  playerStartPos,
+  updateRate,
+  healthInterval,
+  sanityInterval,
+  moneyInterval,
+  timeInterval
+} from '../../Constants';
 
 //GRID
 import generateCells from '../../Utils/generate-cells';
@@ -50,12 +58,16 @@ const GameWindow = () => {
   // time
   const [timeStopped, setTimeStopped] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
+  const [timeTick, setTimeTick] = useState(0);
 
-
-  // TODO:
+  // stats
   const [health, setHealth] = useState(100);
   const [sanity, setSanity] = useState(100);
   const [money, setMoney] = useState(100);
+  const [healthTick, setHealthTick] = useState(0);
+  const [sanityTick, setSanityTick] = useState(0);
+  const [moneyTick, setMoneyTick] = useState(0);
+
 
 
   // move player movement into player movement script 
@@ -74,6 +86,40 @@ const GameWindow = () => {
     const update = setInterval(() => {
       if (!live) {
         start();
+      }
+
+      if (!timeStopped) {
+        // decrement health due to aging
+        if (healthTick === healthInterval) {
+          setHealth(health - 1);
+          setHealthTick(0);
+        } else {
+          setHealthTick(healthTick + 1);
+        }
+
+        // decrement sanity due to being trapped at home
+        if (sanityTick === sanityInterval) {
+          setSanity(sanity - 1);
+          setSanityTick(0);
+        } else {
+          setSanityTick(sanityTick + 1);
+        }
+
+        // decrement money due to bills
+        if (moneyTick === moneyInterval) {
+          setMoney(money - 1);
+          setMoneyTick(0);
+        } else {
+          setMoneyTick(moneyTick + 1);
+        }
+
+        // decrement time just because ...time
+        if (timeTick === timeInterval) {
+          setElapsedTime(elapsedTime + 1);
+          setTimeTick(0);
+        } else {
+          setTimeTick(timeTick + 1);
+        }
       }
 
       // player movement update
@@ -214,10 +260,10 @@ const GameWindow = () => {
       <div className="cells">{renderCells()}</div>
       <Player currentFrame={playerFrameLib[currentPlayerFrame]} />
       <div className='UI'>
-        <TimeMeter />
-        <MoneyMeter />
-        <SanityMeter />
-        <HealthMeter />
+        <TimeMeter currentTime={elapsedTime} />
+        <MoneyMeter currentMoney={money} />
+        <SanityMeter currentSanity={sanity} />
+        <HealthMeter currentHealth={health} />
       </div>
       {dialogBoxActive && <DialogBox yesClick={yesAction} noClick={noAction} text={pendingAction} />}
     </section>
