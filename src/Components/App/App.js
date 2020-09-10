@@ -211,7 +211,7 @@ const App = () => {
           <p>S:100</p>
           <p>H:100</p>
         </div>
-        {dialogBoxActive && <DialogBox yesClick={yesAction} noClick={noAction} />}
+        {dialogBoxActive && <DialogBox yesClick={yesAction} noClick={noAction} text={pendingAction} />}
       </div>
     </main>
   );
