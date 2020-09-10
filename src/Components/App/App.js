@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { playerMoveSpeed, playerStartPos } from '../../Constants';
+import { playerMoveSpeed, playerStartPos, updateRate } from '../../Constants';
 import Player from '../Player';
 import generateCells from '../../Utils/generate-cells';
 import Cell from '../Cell';
@@ -12,13 +12,16 @@ const App = () => {
   const [cells, setCells] = useState(generateCells());
   const [live, setLive] = useState(false);
 
-  // movement
+  // player movement
   const [playerPos, setPlayerPos] = useState({ row: playerStartPos.row, col: playerStartPos.col });
   const [playerTarget, setPlayerTarget] = useState({ row: playerStartPos.row, col: playerStartPos.col });
+  const [playerMoveTick, setPlayerMoveTick] = useState(0);
+  const [isMoving, setIsMoving] = useState(false);
 
-  // animation
+  // player animation
   const [currentPlayerFrame, setCurrentPlayerFrame] = useState(0);
   const [playerFrameLib, setPlayerFrameLib] = useState(c1Frames.right);
+  const [playerAnimTick, setPlayerAnimTick] = useState(0);
 
   // look up use reducer
   const [nextAction, setNextAction] = useState(() => { });
@@ -29,6 +32,15 @@ const App = () => {
   const [money, setMoney] = useState(100);
   const [elapsedTime, setElapsedTime] = useState(0);
 
+  // turn use effect into update every 50ms
+  // check if playerpos === targetpos and if not then moving = true else false
+  // move player movement into player movement script 
+  // move player anim into player anim script
+  // have tick in update for how ofter player moves depending on player movement speed
+  // have tick in update for how often animation plays depending on animation speed
+  // have ticks in update for health, sanity and money
+  // elapsed time will still depend on movement and actions (for now/// could later be transferred into a tick)
+
 
   let player = document.querySelector('.Player');
 
@@ -38,34 +50,24 @@ const App = () => {
         start();
       }
 
-      movePlayer(0, 0);
-
-      // move up
-      if (playerPos.row < playerTarget.row && cells[playerPos.row + 1][playerPos.col].walkable) {
-        movePlayer(1, 0);
-        changePlayerMoveFrame();
-        setPlayerFrameLib(c1Frames.front);
-      }
-      // move down
-      if (playerPos.row > playerTarget.row && cells[playerPos.row - 1][playerPos.col].walkable) {
-        movePlayer(-1, 0);
-        changePlayerMoveFrame();
-        setPlayerFrameLib(c1Frames.back);
-      }
-      // move right
-      if (playerPos.col < playerTarget.col && cells[playerPos.row][playerPos.col + 1].walkable) {
-        movePlayer(0, 1);
-        changePlayerMoveFrame();
-        setPlayerFrameLib(c1Frames.right);
-      }
-      // move left
-      if (playerPos.col > playerTarget.col && cells[playerPos.row][playerPos.col - 1].walkable) {
-        movePlayer(0, -1);
-        changePlayerMoveFrame();
-        setPlayerFrameLib(c1Frames.left);
+      // player movement update
+      if (playerMoveTick === playerMoveSpeed) {
+        playerPositionUpdate();
+        setPlayerMoveTick(0);
+      } else {
+        setPlayerMoveTick(playerMoveTick + 1);
       }
 
-    }, playerMoveSpeed);
+      if (isMoving) {
+        // player animation update
+        if (playerAnimTick === Math.floor(playerMoveSpeed / 2)) {
+          changePlayerMoveFrame();
+          setPlayerAnimTick(0);
+        } else {
+          setPlayerAnimTick(playerAnimTick + 1);
+        }
+      }
+    }, updateRate);
 
     return () => {
       clearInterval(update);
@@ -76,6 +78,34 @@ const App = () => {
     setLive(true);
     setCurrentPlayerFrame(0);
     setPlayerFrameLib(c1Frames.right);
+  };
+
+  const playerPositionUpdate = () => {
+    movePlayer(0, 0);
+    setIsMoving(true);
+
+    // move up
+    if (playerPos.row < playerTarget.row && cells[playerPos.row + 1][playerPos.col].walkable) {
+      movePlayer(1, 0);
+      setPlayerFrameLib(c1Frames.front);
+    }
+    // move down
+    else if (playerPos.row > playerTarget.row && cells[playerPos.row - 1][playerPos.col].walkable) {
+      movePlayer(-1, 0);
+      setPlayerFrameLib(c1Frames.back);
+    }
+    // move right
+    else if (playerPos.col < playerTarget.col && cells[playerPos.row][playerPos.col + 1].walkable) {
+      movePlayer(0, 1);
+      setPlayerFrameLib(c1Frames.right);
+    }
+    // move left
+    else if (playerPos.col > playerTarget.col && cells[playerPos.row][playerPos.col - 1].walkable) {
+      movePlayer(0, -1);
+      setPlayerFrameLib(c1Frames.left);
+    } else {
+      setIsMoving(false);
+    }
   };
 
   const movePlayer = (rowDir, colDir) => {
@@ -138,9 +168,9 @@ const App = () => {
         <Player currentFrame={playerFrameLib[currentPlayerFrame]} />
         <div className='UI'>
           <p>12:00PM</p>
-          <p>M: $100</p>
-          <p>S: 100</p>
-          <p>H: 100</p>
+          <p>M:$100</p>
+          <p>S:100</p>
+          <p>H:100</p>
         </div>
       </div>
     </main>
