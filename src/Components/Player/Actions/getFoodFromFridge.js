@@ -4,3 +4,5 @@ const getFood = () => {
   // increment health
   // decrement money
 };
+
+export default getFood;

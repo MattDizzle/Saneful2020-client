@@ -4,3 +4,5 @@ const workOnComp = () => {
   // increment money
   // decrement sanity
 };
+
+export default workOnComp;

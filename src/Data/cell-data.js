@@ -7,7 +7,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: true,
       hasAction: true,
-      action: 'relaxOnCouch'
+      action: 'relax on the couch'
     },
     {
       row: 4,
@@ -16,7 +16,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: true,
       hasAction: true,
-      action: 'relaxOnCouch'
+      action: 'relax on the couch'
     },
     {
       row: 6,
@@ -25,7 +25,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: true,
       hasAction: false,
-      action: 'relaxOnCouch'
+      action: 'relax on the couch'
     },
     {
       row: 6,
@@ -70,16 +70,16 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: true,
-      action: 'workOnComp'
+      action: 'do work on the computer'
     },
     {
       row: 1,
       col: 2,
       name: 'computerFront',
       hasPlayer: false,
-      walkable: false,
+      walkable: true,
       hasAction: true,
-      action: 'workOnComp'
+      action: 'do work on the computer'
     },
     {
       row: 0,
@@ -106,7 +106,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: true,
-      action: 'getFood'
+      action: 'eat food'
     },
     {
       row: 1,
@@ -115,7 +115,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: true,
       hasAction: true,
-      action: 'getFood'
+      action: 'eat food'
     },
     {
       row: 0,

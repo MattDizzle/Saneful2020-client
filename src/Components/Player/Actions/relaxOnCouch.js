@@ -5,3 +5,5 @@ const relaxOnCouch = () => {
   // increment sanity
   // decrement health
 };
+
+export default relaxOnCouch;

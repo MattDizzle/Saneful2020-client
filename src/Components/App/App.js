@@ -1,16 +1,29 @@
+//GENERAL
 import React, { useState, useEffect } from 'react';
 import { playerMoveSpeed, playerStartPos, updateRate } from '../../Constants';
-import Player from '../Player';
+
+//GRID
 import generateCells from '../../Utils/generate-cells';
 import Cell from '../Cell';
 
+// PLAYER
+import Player from '../Player';
 import { c1Frames } from '../../Data/animation-data';
+import DetermineAction from '../Player/Actions';
 
+//UI
+import DialogBox from '../DialogBox';
+
+//CSS
 import './App.scss';
 
 const App = () => {
+  /* State Start */
   const [cells, setCells] = useState(generateCells());
   const [live, setLive] = useState(false);
+
+  // player control
+  const [playerHasControl, setPlayerHasControl] = useState(true);
 
   // player movement
   const [playerPos, setPlayerPos] = useState({ row: playerStartPos.row, col: playerStartPos.col });
@@ -23,8 +36,12 @@ const App = () => {
   const [playerFrameLib, setPlayerFrameLib] = useState(c1Frames.right);
   const [playerAnimTick, setPlayerAnimTick] = useState(0);
 
-  // look up use reducer
-  const [nextAction, setNextAction] = useState(() => { });
+  // UI
+  const [dialogBoxActive, setDialogBoxActive] = useState(false);
+
+  // actions
+  const [nextAction, setNextAction] = useState('none');
+  const [pendingAction, setPendingAction] = useState('none');
 
   // TODO:
   const [health, setHealth] = useState(100);
@@ -36,6 +53,8 @@ const App = () => {
   // move player anim into player anim script
   // have ticks in update for health, sanity and money
   // elapsed time will still depend on movement and actions (for now/// could later be transferred into a tick)
+
+  /* State End */
 
   let player = document.querySelector('.Player');
 
@@ -64,6 +83,17 @@ const App = () => {
         } else {
           setPlayerAnimTick(playerAnimTick + 1);
         }
+      } else {
+        // check for action triggers on current cell
+        // this could be put outside of isMoving condition to check every cell we walk over 
+        if (cells[playerPos.row][playerPos.col].hasAction) {
+          //show player a menu that asks if they want to perform the action
+          if (nextAction !== 'none') {
+            setPendingAction(nextAction);
+            setPlayerHasControl(false);
+            setDialogBoxActive(true);
+          }
+        }
       }
     }, updateRate);
 
@@ -71,6 +101,17 @@ const App = () => {
       clearInterval(update);
     };
   });
+
+  const yesAction = () => {
+    DetermineAction(pendingAction);
+  };
+
+  const noAction = () => {
+    setDialogBoxActive(false);
+    setPlayerHasControl(true);
+    setNextAction('none');
+    setPendingAction('none');
+  };
 
   const start = () => {
     setLive(true);
@@ -134,10 +175,10 @@ const App = () => {
   };
 
   const handleCellClick = (rowTarget, colTarget, action) => {
-    // console.log(rowTarget, colTarget);
-    setPlayerTarget({ row: rowTarget, col: colTarget });
-    setNextAction(() => action);
-
+    if (playerHasControl) {
+      setPlayerTarget({ row: rowTarget, col: colTarget });
+      setNextAction(action);
+    }
   };
 
   const renderCells = () => {
@@ -170,6 +211,7 @@ const App = () => {
           <p>S:100</p>
           <p>H:100</p>
         </div>
+        {dialogBoxActive && <DialogBox yesClick={yesAction} noClick={noAction} />}
       </div>
     </main>
   );
