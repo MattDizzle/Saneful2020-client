@@ -8,7 +8,7 @@ const relaxOnCouch = () => {
   const health = -35;
 
   // decrement sanity 
-  const sanity = 60;
+  const sanity = 70;
 
   // increment money
   const money = -20;

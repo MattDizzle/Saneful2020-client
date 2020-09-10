@@ -4,7 +4,7 @@ const getFood = () => {
   const directionToFace = 'back';
 
   // decrement health
-  const health = 60;
+  const health = 70;
 
   // decrement sanity 
   const sanity = -20;

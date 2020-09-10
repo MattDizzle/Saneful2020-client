@@ -10,7 +10,7 @@ const workOnComp = () => {
   const sanity = -35;
 
   // increment money
-  const money = 60;
+  const money = 70;
 
   //time increase
   const time = 60;
