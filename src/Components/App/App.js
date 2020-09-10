@@ -12,7 +12,7 @@ const App = () => {
   const [cells, setCells] = useState(generateCells());
   const [live, setLive] = useState(false);
 
-  //movement
+  // movement
   const [playerPos, setPlayerPos] = useState({ row: playerStartPos.row, col: playerStartPos.col });
   const [playerTarget, setPlayerTarget] = useState({ row: playerStartPos.row, col: playerStartPos.col });
 
@@ -23,7 +23,7 @@ const App = () => {
   // look up use reducer
   const [nextAction, setNextAction] = useState(() => console.log('test'));
 
-  //TODO:
+  // TODO:
   const [health, setHealth] = useState(100);
   const [sanity, setSanity] = useState(100);
   const [money, setMoney] = useState(100);
@@ -40,32 +40,29 @@ const App = () => {
 
       movePlayer(0, 0);
 
-      //move up
+      // move up
       if (playerPos.row < playerTarget.row && cells[playerPos.row + 1][playerPos.col].walkable) {
         movePlayer(1, 0);
         changePlayerMoveFrame();
         setPlayerFrameLib(c1Frames.front);
       }
-      //move down
+      // move down
       if (playerPos.row > playerTarget.row && cells[playerPos.row - 1][playerPos.col].walkable) {
         movePlayer(-1, 0);
         changePlayerMoveFrame();
         setPlayerFrameLib(c1Frames.back);
       }
-      //move right
+      // move right
       if (playerPos.col < playerTarget.col && cells[playerPos.row][playerPos.col + 1].walkable) {
         movePlayer(0, 1);
         changePlayerMoveFrame();
         setPlayerFrameLib(c1Frames.right);
       }
-      //move left
+      // move left
       if (playerPos.col > playerTarget.col && cells[playerPos.row][playerPos.col - 1].walkable) {
         movePlayer(0, -1);
         changePlayerMoveFrame();
         setPlayerFrameLib(c1Frames.left);
-      }
-      else {
-        setCurrentPlayerFrame(0);
       }
 
     }, playerMoveSpeed);
@@ -82,7 +79,7 @@ const App = () => {
   };
 
   const movePlayer = (rowDir, colDir) => {
-    const newCells = cells.slice(); //copy cells
+    const newCells = cells.slice(); // copy cells
     const currentCell = newCells[playerPos.row][playerPos.col];
 
     setPlayerPos({ row: playerPos.row + rowDir, col: playerPos.col + colDir });
@@ -109,7 +106,7 @@ const App = () => {
   };
 
   const handleCellClick = (rowTarget, colTarget, action) => {
-    console.log(rowTarget, colTarget);
+    // console.log(rowTarget, colTarget);
     setPlayerTarget({ row: rowTarget, col: colTarget });
     setNextAction(() => action);
   };
@@ -138,11 +135,13 @@ const App = () => {
         <img className='cells' src='images/grid/draft1nogrid.png' alt='background'></img>
         <div className="cells">{renderCells()}</div>
         <Player currentFrame={playerFrameLib[currentPlayerFrame]} />
+        <div className='UI'>
+          <p>12:00PM</p>
+          <p>M: $100</p>
+          <p>S: 100</p>
+          <p>H: 100</p>
+        </div>
       </div>
-      <p>S: 100</p>
-      <p>H: 100</p>
-      <p>$100</p>
-      <p>12:00PM</p>
     </main>
   );
 };

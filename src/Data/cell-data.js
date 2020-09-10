@@ -18,7 +18,7 @@ export const mainRoomData =
       col: 2,
       name: 'couch1',
       hasPlayer: false,
-      walkable: false,
+      walkable: true,
       hasAction: true,
       action: relaxOnCouch
     },
@@ -27,7 +27,7 @@ export const mainRoomData =
       col: 3,
       name: 'couch2',
       hasPlayer: false,
-      walkable: false,
+      walkable: true,
       hasAction: true,
       action: relaxOnCouch
     },
@@ -35,6 +35,24 @@ export const mainRoomData =
       row: 6,
       col: 2,
       name: 'tv',
+      hasPlayer: false,
+      walkable: false,
+      hasAction: false,
+      action: () => { }
+    },
+    {
+      row: 6,
+      col: 9,
+      name: 'clothes1',
+      hasPlayer: false,
+      walkable: false,
+      hasAction: false,
+      action: () => { }
+    },
+    {
+      row: 7,
+      col: 9,
+      name: 'clothes1',
       hasPlayer: false,
       walkable: false,
       hasAction: false,
