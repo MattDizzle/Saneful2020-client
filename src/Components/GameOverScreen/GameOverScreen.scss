@@ -1,0 +1,23 @@
+.game-over-screen{
+  display: flex;
+  flex-direction: column;
+  height: 538px;
+  width: 521px;
+  justify-content: center;
+  align-items: center;
+  z-index: 12;
+  position: absolute;
+  top: 0px; 
+  left: 0px;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  padding: 8px;
+}
+
+.game-over-message{
+  width: 80%;
+}
+
+.game-over-message p {
+  line-height: 30px;
+}

@@ -25,6 +25,7 @@ import HealthMeter from '../HealthMeter';
 import SanityMeter from '../SanityMeter';
 import MoneyMeter from '../MoneyMeter';
 import TimeMeter from '../TimeMeter';
+import GameOverScreen from '../GameOverScreen';
 
 //CSS
 import './GameWindow.scss';
@@ -33,6 +34,7 @@ const GameWindow = () => {
   /* State Start */
   const [cells, setCells] = useState(generateCells());
   const [live, setLive] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
 
   // player control
   const [playerHasControl, setPlayerHasControl] = useState(true);
@@ -59,6 +61,7 @@ const GameWindow = () => {
   const [timeStopped, setTimeStopped] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [timeTick, setTimeTick] = useState(0);
+  const [reasonForDeath, setReasonForDeath] = useState('still alive');
 
   // stats
   const [health, setHealth] = useState(100);
@@ -66,24 +69,17 @@ const GameWindow = () => {
   const [money, setMoney] = useState(100);
   const [maxHealth, setMaxHealth] = useState(100);
   const [maxSanity, setMaxSanity] = useState(100);
-  const [maxMoney, setMaxMoney] = useState(100);
   const [healthTick, setHealthTick] = useState(0);
   const [sanityTick, setSanityTick] = useState(0);
   const [moneyTick, setMoneyTick] = useState(0);
-
-
-
-  // move player movement into player movement script 
-  // move player anim into player anim script
-  // have ticks in update for health, sanity and money
-  // elapsed time will still depend on movement and actions (for now/// could later be transferred into a tick)
 
   /* State End */
 
   let player = document.querySelector('.Player');
 
-  // when we reach a cell we simply need to ask if it has an action
-  // if so we send the action string of that cell to the player actions script which will perform the action 
+  // TODO: 
+  // move player movement into player movement script 
+  // move player anim into player anim script
 
   useEffect(() => {
     const update = setInterval(() => {
@@ -91,68 +87,78 @@ const GameWindow = () => {
         start();
       }
 
-      if (!timeStopped) {
-        // decrement health due to aging
-        if (healthTick === healthInterval) {
-          setHealth(health - 1);
-          setHealthTick(0);
-        } else {
-          setHealthTick(healthTick + 1);
-        }
-
-        // decrement sanity due to being trapped at home
-        if (sanityTick === sanityInterval) {
-          setSanity(sanity - 1);
-          setSanityTick(0);
-        } else {
-          setSanityTick(sanityTick + 1);
-        }
-
-        // decrement money due to bills
-        if (moneyTick === moneyInterval) {
-          setMoney(money - 1);
-          setMoneyTick(0);
-        } else {
-          setMoneyTick(moneyTick + 1);
-        }
-
-        // decrement time just because ...time
-        if (timeTick === timeInterval) {
-          setElapsedTime(elapsedTime + 1);
-          setTimeTick(0);
-        } else {
-          setTimeTick(timeTick + 1);
-        }
-      }
-
-      // player movement update
-      if (playerMoveTick === playerMoveSpeed) {
-        playerPositionUpdate();
-        setPlayerMoveTick(0);
+      if (health <= 0 || sanity <= 0) {
+        if (health <= 0)
+          setReasonForDeath('health');
+        if (sanity <= 0)
+          setReasonForDeath('sanity');
+        handleGameOver();
       } else {
-        setPlayerMoveTick(playerMoveTick + 1);
-      }
+        if (!timeStopped) {
+          // decrement health due to aging
+          if (healthTick === healthInterval) {
+            setHealth(health - 1);
+            setHealthTick(0);
+          } else {
+            setHealthTick(healthTick + 1);
+          }
 
-      if (isMoving) {
-        // player animation update
-        if (playerAnimTick === Math.floor(playerMoveSpeed / 2)) {
-          changePlayerMoveFrame();
-          setPlayerAnimTick(0);
-        } else {
-          setPlayerAnimTick(playerAnimTick + 1);
+          // decrement sanity due to being trapped at home
+          if (sanityTick === sanityInterval) {
+            setSanity(sanity - 1);
+            setSanityTick(0);
+          } else {
+            setSanityTick(sanityTick + 1);
+          }
+
+          // decrement money due to bills
+          if (moneyTick === moneyInterval) {
+            setMoney(money - 1);
+            setMoneyTick(0);
+          } else {
+            setMoneyTick(moneyTick + 1);
+          }
+
+          // decrement time just because ...time
+          if (timeTick === timeInterval) {
+            setElapsedTime(elapsedTime + 1);
+            setTimeTick(0);
+          } else {
+            setTimeTick(timeTick + 1);
+          }
         }
-      } else {
-        // check for action triggers on current cell
-        // this could be put outside of isMoving condition to check every cell we walk over 
-        if (cells[playerPos.row][playerPos.col].hasAction) {
-          //show player a menu that asks if they want to perform the action
-          if (nextAction !== 'none') {
-            setPendingAction(nextAction);
-            setPlayerHasControl(false);
-            setDialogBoxActive(true);
+
+        // player movement update
+        if (playerMoveTick === playerMoveSpeed) {
+          playerPositionUpdate();
+          setPlayerMoveTick(0);
+        } else {
+          setPlayerMoveTick(playerMoveTick + 1);
+        }
+
+        if (isMoving) {
+          // player animation update
+          if (playerAnimTick === Math.floor(playerMoveSpeed / 2)) {
+            changePlayerMoveFrame();
+            setPlayerAnimTick(0);
+          } else {
+            setPlayerAnimTick(playerAnimTick + 1);
+          }
+        } else {
+          // check for action triggers on current cell
+          // this could be put outside of isMoving condition to check every cell we walk over 
+          if (cells[playerPos.row][playerPos.col].hasAction) {
+            //show player a menu that asks if they want to perform the action
+            if (nextAction !== 'none') {
+              setPendingAction(nextAction);
+              setPlayerHasControl(false);
+              setDialogBoxActive(true);
+            }
           }
         }
       }
+
+
     }, updateRate);
 
     return () => {
@@ -175,6 +181,11 @@ const GameWindow = () => {
     setLive(true);
     setCurrentPlayerFrame(0);
     setPlayerFrameLib(c1Frames.right);
+  };
+
+  const handleGameOver = () => {
+    setGameOver(true);
+    setLive(false);
   };
 
   const playerPositionUpdate = () => {
@@ -294,6 +305,7 @@ const GameWindow = () => {
         <HealthMeter currentHealth={health} />
       </div>
       {dialogBoxActive && <DialogBox yesClick={yesAction} noClick={noAction} text={pendingAction} />}
+      {gameOver && <GameOverScreen currentTime={elapsedTime} reason={reasonForDeath} />}
     </section>
   );
 };
