@@ -10,11 +10,11 @@
 .UI{
   display: flex;
   flex-direction: column;
-  height: 100px;
+  height: 135px;
   justify-content: space-between;
   z-index: 12;
   position: absolute;
-  top: 430px; 
+  top: 400px; 
   left: 15px;
   background-color: rgba(0, 0, 0, 0.671);
   color: rgb(255, 255, 255);
@@ -22,7 +22,7 @@
 }
 
 .UI p{
-  margin: 0;
+  margin: 5px;
 }
 
 .background{

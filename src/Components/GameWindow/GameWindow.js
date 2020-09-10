@@ -13,6 +13,10 @@ import DetermineAction from '../Player/Actions';
 
 //UI
 import DialogBox from '../DialogBox';
+import HealthMeter from '../HealthMeter';
+import SanityMeter from '../SanityMeter';
+import MoneyMeter from '../MoneyMeter';
+import TimeMeter from '../TimeMeter';
 
 //CSS
 import './GameWindow.scss';
@@ -43,11 +47,16 @@ const GameWindow = () => {
   const [nextAction, setNextAction] = useState('none');
   const [pendingAction, setPendingAction] = useState('none');
 
+  // time
+  const [timeStopped, setTimeStopped] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0);
+
+
   // TODO:
   const [health, setHealth] = useState(100);
   const [sanity, setSanity] = useState(100);
   const [money, setMoney] = useState(100);
-  const [elapsedTime, setElapsedTime] = useState(0);
+
 
   // move player movement into player movement script 
   // move player anim into player anim script
@@ -205,10 +214,10 @@ const GameWindow = () => {
       <div className="cells">{renderCells()}</div>
       <Player currentFrame={playerFrameLib[currentPlayerFrame]} />
       <div className='UI'>
-        <p>12:00PM</p>
-        <p>M:$100</p>
-        <p>S:100</p>
-        <p>H:100</p>
+        <TimeMeter />
+        <MoneyMeter />
+        <SanityMeter />
+        <HealthMeter />
       </div>
       {dialogBoxActive && <DialogBox yesClick={yesAction} noClick={noAction} text={pendingAction} />}
     </section>
