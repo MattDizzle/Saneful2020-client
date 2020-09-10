@@ -32,17 +32,15 @@ const App = () => {
   const [money, setMoney] = useState(100);
   const [elapsedTime, setElapsedTime] = useState(0);
 
-  // turn use effect into update every 50ms
-  // check if playerpos === targetpos and if not then moving = true else false
   // move player movement into player movement script 
   // move player anim into player anim script
-  // have tick in update for how ofter player moves depending on player movement speed
-  // have tick in update for how often animation plays depending on animation speed
   // have ticks in update for health, sanity and money
   // elapsed time will still depend on movement and actions (for now/// could later be transferred into a tick)
 
-
   let player = document.querySelector('.Player');
+
+  // when we reach a cell we simply need to ask if it has an action
+  // if so we send the action string of that cell to the player actions script which will perform the action 
 
   useEffect(() => {
     const update = setInterval(() => {

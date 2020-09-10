@@ -1,25 +1,3 @@
-const relaxOnCouch = () => {
-  console.log('so relaxing...');
-  // walk to couch 
-  // face tv
-  // increment sanity
-  // decrement health
-};
-
-const workOnComp = () => {
-  console.log('yay time to work...');
-  // face computer
-  // increment money
-  // decrement sanity
-};
-
-const getFood = () => {
-  console.log('yesss fooddd!!');
-  // face fridge
-  // increment health
-  // decrement money
-};
-
 export const mainRoomData =
   [
     {
@@ -29,7 +7,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: true,
       hasAction: true,
-      action: relaxOnCouch
+      action: 'relaxOnCouch'
     },
     {
       row: 4,
@@ -38,7 +16,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: true,
       hasAction: true,
-      action: relaxOnCouch
+      action: 'relaxOnCouch'
     },
     {
       row: 6,
@@ -47,7 +25,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: true,
       hasAction: false,
-      action: relaxOnCouch
+      action: 'relaxOnCouch'
     },
     {
       row: 6,
@@ -56,7 +34,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: () => { }
+      action: 'none'
     },
     {
       row: 7,
@@ -65,7 +43,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: () => { }
+      action: 'none'
     },
     { /* Back wall start */
       row: 0,
@@ -74,7 +52,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: () => { }
+      action: 'none'
     },
     {
       row: 0,
@@ -83,7 +61,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: () => { }
+      action: 'none'
     },
     {
       row: 0,
@@ -92,7 +70,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: true,
-      action: workOnComp
+      action: 'workOnComp'
     },
     {
       row: 1,
@@ -101,7 +79,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: true,
-      action: workOnComp
+      action: 'workOnComp'
     },
     {
       row: 0,
@@ -110,7 +88,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: () => { }
+      action: 'none'
     },
     {
       row: 0,
@@ -119,7 +97,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: () => { }
+      action: 'none'
     },
     {
       row: 0,
@@ -128,7 +106,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: true,
-      action: getFood
+      action: 'getFood'
     },
     {
       row: 1,
@@ -137,7 +115,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: true,
       hasAction: true,
-      action: getFood
+      action: 'getFood'
     },
     {
       row: 0,
@@ -146,7 +124,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: () => { }
+      action: 'none'
     },
     {
       row: 0,
@@ -155,7 +133,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: () => { }
+      action: 'none'
     },
     {
       row: 0,
@@ -164,7 +142,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: () => { }
+      action: 'none'
     },
     {
       row: 0,
@@ -173,6 +151,6 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: () => { }
+      action: 'none'
     }, /* Back wall finish */
   ];
