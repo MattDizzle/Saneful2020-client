@@ -1,14 +1,20 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import GameWindow from '../GameWindow/GameWindow';
 
 import './App.scss';
 
-const App = () => {
 
+const App = () => {
   return (
-    <main className='App'>
-      <GameWindow />
-    </main>
+    <div className='App'>
+      <header>
+        header
+      </header >
+      <main >
+        <GameWindow />
+      </main>
+    </div >
   );
 };
 
