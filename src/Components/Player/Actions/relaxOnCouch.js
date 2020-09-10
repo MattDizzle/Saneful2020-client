@@ -2,8 +2,27 @@ const relaxOnCouch = () => {
   console.log('so relaxing...');
   // walk to couch 
   // face tv
-  // increment sanity
+  const directionToFace = 'front';
+
   // decrement health
+  const health = -35;
+
+  // decrement sanity 
+  const sanity = 60;
+
+  // increment money
+  const money = -20;
+
+  //time increase
+  const time = 60;
+
+  return {
+    healthMod: health,
+    sanityMod: sanity,
+    moneyMod: money,
+    timeMod: time,
+    directionToFace: directionToFace
+  };
 };
 
 export default relaxOnCouch;

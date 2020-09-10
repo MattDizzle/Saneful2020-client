@@ -64,6 +64,9 @@ const GameWindow = () => {
   const [health, setHealth] = useState(100);
   const [sanity, setSanity] = useState(100);
   const [money, setMoney] = useState(100);
+  const [maxHealth, setMaxHealth] = useState(100);
+  const [maxSanity, setMaxSanity] = useState(100);
+  const [maxMoney, setMaxMoney] = useState(100);
   const [healthTick, setHealthTick] = useState(0);
   const [sanityTick, setSanityTick] = useState(0);
   const [moneyTick, setMoneyTick] = useState(0);
@@ -158,7 +161,7 @@ const GameWindow = () => {
   });
 
   const yesAction = () => {
-    DetermineAction(pendingAction);
+    DetermineAction(pendingAction, executeAction);
   };
 
   const noAction = () => {
@@ -227,6 +230,31 @@ const GameWindow = () => {
       setCurrentPlayerFrame(currentPlayerFrame + 1);
     else
       setCurrentPlayerFrame(0);
+  };
+
+  const executeAction = (mods) => {
+
+    // adjust stats
+    let newHealth = mods.healthMod;
+    if (newHealth > maxHealth - health) {
+      newHealth = maxHealth - health;
+    }
+
+    let newSanity = mods.sanityMod;
+    if (newSanity > maxSanity - sanity) {
+      newSanity = maxSanity - sanity;
+    }
+
+    setHealth(health + newHealth);
+    setSanity(sanity + newSanity);
+    setMoney(money + mods.moneyMod);
+    setElapsedTime(elapsedTime + mods.timeMod);
+
+    // face the correct direction
+    setPlayerFrameLib(c1Frames[mods.directionToFace]);
+
+    // complete action
+    noAction();
   };
 
   const handleCellClick = (rowTarget, colTarget, action) => {

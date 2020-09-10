@@ -3,16 +3,16 @@ import relaxOnCouch from './relaxOnCouch';
 import workOnComp from './workOnComp';
 
 
-const DetermineAction = (actionString) => {
-  console.log('determining action');
+const DetermineAction = (actionString, executeAction) => {
+  console.log('determining action...');
   if (actionString === 'do work on the computer') {
-    workOnComp();
+    executeAction(workOnComp());
   }
   else if (actionString === 'eat food') {
-    getFoodFromFridge();
+    executeAction(getFoodFromFridge());
   }
   else if (actionString === 'relax on the couch') {
-    relaxOnCouch();
+    executeAction(relaxOnCouch());
   }
 };
 

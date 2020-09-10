@@ -8,7 +8,7 @@ const DialogBox = (props) => {
 
   newText = newText.charAt(0).toUpperCase() + newText.slice(1);
 
-  newText = newText += '?';
+  newText = newText += ' for an hour?';
 
   return (
     <div className='dialog-box-container'>
