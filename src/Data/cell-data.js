@@ -24,7 +24,7 @@ export const mainRoomData =
       name: 'tv',
       hasPlayer: false,
       walkable: true,
-      hasAction: false,
+      hasAction: true,
       action: 'relax on the couch'
     },
     {
