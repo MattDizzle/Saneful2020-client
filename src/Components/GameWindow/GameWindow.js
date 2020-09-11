@@ -119,7 +119,7 @@ const GameWindow = () => {
             setMoneyTick(moneyTick + 1);
           }
 
-          // decrement time just because ...time
+          // decrement time because ...time
           if (timeTick === timeInterval) {
             setElapsedTime(elapsedTime + 1);
             setTimeTick(0);
@@ -149,7 +149,7 @@ const GameWindow = () => {
           // this could be put outside of isMoving condition to check every cell we walk over 
           if (cells[playerPos.row][playerPos.col].hasAction) {
             //show player a menu that asks if they want to perform the action
-            if (nextAction !== 'none') {
+            if (nextAction !== 'none' && (playerPos.row === playerTarget.row && playerPos.col === playerTarget.col)) {
               setPendingAction(nextAction);
               setPlayerHasControl(false);
               setDialogBoxActive(true);
@@ -222,7 +222,6 @@ const GameWindow = () => {
 
     setPlayerPos({ row: playerPos.row + rowDir, col: playerPos.col + colDir });
 
-    newCells[playerPos.row][playerPos.col].name = 'Player';
     newCells[playerPos.row][playerPos.col].hasPlayer = true;
 
     if (player) {
@@ -232,7 +231,6 @@ const GameWindow = () => {
 
     setCells(newCells);
 
-    currentCell.name = 'empty';
     currentCell.hasPlayer = false;
   };
 

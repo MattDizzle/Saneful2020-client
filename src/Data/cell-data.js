@@ -23,9 +23,9 @@ export const mainRoomData =
       col: 2,
       name: 'tv',
       hasPlayer: false,
-      walkable: true,
-      hasAction: true,
-      action: 'relax on the couch'
+      walkable: false,
+      hasAction: false,
+      action: 'none'
     },
     {
       row: 6,
