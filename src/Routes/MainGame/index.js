@@ -5,10 +5,17 @@ import './MainGame.scss';
 
 const MainGame = () => {
 
+  const handleSaveGame = (saveObj) => {
+
+    //save game
+    //call save game service
+    //pass saveObj as body
+  };
+
   return (
     <section className='MainGame'>
       MainGame
-      <GameWindow />
+      <GameWindow saveGame={handleSaveGame} />
     </section>
   );
 };

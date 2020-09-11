@@ -5,6 +5,12 @@
   font-family: 'Press Start 2P', cursive;
 }
 
+.Register form{
+  display: flex;
+  flex-direction: column;
+}
+
+
 @keyframes bounceIn {
   0% {
     transform: scale(0.1);
@@ -19,7 +25,7 @@
   }
 }
 
-.loginButton, .registerButton, input {
+.registerButton, input {
   margin: auto;
   margin-top: 8px;
   min-height: 25px;

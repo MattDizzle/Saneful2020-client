@@ -272,6 +272,17 @@ const GameWindow = () => {
     }
   };
 
+  const onSaveClick = () => {
+    return {
+      health,
+      sanity,
+      money,
+      elapsedTime,
+      playerPosRow: playerPos.row,
+      playerPosCol: playerPos.col,
+    };
+  };
+
   const renderCells = () => {
     return cells.map((row, rowIndex) =>
       row.map((cell, colIndex) => (

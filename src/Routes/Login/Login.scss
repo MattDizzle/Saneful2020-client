@@ -19,7 +19,12 @@
   }
 }
 
-.loginButton, .registerButton, input {
+.Login form{
+  display: flex;
+  flex-direction: column;
+}
+
+.loginButton, input {
   margin: auto;
   margin-top: 8px;
   min-height: 25px;

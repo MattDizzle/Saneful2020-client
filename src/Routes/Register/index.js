@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "../../hooks/useForm";
 import { useHistory } from "react-router-dom";
 import logo from '../../navywhitelogo.png';
+import AuthApiService from '../../services/auth-service';
+
 import './Register.scss';
 
 const Register = () => {
@@ -10,11 +12,10 @@ const Register = () => {
     username: "",
     email: "",
     password: "",
-    sprite: ""
   });
 
   const handleSubmit = (e) => {
-    const { username, email, password, sprite } = values;
+    const { username, email, password, } = values;
     e.preventDefault();
     console.log(
       "username: ",
@@ -23,22 +24,23 @@ const Register = () => {
       email,
       "password: ",
       password,
-      "sprite",
-      sprite
     );
+
+    AuthApiService.postUser({
+      user_name: username,
+      user_email: email,
+      user_password: password
+    })
+      .then(res => console.log(res));;
+
     reset();
     history.goBack();
   };
 
   return (
     <div className="Register">
-      <img src={logo} className="logo" alt="logo"/>
+      <img src={logo} className="logo" alt="logo" />
       <form onSubmit={handleSubmit}>
-        <select name="sprite" onChange={handleChange} value={values.sprite}>
-          <option value="c1">c1</option>
-          <option value="c2">c2</option>
-          <option value="c3">c3</option>
-        </select>
         <input
           type="text"
           name="username"
@@ -60,7 +62,7 @@ const Register = () => {
           onChange={handleChange}
           value={values.password}
         />
-        <button type="submit">Register</button>
+        <button type="submit" className='registerButton'>Register</button>
       </form>
     </div>
   );
