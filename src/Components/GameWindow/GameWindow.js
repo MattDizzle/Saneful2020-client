@@ -158,7 +158,6 @@ const GameWindow = () => {
         }
       }
 
-
     }, updateRate);
 
     return () => {
