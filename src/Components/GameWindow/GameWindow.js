@@ -283,6 +283,7 @@ const GameWindow = () => {
     return cells.map((row, rowIndex) =>
       row.map((cell, colIndex) => (
         <Cell
+          class={cell.hasAction ? 'action-cell' : 'cell'}
           key={`${rowIndex}-${colIndex}`}
           walkable={cell.walkable}
           name={cell.name}

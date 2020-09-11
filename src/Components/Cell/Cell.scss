@@ -1,5 +1,16 @@
-.Cell {
+.cell {
   // border: 1px gray solid;
+  visibility:hidden;
   height: 52px;
   width: 52px;
+}
+
+.action-cell {
+  visibility:hidden;
+  height: 52px;
+  width: 52px;
+}
+
+.action-cell:hover{
+  visibility:visible;
 }
