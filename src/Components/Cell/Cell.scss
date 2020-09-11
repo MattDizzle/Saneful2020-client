@@ -1,16 +1,21 @@
 .cell {
   // border: 1px gray solid;
-  visibility:hidden;
+  visibility: visible;
   height: 52px;
   width: 52px;
 }
 
-.action-cell {
-  visibility:hidden;
+.action-cell{
   height: 52px;
   width: 52px;
 }
 
-.action-cell:hover{
+.action-cell img{
+  visibility:hidden;
+}
+
+.action-cell:hover img{
   visibility:visible;
+  margin-top: -50px;
+
 }

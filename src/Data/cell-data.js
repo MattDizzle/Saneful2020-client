@@ -69,8 +69,8 @@ export const mainRoomData =
       name: 'computerBack',
       hasPlayer: false,
       walkable: false,
-      hasAction: true,
-      action: 'do work on the computer'
+      hasAction: false,
+      action: 'none'
     },
     {
       row: 1,
@@ -105,8 +105,8 @@ export const mainRoomData =
       name: 'fridgeBack',
       hasPlayer: false,
       walkable: false,
-      hasAction: true,
-      action: 'eat food'
+      hasAction: false,
+      action: 'none'
     },
     {
       row: 1,
