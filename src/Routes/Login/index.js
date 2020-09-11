@@ -27,14 +27,13 @@ const Login = (props) => {
     })
       .then(res => {
         userContext.processLogin(res.authToken);
+        history.push('/dashboard');
       })
       .catch(res => {
         userContext.setError(res.error);
       });
 
     reset();
-
-    history.push('/dashboard');
   };
 
   return (
