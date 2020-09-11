@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.loginButton, .registerButton, input {
+  margin: auto;
+  margin-top: 8px;
+  min-height: 25px;
+}
+
+.bounceIn {
+  animation: bounceIn 2s;
+}
+
+.logo {
+  align-self: center;
+  margin-top: 25%;
+  max-width: 35%;
+  min-width: 200px;
+}
+
+// body {  
+//   width:auto;
+//   margin: auto;
+//   background-color: #060321;
+//   justify-content: center;
+//   align-items: center;
+//   text-align: center;
+//   }
+
+label {
+  color: white;
+}
+
+form, .buttonHolder {
+  padding-top: 3rem;
+  margin: auto;
+}
