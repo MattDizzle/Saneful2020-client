@@ -1,26 +1,40 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "../../hooks/useForm";
 import { useHistory } from "react-router-dom";
 import logo from '../../navywhitelogo.png';
 import AuthApiService from '../../services/auth-service';
+import UserContext from '../../Context/UserContext';
 
 import './Login.scss';
 
-const Login = () => {
+const Login = (props) => {
   const history = useHistory();
+  const userContext = useContext(UserContext);
 
   const { values, handleChange, reset } = useForm({ email: "", password: "" });
 
   const handleSubmit = (e) => {
     const { email, password } = values;
     e.preventDefault();
+
+    userContext.setError(null);
+
     console.log("email: ", email, "password: ", password);
+
+    AuthApiService.postLogin({
+      user_email: email,
+      user_password: password
+    })
+      .then(res => {
+        userContext.processLogin(res.authToken);
+      })
+      .catch(res => {
+        userContext.setError(res.error);
+      });
+
     reset();
 
-    AuthApiService.postLogin({ user_email: email, user_password: password })
-      .then(res => console.log(res));
-
-    history.goBack();
+    history.push('/dashboard');
   };
 
   return (
@@ -43,6 +57,9 @@ const Login = () => {
         />
         <button type="submit" className='loginButton'>Log In</button>
       </form>
+      <div role='alert'>
+        {userContext.error && <p>{userContext.error}</p>}
+      </div>
     </div>
   );
 };

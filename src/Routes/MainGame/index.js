@@ -14,7 +14,6 @@ const MainGame = () => {
 
   return (
     <section className='MainGame'>
-      MainGame
       <GameWindow saveGame={handleSaveGame} />
     </section>
   );

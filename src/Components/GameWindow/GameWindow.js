@@ -77,10 +77,6 @@ const GameWindow = () => {
 
   let player = document.querySelector('.Player');
 
-  // TODO: 
-  // move player movement into player movement script 
-  // move player anim into player anim script
-
   useEffect(() => {
     const update = setInterval(() => {
       if (!live) {

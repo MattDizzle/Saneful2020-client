@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "../../hooks/useForm";
 import { useHistory } from "react-router-dom";
 import logo from '../../navywhitelogo.png';
 import AuthApiService from '../../services/auth-service';
 
 import './Register.scss';
+import UserContext from "../../Context/UserContext";
 
 const Register = () => {
   const history = useHistory();
+  const userContext = useContext(UserContext);
+
   const { values, handleChange, reset } = useForm({
     username: "",
     email: "",
@@ -31,7 +34,12 @@ const Register = () => {
       user_email: email,
       user_password: password
     })
-      .then(res => console.log(res));;
+      .then(user => {
+        console.log(user);
+      })
+      .catch(res => {
+        userContext.setError(res.error);
+      });
 
     reset();
     history.goBack();
