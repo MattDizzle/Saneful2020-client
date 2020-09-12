@@ -36,13 +36,24 @@ const Register = () => {
     })
       .then(user => {
         console.log(user);
+        AuthApiService.postLogin({
+          user_email: email,
+          user_password: password
+        })
+          .then(res => {
+            console.log(res);
+            userContext.processLogin(res.authToken);
+            history.push('/dashboard');
+          })
+          .catch(res => {
+            userContext.setError(res.error);
+          })
       })
       .catch(res => {
         userContext.setError(res.error);
       });
 
     reset();
-    history.goBack();
   };
 
   return (
