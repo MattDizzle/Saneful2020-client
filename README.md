@@ -20,8 +20,9 @@ Users can login and play Saneful.
 
 Users lose game when they run out of sanity.
 
-_______________________________________________________________________________
-_______________________________________________________________________________
+---
+
+---
 
 ## Screenshots
 
@@ -32,13 +33,14 @@ Login:
 ![Saneful Screenshot: Login]()
 
 Game Window:
-![Saneful Screenshot: Learn]()
+![Saneful Screenshot: Game Window]()
 
 Signup:
 ![Saneful Screenshot: Registration]()
 
-________________________________________________________________________________
-________________________________________________________________________________
+---
+
+---
 
 ## About the Technology Stack
 
@@ -61,7 +63,6 @@ Heroku
 ​Development Environment
 
 Node.js
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
