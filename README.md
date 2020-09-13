@@ -1,3 +1,68 @@
+# Saneful 2020
+
+### Project by Nick S., Chrissy H., Michael O., Minh N. and Matt R..
+
+Live Link:
+https://saneful.vercel.app/
+
+Heroku Link:
+https://mighty-reaches-06724.herokuapp.com/
+
+GitHub Client Link:
+https://github.com/thinkful-ei-panda/Saneful2020-client
+
+GitHub API Link:
+https://github.com/MattDizzle/Saneful2020-api
+
+Users can register an account which will save thier progress.
+
+Users can login and play Saneful.
+
+Users lose game when they run out of sanity.
+
+_______________________________________________________________________________
+_______________________________________________________________________________
+
+## Screenshots
+
+Dash:
+![Saneful Screenshot: Dash]()
+
+Login:
+![Saneful Screenshot: Login]()
+
+Game Window:
+![Saneful Screenshot: Learn]()
+
+Signup:
+![Saneful Screenshot: Registration]()
+
+________________________________________________________________________________
+________________________________________________________________________________
+
+## About the Technology Stack
+
+Front-end technologies:
+
+HTML5, CSS3, SCSS, Javascript, React, JSX
+
+Server technologies:
+
+​Express, Morgan, Helmet, Path, JsonWebToken, XSS, pg, Dotenv, Cors, Postgrator, Supertest
+
+Data Persistence:
+
+PostgreSQL
+
+Hosting/SaaS:
+Vercel
+Heroku
+
+​Development Environment
+
+Node.js
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
