@@ -1,5 +1,7 @@
+//SYSTEM
+import React, { useState, useEffect, useContext } from 'react';
+import GameContext from '../../Context/GameContext';
 //GENERAL
-import React, { useState, useEffect } from 'react';
 import {
   playerMoveSpeed,
   playerStartPos,
@@ -31,6 +33,19 @@ import GameOverScreen from '../GameOverScreen';
 import './GameWindow.scss';
 
 const GameWindow = () => {
+
+  const gameContext = useContext(GameContext);
+  const {
+    current_x_coord,
+    current_y_coord,
+    money_counter,
+    health_points,
+    health_points_max,
+    sanity_points,
+    sanity_points_max,
+    elapsed_time,
+  } = gameContext.gameData;
+
   /* State Start */
   const [cells, setCells] = useState(generateCells());
   const [live, setLive] = useState(false);
@@ -40,8 +55,8 @@ const GameWindow = () => {
   const [playerHasControl, setPlayerHasControl] = useState(true);
 
   // player movement
-  const [playerPos, setPlayerPos] = useState({ row: playerStartPos.row, col: playerStartPos.col });
-  const [playerTarget, setPlayerTarget] = useState({ row: playerStartPos.row, col: playerStartPos.col });
+  const [playerPos, setPlayerPos] = useState({ row: current_x_coord, col: current_y_coord });
+  const [playerTarget, setPlayerTarget] = useState({ row: current_x_coord, col: current_y_coord });
   const [playerMoveTick, setPlayerMoveTick] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
 
@@ -59,16 +74,14 @@ const GameWindow = () => {
 
   // time
   const [timeStopped, setTimeStopped] = useState(false);
-  const [elapsedTime, setElapsedTime] = useState(0);
+  const [elapsedTime, setElapsedTime] = useState(elapsed_time);
   const [timeTick, setTimeTick] = useState(0);
   const [reasonForDeath, setReasonForDeath] = useState('still alive');
 
   // stats
-  const [health, setHealth] = useState(100);
-  const [sanity, setSanity] = useState(100);
-  const [money, setMoney] = useState(100);
-  const [maxHealth, setMaxHealth] = useState(100);
-  const [maxSanity, setMaxSanity] = useState(100);
+  const [health, setHealth] = useState(health_points);
+  const [sanity, setSanity] = useState(sanity_points);
+  const [money, setMoney] = useState(money_counter);
   const [healthTick, setHealthTick] = useState(0);
   const [sanityTick, setSanityTick] = useState(0);
   const [moneyTick, setMoneyTick] = useState(0);
@@ -180,6 +193,7 @@ const GameWindow = () => {
 
   const handleGameOver = () => {
     setGameOver(true);
+    setTimeStopped(true);
     setLive(false);
   };
 
@@ -240,13 +254,13 @@ const GameWindow = () => {
 
     // adjust stats
     let newHealth = mods.healthMod;
-    if (newHealth > maxHealth - health) {
-      newHealth = maxHealth - health;
+    if (newHealth > health_points_max - health) {
+      newHealth = health_points_max - health;
     }
 
     let newSanity = mods.sanityMod;
-    if (newSanity > maxSanity - sanity) {
-      newSanity = maxSanity - sanity;
+    if (newSanity > sanity_points_max - sanity) {
+      newSanity = sanity_points_max - sanity;
     }
 
     setHealth(health + newHealth);
@@ -268,16 +282,16 @@ const GameWindow = () => {
     }
   };
 
-  const onSaveClick = () => {
-    return {
-      health,
-      sanity,
-      money,
-      elapsedTime,
-      playerPosRow: playerPos.row,
-      playerPosCol: playerPos.col,
-    };
-  };
+  // const onSaveClick = () => {
+  //   return {
+  //     health,
+  //     sanity,
+  //     money,
+  //     elapsedTime,
+  //     playerPosRow: playerPos.row,
+  //     playerPosCol: playerPos.col,
+  //   };
+  // };
 
   const renderCells = () => {
     return cells.map((row, rowIndex) =>

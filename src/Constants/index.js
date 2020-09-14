@@ -4,7 +4,6 @@ export const MAX_COLS = 10;
 
 //PLAYER
 export const playerMoveSpeed = 4;
-export const playerStartPos = { row: 2, col: 0 };
 
 //STATS
 export const healthInterval = 40;

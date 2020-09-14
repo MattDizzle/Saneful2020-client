@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch } from "react-router-dom";
 // import GameWindow from '../GameWindow/GameWindow';
 import LeaderBoard from "../../Routes/LeaderBoard";
 import Login from "../../Routes/Login";

@@ -1,27 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import GameWindow from '../../Components/GameWindow/GameWindow';
-import SaveApiService from '../../services/save-service';
+import GameContext from '../../Context/GameContext';
 
 import './MainGame.scss';
 
 const MainGame = () => {
 
-  const handleNewGame = () => {
-
-
-  };
-
-  const handleLoadGame = async () => {
-    const result = await SaveApiService.getSaveGameData();
-    console.log(result);
-  };
+  const gameContext = useContext(GameContext);
 
   const handleSaveGame = (saveObj) => {
-
-    //save game
-    //call save game service
-
-    //pass saveObj as body
+    gameContext.saveGame(saveObj);
   };
 
   return (

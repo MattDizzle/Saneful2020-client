@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SaveApiService from '../services/save-service';
 
 const GameContext = React.createContext({
   gameData: {
@@ -11,7 +12,10 @@ const GameContext = React.createContext({
     sanity_points_max: 0,
     elapsed_time: 0,
   },
-  setGameData: () => { }
+  setGameData: () => { },
+  newGame: () => { },
+  loadGame: () => { },
+  saveGame: () => { },
 });
 
 export default GameContext;
@@ -38,10 +42,43 @@ export class GameProvider extends Component {
     console.log(gameData);
   };
 
+  newGame = async () => {
+    let result;
+
+    try {
+      result = await SaveApiService.postNewGameData();
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+
+    this.setGameData(result);
+  };
+
+  loadGame = async () => {
+    let result;
+
+    try {
+      result = await SaveApiService.getSaveGameData();
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+
+    this.setGameData(result);
+  };
+
+  saveGame = async (gameData) => {
+
+  };
+
   render() {
     const value = {
       gameData: this.state.gameData,
       setGameData: this.setGameData,
+      newGame: this.newGame,
+      loadGame: this.loadGame,
+      saveGame: this.saveGame
     };
     return (
       <GameContext.Provider value={value}>
