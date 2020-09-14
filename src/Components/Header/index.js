@@ -17,13 +17,14 @@ const Header = () => {
     return (
       <div>
         <li>
-          <Link to="/dashboard">Dashbaord</Link>
+          <Link to="/dashboard">Dashboard</Link>
         </li>
         <li>
           <Link to="/leaderBoard">LeaderBoard</Link>
         </li>
         <li>
-          {userContext.user.email}
+          {userContext.user.user_name}
+          {console.log(userContext.user)}
         </li>
         <li>
           <Link
