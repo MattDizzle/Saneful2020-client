@@ -8,10 +8,11 @@ const SaveApiService = {
    * @returns {object} game data object
    */
   getSaveGameData() {
+    console.log(TokenService.getAuthToken());
     return fetch(`${config.API_ENDPOINT}/save`, {
       method: 'GET',
       headers: {
-        'athorization': `Bearer ${TokenService.getAuthToken()}`,
+        'authorization': `Bearer ${TokenService.getAuthToken()}`,
       }
     })
       .then(res =>

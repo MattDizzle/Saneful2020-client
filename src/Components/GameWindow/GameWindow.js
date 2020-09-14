@@ -4,7 +4,6 @@ import GameContext from '../../Context/GameContext';
 //GENERAL
 import {
   playerMoveSpeed,
-  playerStartPos,
   updateRate,
   healthInterval,
   sanityInterval,

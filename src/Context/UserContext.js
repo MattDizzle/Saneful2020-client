@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AuthApiService from '../services/auth-service';
 import TokenService from '../services/token-service';
 
 const UserContext = React.createContext({

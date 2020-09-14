@@ -42,17 +42,17 @@ export class GameProvider extends Component {
     console.log(gameData);
   };
 
-  newGame = async () => {
+  newGame = async (newGameData) => {
     let result;
 
     try {
-      result = await SaveApiService.postNewGameData();
+      result = await SaveApiService.postNewGameData(newGameData);
       console.log(result);
     } catch (error) {
       console.log(error);
     }
 
-    this.setGameData(result);
+    // this.setGameData(result);
   };
 
   loadGame = async () => {
