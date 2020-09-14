@@ -42,6 +42,8 @@ const GameWindow = () => {
     health_points_max,
     sanity_points,
     sanity_points_max,
+    dead,
+    character_skin,
     elapsed_time,
   } = gameContext.gameData;
 

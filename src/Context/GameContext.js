@@ -10,6 +10,8 @@ const GameContext = React.createContext({
     health_points_max: 0,
     sanity_points: 0,
     sanity_points_max: 0,
+    dead: false,
+    character_skin: 1,
     elapsed_time: 0,
   },
   setGameData: () => { },
@@ -32,6 +34,8 @@ export class GameProvider extends Component {
         health_points_max: 0,
         sanity_points: 0,
         sanity_points_max: 0,
+        dead: false,
+        character_skin: 1,
         elapsed_time: 0,
       }
     };
@@ -39,7 +43,6 @@ export class GameProvider extends Component {
 
   setGameData = (gameData) => {
     this.setState(gameData);
-    console.log(gameData);
   };
 
   newGame = async (newGameData) => {
@@ -47,12 +50,12 @@ export class GameProvider extends Component {
 
     try {
       result = await SaveApiService.postNewGameData(newGameData);
-      console.log(result);
+      // console.log(result);
     } catch (error) {
       console.log(error);
     }
 
-    // this.setGameData(result);
+    this.setGameData(result);
   };
 
   loadGame = async () => {
@@ -60,12 +63,14 @@ export class GameProvider extends Component {
 
     try {
       result = await SaveApiService.getSaveGameData();
-      console.log(result);
+      this.setGameData({ gameData: result[0] });
+      console.log(result[0]);
     } catch (error) {
       console.log(error);
     }
 
-    this.setGameData(result);
+
+
   };
 
   saveGame = async (gameData) => {

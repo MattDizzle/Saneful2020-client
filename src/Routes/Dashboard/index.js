@@ -22,6 +22,8 @@ const Dashboard = () => {
       health_points_max: 100,
       sanity_points: 100,
       sanity_points_max: 100,
+      dead: false,
+      character_skin: 1, //this will be passed in by a selection by the user when they create a new game
       elapsed_time: 0
     };
 
