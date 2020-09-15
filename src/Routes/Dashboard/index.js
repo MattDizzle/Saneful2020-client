@@ -35,7 +35,7 @@ const Dashboard = () => {
     const newGame = {
       current_x_coord: 0,
       current_y_coord: 2,
-      money_counter: 200,
+      money_counter: 0,
       health_points: 100,
       health_points_max: 100,
       sanity_points: 100,

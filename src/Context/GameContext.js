@@ -46,7 +46,6 @@ export class GameProvider extends Component {
   }
 
   setGameData = (gameData) => {
-    console.log(gameData);
     this.setState({
       gameData: {
         saved_game_id: gameData.saved_game_id,
@@ -59,7 +58,7 @@ export class GameProvider extends Component {
         sanity_points_max: gameData.sanity_points_max,
         dead: gameData.dead,
         character_skin: gameData.character_skin,
-        elapsed_time: gameData.money_counter,
+        elapsed_time: gameData.elapsed_time,
       }
     });
   };
@@ -67,7 +66,7 @@ export class GameProvider extends Component {
   newGame = async (newGameData = {
     current_x_coord: 0,
     current_y_coord: 2,
-    money_counter: 200,
+    money_counter: 0,
     health_points: 100,
     health_points_max: 100,
     sanity_points: 100,
@@ -120,19 +119,15 @@ export class GameProvider extends Component {
         console.log('no current game');
       }
 
-      // console.log(currentGame);
     } catch (error) {
       console.error(error);
     }
 
   };
 
-  saveGame = async (gameData) => {
-    // SaveApiService.patchGameData(gameData);
-    console.log('context', gameData);
+  saveGame = async () => {
     try {
-      await SaveApiService.patchGameData(gameData);
-      this.setGameData(gameData);
+      await SaveApiService.patchGameData(this.state.gameData);
     } catch (error) {
       console.error(error);
     }

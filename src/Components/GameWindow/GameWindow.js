@@ -98,7 +98,6 @@ const GameWindow = () => {
       if (!live) {
         start();
       }
-
       if (health <= 0 || sanity <= 0) {
         if (health <= 0)
           setReasonForDeath('health');
@@ -106,6 +105,7 @@ const GameWindow = () => {
           setReasonForDeath('sanity');
         handleGameOver();
       } else {
+        updateGameStateInContext();
         if (!timeStopped) {
           // decrement health due to aging
           if (healthTick === healthInterval) {
@@ -195,9 +195,10 @@ const GameWindow = () => {
   };
 
   const handleGameOver = () => {
-    if (!gameOver) {
+    if (live) {
       setGameOver(true);
-      saveGame(true);
+      updateGameStateInContext();
+      saveGame();
       setTimeStopped(true);
       setLive(false);
     }
@@ -288,7 +289,7 @@ const GameWindow = () => {
     }
   };
 
-  const saveGame = (dead = false) => {
+  const updateGameStateInContext = () => {
     const gameData = {
       saved_game_id: gameContext.gameData.saved_game_id,
       current_x_coord: playerPos.col,
@@ -298,11 +299,29 @@ const GameWindow = () => {
       health_points_max: maxHealth,
       sanity_points: sanity,
       sanity_points_max: maxSanity,
-      dead: dead,
+      dead: gameOver,
       character_skin: 1,
       elapsed_time: elapsedTime
     };
-    gameContext.saveGame(gameData);
+    gameContext.setGameData(gameData);
+  };
+
+  const saveGame = () => {
+
+    // const gameData = {
+    //   saved_game_id: gameContext.gameData.saved_game_id,
+    //   current_x_coord: playerPos.col,
+    //   current_y_coord: playerPos.row,
+    //   money_counter: money,
+    //   health_points: health,
+    //   health_points_max: maxHealth,
+    //   sanity_points: sanity,
+    //   sanity_points_max: maxSanity,
+    //   dead: false,
+    //   character_skin: 1,
+    //   elapsed_time: elapsedTime
+    // };
+    gameContext.saveGame();
   };
 
   const renderCells = () => {
