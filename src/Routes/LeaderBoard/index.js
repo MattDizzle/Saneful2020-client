@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import convertTime from '../../Utils/convert-time';
+import SaveApiService from '../../services/save-service';
 
 import './LeaderBoard.scss';
 
@@ -23,13 +24,25 @@ const temp = [
 
 const LeaderBoard = () => {
 
-  const renderList = () => {
+  const [list, setList] = useState([]);
 
-    return temp.map((player, index) => {
-      let convertedTime = convertTime(player.elapsedTime);
+  useEffect(() => {
+    console.log('test');
+    SaveApiService.getLeaderboard()
+      .then(res => {
+        setList(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const renderList = () => {
+    return list.map((player, index) => {
+      let convertedTime = convertTime(player.elapsed_time);
       return (
         <li key={index}>
-          <p>{player.username} | {`${convertedTime.days} day(s), ${convertedTime.hours} hours ${convertedTime.mins} mins`} | {player.alive ? 'alive' : 'deceased'}</p>
+          <p>{player.user_name} | {`${convertedTime.days} day(s), ${convertedTime.hours} hours ${convertedTime.mins} mins`} | {player.dead ? 'alive' : 'deceased'}</p>
         </li>
       );
     });

@@ -49,14 +49,29 @@ const SaveApiService = {
           ? res.json().then(e => Promise.reject(e))
           : res.json()
       );
-  }
+  },
 
   // update save
   //  takes save_id param
   //  returns nothing
 
-  // get leaderboard
-  //   returns leaderboard
+  /**
+   * Returns leaderboard
+   * @returns {object} game data object
+   */
+  getLeaderboard() {
+    return fetch(`${config.API_ENDPOINT}/save/leaderboard`, {
+      method: 'GET',
+      headers: {
+        'authorization': `Bearer ${TokenService.getAuthToken()}`,
+      }
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      );
+  },
 };
 
 export default SaveApiService;
