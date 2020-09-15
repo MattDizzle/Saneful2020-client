@@ -56,7 +56,7 @@ const GameWindow = () => {
   const [playerHasControl, setPlayerHasControl] = useState(true);
 
   // player movement
-  const [playerPos, setPlayerPos] = useState({ row: current_y_coord, col: current_x_coord });
+  const [playerPos, setPlayerPos] = useState({ row: (current_y_coord ? current_y_coord : 2), col: (current_x_coord ? current_x_coord : 0) });
   const [playerTarget, setPlayerTarget] = useState({ row: current_y_coord, col: current_x_coord });
   const [playerMoveTick, setPlayerMoveTick] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
@@ -83,6 +83,8 @@ const GameWindow = () => {
   const [health, setHealth] = useState(health_points);
   const [sanity, setSanity] = useState(sanity_points);
   const [money, setMoney] = useState(money_counter);
+  const [maxHealth, setMaxHealth] = useState(health_points_max);
+  const [maxSanity, setMaxSanity] = useState(sanity_points_max);
   const [healthTick, setHealthTick] = useState(0);
   const [sanityTick, setSanityTick] = useState(0);
   const [moneyTick, setMoneyTick] = useState(0);
@@ -193,9 +195,12 @@ const GameWindow = () => {
   };
 
   const handleGameOver = () => {
-    setGameOver(true);
-    setTimeStopped(true);
-    setLive(false);
+    if (!gameOver) {
+      setGameOver(true);
+      saveGame(true);
+      setTimeStopped(true);
+      setLive(false);
+    }
   };
 
   const playerPositionUpdate = () => {
@@ -255,13 +260,13 @@ const GameWindow = () => {
 
     // adjust stats
     let newHealth = mods.healthMod;
-    if (newHealth > health_points_max - health) {
-      newHealth = health_points_max - health;
+    if (newHealth > maxHealth - health) {
+      newHealth = maxHealth - health;
     }
 
     let newSanity = mods.sanityMod;
-    if (newSanity > sanity_points_max - sanity) {
-      newSanity = sanity_points_max - sanity;
+    if (newSanity > maxSanity - sanity) {
+      newSanity = maxSanity - sanity;
     }
 
     setHealth(health + newHealth);
@@ -283,16 +288,22 @@ const GameWindow = () => {
     }
   };
 
-  // const onSaveClick = () => {
-  //   return {
-  //     health,
-  //     sanity,
-  //     money,
-  //     elapsedTime,
-  //     playerPosRow: playerPos.row,
-  //     playerPosCol: playerPos.col,
-  //   };
-  // };
+  const saveGame = (dead = false) => {
+    const gameData = {
+      saved_game_id: gameContext.gameData.saved_game_id,
+      current_x_coord: playerPos.col,
+      current_y_coord: playerPos.row,
+      money_counter: money,
+      health_points: health,
+      health_points_max: maxHealth,
+      sanity_points: sanity,
+      sanity_points_max: maxSanity,
+      dead: dead,
+      character_skin: 1,
+      elapsed_time: elapsedTime
+    };
+    gameContext.saveGame(gameData);
+  };
 
   const renderCells = () => {
     return cells.map((row, rowIndex) =>
@@ -323,9 +334,11 @@ const GameWindow = () => {
         <MoneyMeter currentMoney={money} />
         <SanityMeter currentSanity={sanity} />
         <HealthMeter currentHealth={health} />
+        <button onClick={saveGame}>Save</button>
       </div>
       {dialogBoxActive && <DialogBox yesClick={yesAction} noClick={noAction} text={pendingAction} />}
       {gameOver && <GameOverScreen currentTime={elapsedTime} reason={reasonForDeath} />}
+
     </section>
   );
 };

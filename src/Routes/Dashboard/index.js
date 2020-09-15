@@ -53,7 +53,7 @@ const Dashboard = () => {
 
   return (
     <section className='Dashboard'>
-      <p>Dashboard</p>
+      <h2>Dashboard</h2>
       {hasLoaded && <div>
         {hasCurrent && <button onClick={handleLoadGame}>Continue</button>}
         {!hasCurrent && <button onClick={handleNewGame}>New Game</button>}

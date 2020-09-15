@@ -9,7 +9,6 @@ const LeaderBoard = () => {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    console.log('test');
     SaveApiService.getLeaderboard()
       .then(res => {
         setList(res);

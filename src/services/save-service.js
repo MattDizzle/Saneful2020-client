@@ -8,7 +8,6 @@ const SaveApiService = {
    * @returns {object} game data object
    */
   getSaveGameData() {
-    console.log(TokenService.getAuthToken());
     return fetch(`${config.API_ENDPOINT}/save`, {
       method: 'GET',
       headers: {
@@ -32,6 +31,8 @@ const SaveApiService = {
    * health_points_max,
    * sanity_points,
    * sanity_points_max,
+   * dead,
+   * character_skin,
    * elapsed_time
    * @param {object} gameData 
    */
@@ -51,9 +52,38 @@ const SaveApiService = {
       );
   },
 
-  // update save
-  //  takes save_id param
-  //  returns nothing
+  /**
+   * Patches existing game data to server
+   * body:
+   * save_id,
+   * current_x_coord,
+   * current_y_coord,
+   * money_counter,
+   * health_points,
+   * health_points_max,
+   * sanity_points,
+   * sanity_points_max,
+   * dead,
+   * character_skin,
+   * elapsed_time
+   * @param {object} gameData 
+   */
+  patchGameData(gameData) {
+    console.log('service', gameData);
+    return fetch(`${config.API_ENDPOINT}/save/${gameData.saved_game_id}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `Bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify(gameData),
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      );
+  },
 
   /**
    * Returns leaderboard

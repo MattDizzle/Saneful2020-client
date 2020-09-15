@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import SaveApiService from '../services/save-service';
 
 const GameContext = React.createContext({
+
   gameData: {
+    saved_game_id: 0,
     current_x_coord: 0,
     current_y_coord: 0,
     money_counter: 0,
@@ -28,6 +30,7 @@ export class GameProvider extends Component {
     super(props);
     this.state = {
       gameData: {
+        saved_game_id: 0,
         current_x_coord: 0,
         current_y_coord: 0,
         money_counter: 0,
@@ -43,7 +46,22 @@ export class GameProvider extends Component {
   }
 
   setGameData = (gameData) => {
-    this.setState(gameData);
+    console.log(gameData);
+    this.setState({
+      gameData: {
+        saved_game_id: gameData.saved_game_id,
+        current_x_coord: gameData.current_x_coord,
+        current_y_coord: gameData.current_y_coord,
+        money_counter: gameData.money_counter,
+        health_points: gameData.health_points,
+        health_points_max: gameData.health_points_max,
+        sanity_points: gameData.sanity_points,
+        sanity_points_max: gameData.sanity_points_max,
+        dead: gameData.dead,
+        character_skin: gameData.character_skin,
+        elapsed_time: gameData.money_counter,
+      }
+    });
   };
 
   newGame = async (newGameData = {
@@ -94,16 +112,15 @@ export class GameProvider extends Component {
       const currentGame = result.find(game => game.dead === false);
 
       if (currentGame) {
-        this.setGameData({ gameData: currentGame });
-        console.log('loading current game...');
+        this.setGameData(currentGame);
+        console.log('loading current game...', currentGame);
       }
       else {
         this.newGame();
         console.log('no current game');
       }
 
-
-      console.log(currentGame);
+      // console.log(currentGame);
     } catch (error) {
       console.error(error);
     }
@@ -111,7 +128,14 @@ export class GameProvider extends Component {
   };
 
   saveGame = async (gameData) => {
-
+    // SaveApiService.patchGameData(gameData);
+    console.log('context', gameData);
+    try {
+      await SaveApiService.patchGameData(gameData);
+      this.setGameData(gameData);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   render() {
