@@ -23,7 +23,7 @@ const LeaderBoard = () => {
       let convertedTime = convertTime(player.elapsed_time);
       return (
         <li key={index}>
-          <p>{player.user_name} | {`${convertedTime.days} day(s), ${convertedTime.hours} hours ${convertedTime.mins} mins`} | {player.dead ? 'alive' : 'deceased'}</p>
+          <p>{player.user_name} | {`${convertedTime.days} day(s), ${convertedTime.hours} hours ${convertedTime.mins} mins`} | {player.dead ? 'deceased' : 'alive'}</p>
         </li>
       );
     });
