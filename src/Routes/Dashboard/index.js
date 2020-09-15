@@ -10,7 +10,10 @@ const Dashboard = () => {
   const history = useHistory();
 
   const handleLoadGame = () => {
-    gameContext.loadGame();
+    gameContext.loadGame()
+      .then(() => {
+        history.push('/maingame');
+      });;
   };
 
   const handleNewGame = () => {
@@ -29,7 +32,7 @@ const Dashboard = () => {
 
     gameContext.newGame(newGame)
       .then(() => {
-        history.push('/maingame');
+        handleLoadGame();
       });
   };
 
@@ -40,9 +43,7 @@ const Dashboard = () => {
         <button onClick={handleNewGame}>New Game</button>
       </div>
       <div>
-        <Link to='mainGame'>
-          <button onClick={handleLoadGame}>Continue</button>
-        </Link>
+        <button onClick={handleLoadGame}>Continue</button>
       </div>
     </section>
   );

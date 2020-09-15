@@ -56,8 +56,8 @@ const GameWindow = () => {
   const [playerHasControl, setPlayerHasControl] = useState(true);
 
   // player movement
-  const [playerPos, setPlayerPos] = useState({ row: current_x_coord, col: current_y_coord });
-  const [playerTarget, setPlayerTarget] = useState({ row: current_x_coord, col: current_y_coord });
+  const [playerPos, setPlayerPos] = useState({ row: current_y_coord, col: current_x_coord });
+  const [playerTarget, setPlayerTarget] = useState({ row: current_y_coord, col: current_x_coord });
   const [playerMoveTick, setPlayerMoveTick] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
 

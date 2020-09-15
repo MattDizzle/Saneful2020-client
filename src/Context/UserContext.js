@@ -34,7 +34,7 @@ export class UserProvider extends Component {
       state.user = {
         id: jwtPayload.user_id,
         email: jwtPayload.sub,
-        user_name: jwtPayload.user_name,
+        username: jwtPayload.user_name,
       };
 
     this.state = state;
