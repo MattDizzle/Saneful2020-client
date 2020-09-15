@@ -8,6 +8,7 @@ import './Header.scss';
 const Header = () => {
 
   const userContext = useContext(UserContext);
+  const username = userContext.user.username;
 
   const handleLogoutClick = () => {
     userContext.processLogout();
@@ -23,8 +24,7 @@ const Header = () => {
           <Link to="/leaderBoard">LeaderBoard</Link>
         </li>
         <li>
-          {userContext.user.user_name}
-          {console.log(userContext.user)}
+          {username}
         </li>
         <li>
           <Link

@@ -27,6 +27,7 @@ const Login = (props) => {
     })
       .then(res => {
         userContext.processLogin(res.authToken);
+        console.log('1', useContext.user.user_name);
         history.push('/dashboard');
       })
       .catch(res => {

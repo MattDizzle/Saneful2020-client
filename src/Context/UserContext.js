@@ -11,6 +11,12 @@ const UserContext = React.createContext({
   processLogout: () => { },
 });
 
+const nullUser = {
+  id: null,
+  email: null,
+  username: null,
+};
+
 export default UserContext;
 
 export class UserProvider extends Component {
@@ -18,7 +24,7 @@ export class UserProvider extends Component {
     super(props);
 
     const state = {
-      user: {},
+      user: nullUser,
       error: null,
     };
 
@@ -52,6 +58,7 @@ export class UserProvider extends Component {
     const jwtPayload = TokenService.parseAuthToken();
     //need to add username
     this.setUser({
+      username: jwtPayload.user_name,
       id: jwtPayload.user_id,
       email: jwtPayload.sub
     });
