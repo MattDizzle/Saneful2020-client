@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GameOverScreen Component Snapshot test Renders the UI as expected 1`] = `
+<div
+  className="game-over-screen"
+>
+  <div
+    className="game-over-message"
+  >
+    <p>
+      You lasted NaN days NaN hours and NaN minutes before you ...
+    </p>
+  </div>
+</div>
+`;

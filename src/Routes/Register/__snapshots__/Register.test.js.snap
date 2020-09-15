@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Register Component Snapshot test Renders the UI as expected 1`] = `
+<div
+  className="Register"
+>
+  <img
+    alt="logo"
+    className="logo"
+    src="navywhitelogo.png"
+  />
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      name="username"
+      onChange={[Function]}
+      placeholder="Enter your username..."
+      type="text"
+      value=""
+    />
+    <input
+      name="email"
+      onChange={[Function]}
+      placeholder="Enter your email..."
+      type="email"
+      value=""
+    />
+    <input
+      name="password"
+      onChange={[Function]}
+      placeholder="Enter your password..."
+      type="password"
+      value=""
+    />
+    <button
+      className="registerButton"
+      type="submit"
+    >
+      Register
+    </button>
+  </form>
+</div>
+`;

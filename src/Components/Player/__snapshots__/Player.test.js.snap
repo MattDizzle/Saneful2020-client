@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Player Component Snapshot test Renders the UI as expected 1`] = `
+<div
+  className="player-animation"
+>
+  <img
+    alt="player"
+    className="Player"
+  />
+</div>
+`;

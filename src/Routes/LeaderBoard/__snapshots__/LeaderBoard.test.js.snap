@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LeaderBoard Component Snapshot test Renders the UI as expected 1`] = `
+<section
+  className="LeaderBoard"
+>
+  <ul
+    className="leader-list"
+  />
+</section>
+`;

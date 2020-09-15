@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component Snapshot test Renders the UI as expected 1`] = `
+<header
+  className="Header"
+>
+  <nav>
+    <ul>
+      <div>
+        <li>
+          <div>
+            <a
+              href="/"
+              onClick={[Function]}
+            >
+              Login
+            </a>
+          </div>
+          <div>
+            <a
+              href="/register"
+              onClick={[Function]}
+            >
+              Sign up
+            </a>
+          </div>
+        </li>
+      </div>
+    </ul>
+  </nav>
+</header>
+`;

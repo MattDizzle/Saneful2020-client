@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimeMeter Component Snapshot test Renders the UI as expected 1`] = `
+<div>
+  <p>
+    Day NaN
+  </p>
+  <p>
+    NaN:NaN
+  </p>
+</div>
+`;
