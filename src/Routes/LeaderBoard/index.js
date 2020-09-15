@@ -4,24 +4,6 @@ import SaveApiService from '../../services/save-service';
 
 import './LeaderBoard.scss';
 
-const temp = [
-  {
-    username: 'name1',
-    elapsedTime: 143,
-    alive: false,
-  },
-  {
-    username: 'name2',
-    elapsedTime: 456,
-    alive: true,
-  },
-  {
-    username: 'name3',
-    elapsedTime: 86,
-    alive: true,
-  }
-];
-
 const LeaderBoard = () => {
 
   const [list, setList] = useState([]);

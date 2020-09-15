@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 import GameContext from '../../Context/GameContext';
 import { useHistory } from "react-router-dom";
 
@@ -8,6 +7,22 @@ import './Dashboard.scss';
 const Dashboard = () => {
   const gameContext = useContext(GameContext);
   const history = useHistory();
+  const [hasCurrent, setHasCurrent] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
+
+  useEffect(() => {
+    determineCurrent();
+  }, []);
+
+  const determineCurrent = async () => {
+    try {
+      let hasCurrent = await gameContext.currentGameExists();
+      setHasCurrent(hasCurrent);
+      setHasLoaded(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleLoadGame = () => {
     gameContext.loadGame()
@@ -38,13 +53,11 @@ const Dashboard = () => {
 
   return (
     <section className='Dashboard'>
-      <p>Dashboard</p>
-      <div>
-        <button onClick={handleNewGame}>New Game</button>
-      </div>
-      <div>
-        <button onClick={handleLoadGame}>Continue</button>
-      </div>
+      {/* <p>Dashboard</p> */}
+      {hasLoaded && <div>
+        {hasCurrent && <button onClick={handleLoadGame}>Continue</button>}
+        {!hasCurrent && <button onClick={handleNewGame}>New Game</button>}
+      </div>}
     </section>
   );
 };
