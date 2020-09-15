@@ -5,6 +5,7 @@ import GameContext from '../../Context/GameContext';
 import './MainGame.scss';
 
 const MainGame = () => {
+  //if the player reloads the game basically breaks so we need to bring them back to dashboard on reload
 
   const gameContext = useContext(GameContext);
 
