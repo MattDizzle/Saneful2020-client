@@ -1,15 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "../../hooks/useForm";
 import { useHistory } from "react-router-dom";
 import logo from '../../navywhitelogo.png';
 import AuthApiService from '../../services/auth-service';
 import UserContext from '../../Context/UserContext';
+import StartCutscene from '../../Components/StartCutscene/StartCutscene';
 
 import './Login.scss';
 
 const Login = (props) => {
   const history = useHistory();
   const userContext = useContext(UserContext);
+  const [startPressed, setStartPressed] = useState(false);
 
   const { values, handleChange, reset } = useForm({ email: "", password: "" });
 
@@ -36,32 +38,38 @@ const Login = (props) => {
 
     reset();
   };
-
-  return (
-    <div className="Login">
-      <img src={logo} className="logo" alt="logo" />
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter your email..."
-          onChange={handleChange}
-          value={values.email}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter your password..."
-          onChange={handleChange}
-          value={values.password}
-        />
-        <button type="submit" className='loginButton'>Log In</button>
-      </form>
-      <div role='alert'>
-        {userContext.error && <p>{userContext.error}</p>}
-      </div>
+  
+  if (startPressed === true) {
+    return (
+      <div className="Login">
+        <img src={logo} className="logo" alt="logo" />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email..."
+            onChange={handleChange}
+            value={values.email}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password..."
+            onChange={handleChange}
+            value={values.password}
+          />
+          <button type="submit" className='loginButton'>Log In</button>
+        </form>
+        <div role='alert'>
+          {userContext.error && <p>{userContext.error}</p>}
+        </div>
     </div>
-  );
+  )
+} else {
+    return (
+      <StartCutscene startPressed={startPressed} setStartPressed={setStartPressed} />
+    )
+  }
 };
 
 export default Login;
