@@ -134,7 +134,7 @@ const GameWindow = () => {
           }
 
           // decrement sanity due to being trapped at home
-          if (sanityTick === sanityInterval) {
+          if (sanityTick === sanityInterval - Math.floor(elapsedTime / 2000)) {
             setSanity(sanity - 1);
             setSanityTick(0);
           } else {
@@ -188,7 +188,6 @@ const GameWindow = () => {
           }
         }
       }
-
     }, updateRate);
 
     return () => {
