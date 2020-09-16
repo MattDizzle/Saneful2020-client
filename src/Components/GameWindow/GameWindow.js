@@ -177,6 +177,7 @@ const GameWindow = () => {
     };
   });
 
+  // auto focus on game window div at game load time so that keyboard movement works immediately
   useEffect(() => {
     ref1.current.focus();
   }, []
@@ -294,6 +295,7 @@ const GameWindow = () => {
     }
   };
 
+  // use arrow keys OR awsd to move the character
   const handleKeyDown = e => {
     switch (e.key) {
       case 'ArrowUp':
@@ -371,6 +373,7 @@ const GameWindow = () => {
     );
   };
 
+  // used in .GameWindow element to autoFocus on the div
   const ref1 = useRef();
 
   return (
