@@ -61,13 +61,18 @@ const Dashboard = () => {
       {!hasLoaded && <h3>Loading...</h3>}
       <div className='write-up'>
         <h3>The Game</h3>
-        <p>You are living in Los Angles in the year 2020 during a global pandemic. Your goal is to survive in self quarantine. </p>
+        <p>You are living in Los Pixels in the year 2020 during a global pandemic. Your goal is to survive in self quarantine. </p>
         <h3>How to Play</h3>
-        <p>There are 3 metrics that you must maintain: Health, Sanity, Money
-        All three deplete with time.
-        If health or sanity drop below 0 you will perish…
-        There are multiple ways to increase and decrease your health, sanity and money.
-It may take a few lives to find a good survival strategy. Beware, difficulty increases with each passing day. </p>
+        <p>
+          There are 3 metrics that you must maintain: Health, Sanity, Money
+          All three deplete with time.
+        </p>
+        <p>If health or sanity drop below 0 you will perish…</p>
+        <p>
+          There are multiple ways to increase and decrease your health, sanity and money.
+          It may take a few lives to find a good survival strategy.
+        </p>
+        <p> Beware, difficulty increases with each passing day. </p>
       </div>
     </section>
   );

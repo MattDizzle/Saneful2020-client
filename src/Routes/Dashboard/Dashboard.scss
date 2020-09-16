@@ -6,10 +6,17 @@
   margin: 0 auto 10vh auto;
   text-align: left;
   width: 80%;
-  line-height: 1.7rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .to-game-button{
   padding: 1rem;
   font-size: 1rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .write-up{
+    line-height: 1.7rem;
+  }
 }
