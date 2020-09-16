@@ -70,8 +70,8 @@ const GameWindow = () => {
   const [dialogBoxActive, setDialogBoxActive] = useState(false);
 
   // actions
-  const [nextAction, setNextAction] = useState('none');
-  const [pendingAction, setPendingAction] = useState('none');
+  const [nextAction, setNextAction] = useState([]);
+  const [pendingAction, setPendingAction] = useState([]);
 
   // time
   const [timeStopped, setTimeStopped] = useState(false);
@@ -161,7 +161,7 @@ const GameWindow = () => {
           // this could be put outside of isMoving condition to check every cell we walk over 
           if (cells[playerPos.row][playerPos.col].hasAction) {
             //show player a menu that asks if they want to perform the action
-            if (nextAction !== 'none' && (playerPos.row === playerTarget.row && playerPos.col === playerTarget.col)) {
+            if (nextAction.length > 0 && (playerPos.row === playerTarget.row && playerPos.col === playerTarget.col)) {
               setPendingAction(nextAction);
               setPlayerHasControl(false);
               setDialogBoxActive(true);
@@ -184,14 +184,14 @@ const GameWindow = () => {
   );
 
   const yesAction = () => {
-    DetermineAction(pendingAction, executeAction);
+    DetermineAction(pendingAction[0], executeAction);
   };
 
   const noAction = () => {
     setDialogBoxActive(false);
     setPlayerHasControl(true);
-    setNextAction('none');
-    setPendingAction('none');
+    setNextAction([]);
+    setPendingAction([]);
   };
 
   const start = () => {
@@ -288,10 +288,10 @@ const GameWindow = () => {
     noAction();
   };
 
-  const handleCellClick = (rowTarget, colTarget, action) => {
+  const handleCellClick = (rowTarget, colTarget, actions) => {
     if (playerHasControl) {
       setPlayerTarget({ row: rowTarget, col: colTarget });
-      setNextAction(action);
+      setNextAction(actions);
     }
   };
 
@@ -367,7 +367,7 @@ const GameWindow = () => {
           col={cell.col}
           onClick={handleCellClick}
           hasAction={cell.hasAction}
-          action={cell.action}
+          actions={cell.actions}
         />
       ))
     );
@@ -388,7 +388,7 @@ const GameWindow = () => {
         <HealthMeter currentHealth={health} />
         <button onClick={saveGame}>Save</button>
       </div>
-      {dialogBoxActive && <DialogBox yesClick={yesAction} noClick={noAction} text={pendingAction} />}
+      {dialogBoxActive && <DialogBox yesClick={yesAction} noClick={noAction} text={pendingAction[0]} />}
       {gameOver && <GameOverScreen currentTime={elapsedTime} reason={reasonForDeath} />}
 
     </section>

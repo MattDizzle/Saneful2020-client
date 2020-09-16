@@ -33,6 +33,6 @@ class Tile {
     this.hasPlayer = false;
     this.walkable = true;
     this.hasAction = false;
-    this.action = 'none';
+    this.actions = [];
   }
 };

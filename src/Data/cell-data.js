@@ -7,7 +7,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: true,
       hasAction: true,
-      action: 'relax on the couch'
+      actions: ['relax on the couch']
     },
     {
       row: 4,
@@ -16,7 +16,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: true,
       hasAction: true,
-      action: 'relax on the couch'
+      actions: ['relax on the couch']
     },
     {
       row: 6,
@@ -25,7 +25,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: 'none'
+      actions: []
     },
     {
       row: 6,
@@ -34,7 +34,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: 'none'
+      actions: []
     },
     {
       row: 7,
@@ -43,7 +43,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: 'none'
+      actions: []
     },
     { /* Back wall start */
       row: 0,
@@ -52,7 +52,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: 'none'
+      actions: []
     },
     {
       row: 0,
@@ -61,7 +61,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: 'none'
+      actions: []
     },
     {
       row: 0,
@@ -70,7 +70,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: 'none'
+      actions: []
     },
     {
       row: 1,
@@ -79,7 +79,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: true,
       hasAction: true,
-      action: 'do work on the computer'
+      actions: ['do work on the computer']
     },
     {
       row: 0,
@@ -88,7 +88,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: 'none'
+      actions: []
     },
     {
       row: 0,
@@ -97,7 +97,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: 'none'
+      actions: []
     },
     {
       row: 0,
@@ -106,7 +106,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: 'none'
+      actions: []
     },
     {
       row: 1,
@@ -115,7 +115,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: true,
       hasAction: true,
-      action: 'eat food'
+      actions: ['eat food']
     },
     {
       row: 0,
@@ -124,7 +124,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: 'none'
+      actions: []
     },
     {
       row: 0,
@@ -133,7 +133,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: 'none'
+      actions: []
     },
     {
       row: 0,
@@ -142,7 +142,7 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: 'none'
+      actions: []
     },
     {
       row: 0,
@@ -151,6 +151,6 @@ export const mainRoomData =
       hasPlayer: false,
       walkable: false,
       hasAction: false,
-      action: 'none'
+      actions: []
     }, /* Back wall finish */
   ];
