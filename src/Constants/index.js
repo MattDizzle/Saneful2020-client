@@ -12,6 +12,7 @@ export const moneyInterval = 20;
 
 //TIME
 export const timeInterval = 5;
+export const autoSaveInterval = 600; // can be set to 30 if you want to update constantly
 
 //GENERAL
 export const updateRate = 100; //ms

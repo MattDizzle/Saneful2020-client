@@ -8,7 +8,8 @@ import {
   healthInterval,
   sanityInterval,
   moneyInterval,
-  timeInterval
+  timeInterval,
+  autoSaveInterval
 } from '../../Constants';
 
 //GRID
@@ -77,6 +78,7 @@ const GameWindow = () => {
   const [timeStopped, setTimeStopped] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(elapsed_time);
   const [timeTick, setTimeTick] = useState(0);
+  const [autoSaveTick, setAutoSaveTick] = useState(0);
   const [reasonForDeath, setReasonForDeath] = useState('still alive');
 
   // stats
@@ -107,6 +109,13 @@ const GameWindow = () => {
 
   useEffect(() => {
     const update = setInterval(() => {
+
+      if (autoSaveTick === autoSaveInterval) {
+        saveGame();
+      } else {
+        setAutoSaveTick(autoSaveTick + 1);
+      }
+
       if (health <= 0 || sanity <= 0) {
         if (health <= 0)
           setReasonForDeath('health');
@@ -114,7 +123,7 @@ const GameWindow = () => {
           setReasonForDeath('sanity');
         handleGameOver();
       } else {
-        updateGameStateInContext();
+        updateGameStateInContext(false);
         if (!timeStopped) {
           // decrement health due to aging
           if (healthTick === healthInterval) {
@@ -187,9 +196,10 @@ const GameWindow = () => {
     };
   });
 
-  const yesAction = () => {
+  const yesAction = async () => {
     DetermineAction(pendingActions[0], executeAction);
-    setTimeStopped(false);
+    await setTimeStopped(false);
+    saveGame();
   };
 
   const noAction = () => {
@@ -203,7 +213,7 @@ const GameWindow = () => {
   const handleGameOver = () => {
     if (live) {
       setGameOver(true);
-      updateGameStateInContext();
+      updateGameStateInContext(true);
       saveGame();
       setTimeStopped(true);
       setLive(false);
@@ -319,7 +329,7 @@ const GameWindow = () => {
     }
   };
 
-  const updateGameStateInContext = () => {
+  const updateGameStateInContext = (deadAlive) => {
     const gameData = {
       saved_game_id: gameContext.gameData.saved_game_id,
       current_x_coord: playerPos.col,
@@ -329,7 +339,7 @@ const GameWindow = () => {
       health_points_max: maxHealth,
       sanity_points: sanity,
       sanity_points_max: maxSanity,
-      dead: gameOver,
+      dead: deadAlive,
       character_skin: 1,
       elapsed_time: elapsedTime
     };
@@ -337,20 +347,6 @@ const GameWindow = () => {
   };
 
   const saveGame = () => {
-
-    // const gameData = {
-    //   saved_game_id: gameContext.gameData.saved_game_id,
-    //   current_x_coord: playerPos.col,
-    //   current_y_coord: playerPos.row,
-    //   money_counter: money,
-    //   health_points: health,
-    //   health_points_max: maxHealth,
-    //   sanity_points: sanity,
-    //   sanity_points_max: maxSanity,
-    //   dead: false,
-    //   character_skin: 1,
-    //   elapsed_time: elapsedTime
-    // };
     gameContext.saveGame();
   };
 

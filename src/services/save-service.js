@@ -69,7 +69,6 @@ const SaveApiService = {
    * @param {object} gameData 
    */
   patchGameData(gameData) {
-    console.log('service', gameData);
     return fetch(`${config.API_ENDPOINT}/save/${gameData.saved_game_id}`, {
       method: 'PATCH',
       headers: {
@@ -81,7 +80,7 @@ const SaveApiService = {
       .then(res =>
         (!res.ok)
           ? res.json().then(e => Promise.reject(e))
-          : res.json()
+          : 'received'
       );
   },
 
