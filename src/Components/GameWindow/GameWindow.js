@@ -70,8 +70,8 @@ const GameWindow = () => {
   const [dialogBoxActive, setDialogBoxActive] = useState(false);
 
   // actions
-  const [nextAction, setNextAction] = useState([]);
-  const [pendingAction, setPendingAction] = useState([]);
+  const [nextActions, setNextActions] = useState([]);
+  const [pendingActions, setPendingActions] = useState([]);
 
   // time
   const [timeStopped, setTimeStopped] = useState(false);
@@ -94,10 +94,19 @@ const GameWindow = () => {
   let player = document.querySelector('.Player');
 
   useEffect(() => {
+    start();
+  }, []
+  );
+
+  const start = () => {
+    ref1.current.focus(); // auto focus on game window div at game load time so that keyboard movement works immediately
+    setLive(true);
+    setCurrentPlayerFrame(0);
+    setPlayerFrameLib(c1Frames.right);
+  };
+
+  useEffect(() => {
     const update = setInterval(() => {
-      if (!live) {
-        start();
-      }
       if (health <= 0 || sanity <= 0) {
         if (health <= 0)
           setReasonForDeath('health');
@@ -161,10 +170,11 @@ const GameWindow = () => {
           // this could be put outside of isMoving condition to check every cell we walk over 
           if (cells[playerPos.row][playerPos.col].hasAction) {
             //show player a menu that asks if they want to perform the action
-            if (nextAction.length > 0 && (playerPos.row === playerTarget.row && playerPos.col === playerTarget.col)) {
-              setPendingAction(nextAction);
+            if (nextActions.length > 0 && (playerPos.row === playerTarget.row && playerPos.col === playerTarget.col)) {
+              setPendingActions(nextActions);
               setPlayerHasControl(false);
               setDialogBoxActive(true);
+              setTimeStopped(true);
             }
           }
         }
@@ -177,27 +187,17 @@ const GameWindow = () => {
     };
   });
 
-  // auto focus on game window div at game load time so that keyboard movement works immediately
-  useEffect(() => {
-    ref1.current.focus();
-  }, []
-  );
-
   const yesAction = () => {
-    DetermineAction(pendingAction[0], executeAction);
+    DetermineAction(pendingActions[0], executeAction);
+    setTimeStopped(false);
   };
 
   const noAction = () => {
     setDialogBoxActive(false);
     setPlayerHasControl(true);
-    setNextAction([]);
-    setPendingAction([]);
-  };
-
-  const start = () => {
-    setLive(true);
-    setCurrentPlayerFrame(0);
-    setPlayerFrameLib(c1Frames.right);
+    setNextActions([]);
+    setPendingActions([]);
+    setTimeStopped(false);
   };
 
   const handleGameOver = () => {
@@ -291,7 +291,7 @@ const GameWindow = () => {
   const handleCellClick = (rowTarget, colTarget, actions) => {
     if (playerHasControl) {
       setPlayerTarget({ row: rowTarget, col: colTarget });
-      setNextAction(actions);
+      setNextActions(actions);
     }
   };
 
@@ -388,7 +388,7 @@ const GameWindow = () => {
         <HealthMeter currentHealth={health} />
         <button onClick={saveGame}>Save</button>
       </div>
-      {dialogBoxActive && <DialogBox yesClick={yesAction} noClick={noAction} text={pendingAction[0]} />}
+      {dialogBoxActive && <DialogBox yesClick={yesAction} noClick={noAction} text={pendingActions[0]} />}
       {gameOver && <GameOverScreen currentTime={elapsedTime} reason={reasonForDeath} />}
 
     </section>
