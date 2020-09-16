@@ -1,5 +1,5 @@
 //SYSTEM
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import GameContext from '../../Context/GameContext';
 //GENERAL
 import {
@@ -177,6 +177,11 @@ const GameWindow = () => {
     };
   });
 
+  useEffect(() => {
+    ref1.current.focus();
+  }, []
+  );
+
   const yesAction = () => {
     DetermineAction(pendingAction, executeAction);
   };
@@ -289,6 +294,29 @@ const GameWindow = () => {
     }
   };
 
+  const handleKeyDown = e => {
+    switch (e.key) {
+      case 'ArrowUp':
+      case 'w':
+        setPlayerTarget({ row: current_y_coord - 1, col: current_x_coord });
+        break;
+      case 'ArrowDown':
+      case 's':
+        setPlayerTarget({ row: current_y_coord + 1, col: current_x_coord });
+        break;
+      case 'ArrowLeft':
+      case 'a':
+        setPlayerTarget({ row: current_y_coord, col: current_x_coord - 1 });
+        break;
+      case 'ArrowRight':
+      case 'd':
+        setPlayerTarget({ row: current_y_coord, col: current_x_coord + 1 });
+        break;
+      default:
+        break;
+    }
+  };
+
   const updateGameStateInContext = () => {
     const gameData = {
       saved_game_id: gameContext.gameData.saved_game_id,
@@ -343,8 +371,10 @@ const GameWindow = () => {
     );
   };
 
+  const ref1 = useRef();
+
   return (
-    <section className='GameWindow'>
+    <section className='GameWindow' onKeyDown={handleKeyDown} tabIndex={0} ref={ref1}>
       <img className='cells' src='images/grid/draft1nogrid.png' alt='background'></img>
       <div className="cells">{renderCells()}</div>
       <Player currentFrame={playerFrameLib[currentPlayerFrame]} />

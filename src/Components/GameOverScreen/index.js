@@ -23,6 +23,7 @@ const DialogBox = (props) => {
 
     return (
       <div className='game-over-message'>
+        {/* <p>You lasted {(numDays===1)?`${numDays} day `:' days '}{(numHours===1)?`${numHours} hour`:' hours '} and {(numMins===1)?`${numMins} minute `:' minutes '} before you {deathMessage}...</p> */}
         <p>{`You lasted ${numDays} days ${numHours} hours and ${numMins} minutes before you ${deathMessage}...`}</p>
       </div>
     );
