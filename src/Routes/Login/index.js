@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "../../hooks/useForm";
 import { useHistory } from "react-router-dom";
 import logo from '../../navywhitelogo.png';
@@ -12,6 +12,11 @@ const Login = (props) => {
   const history = useHistory();
   const userContext = useContext(UserContext);
   const [startPressed, setStartPressed] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    userContext.setError(null);
+  }, []);
 
   const { values, handleChange, reset } = useForm({ email: "", password: "" });
 
@@ -20,8 +25,9 @@ const Login = (props) => {
     e.preventDefault();
 
     userContext.setError(null);
+    setLoading(true);
 
-    console.log("email: ", email, "password: ", password);
+    // console.log("email: ", email, "password: ", password);
 
     AuthApiService.postLogin({
       user_email: email,
@@ -29,21 +35,23 @@ const Login = (props) => {
     })
       .then(res => {
         userContext.processLogin(res.authToken);
-        console.log('1', useContext.user.user_name);
+        setLoading(false);
+        // console.log('1', useContext.user.user_name);
         history.push('/dashboard');
       })
       .catch(res => {
+        setLoading(false);
         userContext.setError(res.error);
       });
 
     reset();
   };
-  
+
   if (startPressed === true) {
     return (
       <div className="Login">
         <img src={logo} className="logo" alt="logo" />
-        <form onSubmit={handleSubmit}>
+        {loading ? 'Loading...' : <form onSubmit={handleSubmit}>
           <input
             type="email"
             name="email"
@@ -59,16 +67,16 @@ const Login = (props) => {
             value={values.password}
           />
           <button type="submit" className='loginButton'>Log In</button>
-        </form>
-        <div role='alert'>
+        </form>}
+        <div role='alert' className='error-message'>
           {userContext.error && <p>{userContext.error}</p>}
         </div>
-    </div>
-  )
-} else {
+      </div>
+    );
+  } else {
     return (
       <StartCutscene startPressed={startPressed} setStartPressed={setStartPressed} />
-    )
+    );
   }
 };
 
