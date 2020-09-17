@@ -21,5 +21,8 @@
 .action-cell:hover img{
   visibility:visible;
   margin-top: -9vw;
+}
 
+.cell:hover{
+  border: rgba(0, 0, 0, 0.247) dotted 2px;
 }
