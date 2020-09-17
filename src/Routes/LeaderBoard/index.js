@@ -23,9 +23,6 @@ const LeaderBoard = () => {
       let convertedTime = convertTime(player.elapsed_time);
       return (
         <li key={index}>
-          {/* <div className='place-number'>
-            {`${index + 1}.`}
-          </div> */}
           <div className='player-info'>
             <h3>{`${index + 1}. `}{player.user_name}</h3>
             <p>{`${convertedTime.days} day(s), ${convertedTime.hours} hours ${convertedTime.mins} mins`}  {`(${player.dead ? 'deceased' : 'alive'})`}</p>
