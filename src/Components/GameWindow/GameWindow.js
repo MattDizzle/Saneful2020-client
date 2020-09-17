@@ -70,10 +70,13 @@ const GameWindow = () => {
 
   // UI
   const [dialogBoxActive, setDialogBoxActive] = useState(false);
+  const [onlineStoreWindowActive, setOnlineStoreWindowActive] = useState(false);
 
   // actions
   const [nextActions, setNextActions] = useState([]);
   const [pendingActions, setPendingActions] = useState([]);
+  const [nextPromptId, setNextPromptId] = useState(null);
+  const [pendingPromptId, setPendingPromptId] = useState(null);
 
   // time
   const [timeStopped, setTimeStopped] = useState(false);
@@ -182,6 +185,7 @@ const GameWindow = () => {
             //show player a menu that asks if they want to perform the action
             if (nextActions.length > 0 && (playerPos.row === playerTarget.row && playerPos.col === playerTarget.col)) {
               setPendingActions(nextActions);
+              setPendingPromptId(nextPromptId);
               setPlayerHasControl(false);
               setDialogBoxActive(true);
               setTimeStopped(true);
@@ -301,10 +305,11 @@ const GameWindow = () => {
     noAction();
   };
 
-  const handleCellClick = (rowTarget, colTarget, actions) => {
+  const handleCellClick = (rowTarget, colTarget, actions, promptId) => {
     if (playerHasControl) {
       setPlayerTarget({ row: rowTarget, col: colTarget });
       setNextActions(actions);
+      setNextPromptId(promptId);
     }
   };
 
@@ -367,6 +372,7 @@ const GameWindow = () => {
           onClick={handleCellClick}
           hasAction={cell.hasAction}
           actions={cell.actions}
+          promptId={cell.promptId}
         />
       ))
     );
@@ -387,7 +393,8 @@ const GameWindow = () => {
         <HealthMeter currentHealth={health} />
         <button onClick={saveGame}>Save</button>
       </div>
-      {dialogBoxActive && <DialogBox yesClick={yesAction} noClick={noAction} text={pendingActions[0]} />}
+      {dialogBoxActive && <DialogBox pendingPromptId={pendingPromptId} yesClick={yesAction} noClick={noAction} text={pendingActions[0]} setOnlineStoreWindowActive={setOnlineStoreWindowActive} />}
+      {onlineStoreWindowActive && console.log('online store window is active')}
       {gameOver && <GameOverScreen currentTime={elapsedTime} reason={reasonForDeath} />}
 
     </section>
