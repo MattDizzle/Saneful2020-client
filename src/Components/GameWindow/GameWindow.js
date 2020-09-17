@@ -35,6 +35,7 @@ import './GameWindow.scss';
 const GameWindow = () => {
 
   const gameContext = useContext(GameContext);
+
   const {
     current_x_coord,
     current_y_coord,
@@ -195,10 +196,13 @@ const GameWindow = () => {
     };
   });
 
-  const yesAction = async () => {
+  const yesAction = () => {
     DetermineAction(pendingActions[0], executeAction);
-    await setTimeStopped(false);
-    saveGame();
+    updateGameStateInContext(false);
+    setTimeStopped(false);
+    setTimeout(() => {
+      saveGame();
+    }, 1000);
   };
 
   const noAction = () => {

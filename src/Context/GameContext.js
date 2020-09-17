@@ -40,7 +40,7 @@ export class GameProvider extends Component {
         sanity_points_max: 0,
         dead: false,
         character_skin: 1,
-        elapsed_time: 0
+        elapsed_time: 0,
       }
     };
   }
@@ -58,7 +58,7 @@ export class GameProvider extends Component {
         sanity_points_max: gameData.sanity_points_max,
         dead: gameData.dead,
         character_skin: gameData.character_skin,
-        elapsed_time: gameData.elapsed_time
+        elapsed_time: gameData.elapsed_time,
       }
     });
   };
@@ -140,7 +140,7 @@ export class GameProvider extends Component {
       newGame: this.newGame,
       loadGame: this.loadGame,
       saveGame: this.saveGame,
-      currentGameExists: this.currentGameExists
+      currentGameExists: this.currentGameExists,
     };
     return (
       <GameContext.Provider value={value}>
