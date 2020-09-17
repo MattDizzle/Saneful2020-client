@@ -65,12 +65,11 @@ const Dashboard = () => {
         <h3>How to Play</h3>
         <p>
           There are 3 metrics that you must maintain: Health, Sanity, Money
-          All three deplete with time.
+          - all three deplete with time.
         </p>
         <p>If health or sanity drop below 0 you will perish…</p>
         <p>
-          There are multiple ways to increase and decrease your health, sanity and money.
-          It may take a few lives to find a good survival strategy.
+          There are multiple ways to increase and decrease your health, sanity and money and take a few lives to find a good survival strategy... but you are probably smarter than you look!
         </p>
         <p> Beware, difficulty increases with each passing day. </p>
       </div>
