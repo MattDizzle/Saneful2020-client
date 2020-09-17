@@ -1,0 +1,27 @@
+.Dashboard h2{
+  margin: 5vh 0 0 0;
+}
+
+.Dashboard h3{
+  text-decoration: underline;
+}
+
+.write-up{
+  margin: 5vh auto 10vh auto;
+  text-align: left;
+  width: 80%;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.to-game-button{
+  margin-top: 3vh;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .write-up{
+    line-height: 1.7rem;
+  }
+}

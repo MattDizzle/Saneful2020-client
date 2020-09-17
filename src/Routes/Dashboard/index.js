@@ -1,14 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import GameContext from '../../Context/GameContext';
+import UserContext from '../../Context/UserContext';
 import { useHistory } from "react-router-dom";
 
 import './Dashboard.scss';
 
+
 const Dashboard = () => {
   const gameContext = useContext(GameContext);
+  const userContext = useContext(UserContext);
   const history = useHistory();
   const [hasCurrent, setHasCurrent] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
+
+  const username = userContext.user.username;
 
   useEffect(() => {
     determineCurrent();
@@ -54,11 +59,26 @@ const Dashboard = () => {
   return (
     <section className='Dashboard'>
       <h2>Dashboard</h2>
+      <p>Welcome back {username}!</p>
       {hasLoaded && <div>
-        {hasCurrent && <button onClick={handleLoadGame}>Continue</button>}
-        {!hasCurrent && <button onClick={handleNewGame}>New Game</button>}
+        {hasCurrent && <button className='to-game-button' onClick={handleLoadGame}>Continue</button>}
+        {!hasCurrent && <button className='to-game-button' onClick={handleNewGame}>New Game</button>}
       </div>}
       {!hasLoaded && <h3>Loading...</h3>}
+      <div className='write-up'>
+        <h3>The Game</h3>
+        <p>You are living in Los Pixels in the year 2020 during a global pandemic. Your goal is to survive in self quarantine. </p>
+        <h3>How to Play</h3>
+        <p>
+          There are 3 metrics that you must maintain: Health, Sanity, Money
+          - all three deplete with time.
+        </p>
+        <p>If health or sanity drop below 0 you will perish…</p>
+        <p>
+          There are multiple ways to increase and decrease your health, sanity and money and take a few lives to find a good survival strategy... but you are probably smarter than you look!
+        </p>
+        <p> Beware, difficulty increases with each passing day. </p>
+      </div>
     </section>
   );
 };

@@ -1,9 +1,31 @@
-.Leaderboard{
+.LeaderBoard{
   margin: 0 auto;
 }
 
 .leader-list{
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   padding: 0;
-  list-style: none;
+  list-style: upper-latin;
+  width: 90%;
+}
+
+.leader-list li{
+  display: flex;
+  flex-direction: row;
+}
+
+.player-info{
+  text-align: left;
+}
+
+.player-info h3{
+  font-size: 1.1rem;
+}
+
+.player-info p{
+  font-size: 0.8rem;
+  color: darkgray;
+  padding-left: 52px;
 }

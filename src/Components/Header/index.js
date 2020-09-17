@@ -8,7 +8,7 @@ import './Header.scss';
 const Header = () => {
 
   const userContext = useContext(UserContext);
-  const username = userContext.user.username;
+  // const username = userContext.user.username;
 
   const handleLogoutClick = () => {
     userContext.processLogout();
@@ -16,16 +16,16 @@ const Header = () => {
 
   const renderLogoutLink = () => {
     return (
-      <div>
+      <ul className='nav-bar'>
         <li>
           <Link to="/dashboard">Dashboard</Link>
         </li>
         <li>
-          <Link to="/leaderBoard">LeaderBoard</Link>
+          <Link to="/leaderBoard">Leader Board</Link>
         </li>
-        <li>
-          {username}
-        </li>
+        {/* <li>
+            {username}
+          </li> */}
         <li>
           <Link
             onClick={handleLogoutClick}
@@ -33,29 +33,30 @@ const Header = () => {
             Logout
           </Link>
         </li>
-      </div>
+      </ul>
+
     );
   };
 
   const renderLoginLink = () => {
     return (
-      <div>
+      <ul className='nav-bar'>
         <li>
           <div><Link to='/'>Login</Link></div>
+        </li>
+        <li>
           <div><Link to='/register'>Sign up</Link></div>
         </li>
-      </div>
+      </ul>
     );
   };
 
   return (
     <header className='Header'>
       <nav>
-        <ul>
-          {TokenService.hasAuthToken()
-            ? renderLogoutLink()
-            : renderLoginLink()}
-        </ul>
+        {TokenService.hasAuthToken()
+          ? renderLogoutLink()
+          : renderLoginLink()}
       </nav>
     </header >
   );

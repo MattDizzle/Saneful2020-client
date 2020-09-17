@@ -23,7 +23,14 @@ const LeaderBoard = () => {
       let convertedTime = convertTime(player.elapsed_time);
       return (
         <li key={index}>
-          <p>{player.user_name} | {`${convertedTime.days} day(s), ${convertedTime.hours} hours ${convertedTime.mins} mins`} | {player.dead ? 'deceased' : 'alive'}</p>
+          {/* <div className='place-number'>
+            {`${index + 1}.`}
+          </div> */}
+          <div className='player-info'>
+            <h3>{`${index + 1}. `}{player.user_name}</h3>
+            <p>{`${convertedTime.days} day(s), ${convertedTime.hours} hours ${convertedTime.mins} mins`}  {`(${player.dead ? 'deceased' : 'alive'})`}</p>
+          </div>
+
         </li>
       );
     });
@@ -31,9 +38,10 @@ const LeaderBoard = () => {
 
   return (
     <section className='LeaderBoard'>
-      <ul className='leader-list'>
+      <h2>Those who made it the longest...</h2>
+      <ol className='leader-list'>
         {renderList()}
-      </ul>
+      </ol>
     </section>
   );
 };
