@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-* {
-  box-sizing: border-box;
-  font-family: 'Press Start 2P', cursive;
-}
-
 @keyframes bounceIn {
   0% {
     transform: scale(0.1);
@@ -28,6 +23,7 @@
   margin: auto;
   margin-top: 8px;
   min-height: 25px;
+  padding: 10px;
 }
 
 .bounceIn {

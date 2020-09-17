@@ -55,14 +55,14 @@ const Login = (props) => {
           <input
             type="email"
             name="email"
-            placeholder="Enter your email..."
+            placeholder="Enter email..."
             onChange={handleChange}
             value={values.email}
           />
           <input
             type="password"
             name="password"
-            placeholder="Enter your password..."
+            placeholder="Enter password..."
             onChange={handleChange}
             value={values.password}
           />
