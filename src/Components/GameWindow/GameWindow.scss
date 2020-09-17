@@ -1,9 +1,11 @@
 .GameWindow{
   position: relative;
-  margin: 0 20vw;
+  width: 100vw;
 }
 
 .cells{
+  width: 100vw;
+  max-width: 520px;
   display: grid;
   grid-template-rows: repeat(10, 1fr);
   grid-template-columns: repeat(10, 1fr);
@@ -15,16 +17,14 @@
 .UI{
   display: flex;
   flex-direction: column;
-  height: 135px;
-  width: 120px;
-  justify-content: space-between;
+  max-height: 160px;
+  max-width: 130px;
   z-index: 12;
   position: absolute;
   top: 400px; 
   left: 15px;
   background-color: rgba(0, 0, 0, 0.671);
   color: rgb(255, 255, 255);
-  padding: 8px;
 }
 
 .UI p{

@@ -4,9 +4,19 @@
 }
 
 .Player{
+  width: 10vw;
+  max-width: 52px;
   transition: 0.5s;
   z-index: 10;
   position: absolute;
-  top: calc(-11px + calc(52px * var(--top-int)));
-  left: calc(5px + calc(52px * var(--left-int)));
+  top: calc(-3vw + calc(10vw * var(--top-int)));
+  left: calc(1vw + calc(10vw * var(--left-int)));
+}
+
+
+@media only screen and (min-width: 520px) {
+  .Player{
+    top: calc(-11px + calc(52px * var(--top-int)));
+    left: calc(3px + calc(52px * var(--left-int)));
+  }
 }
