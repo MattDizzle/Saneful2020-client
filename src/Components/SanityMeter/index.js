@@ -3,24 +3,29 @@ import React from "react";
 import './SanityMeter.scss';
 
 const SanityMeter = (props) => {
-  const { bgcolor, sanity } = props;
+  const { currentSanity } = props;
 
   const fillerStyles = {
     height: '100%',
-    width: `${sanity}%`,
-    backgroundColor: bgcolor,
+    borderRadius: '10px',
+    transition: '0.25s',
+    width: `${currentSanity}%`,
+    backgroundColor: 'blue',
     textAlign: 'right'
-  }
+  };
 
   return (
     //entire bar
     //completed percentage
-    <div className="barContainer pixel-borders">
-      <div style={fillerStyles}>
-        <span className="barLabel">{`${sanity}`}</span>
+    <div className="title-barContainer">
+      <p>Sanity:</p>
+      <div className="barContainer">
+        <div style={fillerStyles}>
+          <span className="barLabel">{`${currentSanity}`}</span>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default SanityMeter;
