@@ -1,15 +1,17 @@
 .dialog-box-container{
   display: flex;
   flex-direction: column;
-  height: 105px;
-  width: 350px;
-  justify-content: space-between;
+  width: 90vw;
   z-index: 12;
   position: absolute;
-  top: 430px; 
-  left: 160px;
-  background-color: rgba(0, 0, 0, 0.671);
-  color: rgb(255, 255, 255);
+  top: 64vw; 
+  left: 5vw;
+  border-top: rgb(196, 196, 196) solid 2px;
+  border-left: rgb(196, 196, 196) solid 2px;
+  border-right: rgb(114, 114, 114) solid 2px;
+  border-bottom: rgb(114, 114, 114) solid 2px;
+  color: white;
+  background-color: #171058;
   padding: 8px;
 }
 
@@ -22,8 +24,34 @@
 
 .dialog-buttons button{
   width: 80px;
+  border-top: rgb(196, 196, 196) solid 2px;
+  border-left: rgb(196, 196, 196) solid 2px;
+  border-right: rgb(114, 114, 114) solid 2px;
+  border-bottom: rgb(114, 114, 114) solid 2px;
+  color: white;
+  background-color: #171058;
+}
+
+.dialog-buttons button:hover{
+  border-top: rgb(114, 114, 114) solid 2px;
+  border-left: rgb(114, 114, 114) solid 2px;
+  border-right: rgb(196, 196, 196) solid 2px;
+  border-bottom: rgb(196, 196, 196) solid 2px;
+  background-color: #100b3f;
+}
+
+.dialog-buttons button:active{
+  color: gold;
 }
 
 .dialog-box-container p{
-  margin: 0;
+  margin: 5px 0;
+}
+
+@media only screen and (min-width: 520px) {
+  .dialog-box-container{
+    top: 430px; 
+    left: 10px;
+    width: 500px;
+  }
 }
