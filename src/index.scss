@@ -13,11 +13,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   background-color: #060321;
   color: white;
+  width:auto;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 code {
@@ -26,5 +29,5 @@ code {
 }
 
 .error-message{
-  color: crimson;
+  color: rgb(220, 20, 20);
 }

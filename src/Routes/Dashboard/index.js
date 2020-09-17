@@ -1,14 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import GameContext from '../../Context/GameContext';
+import UserContext from '../../Context/UserContext';
 import { useHistory } from "react-router-dom";
 
 import './Dashboard.scss';
 
+
 const Dashboard = () => {
   const gameContext = useContext(GameContext);
+  const userContext = useContext(UserContext);
   const history = useHistory();
   const [hasCurrent, setHasCurrent] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
+
+  const username = userContext.user.username;
 
   useEffect(() => {
     determineCurrent();
@@ -54,6 +59,7 @@ const Dashboard = () => {
   return (
     <section className='Dashboard'>
       <h2>Dashboard</h2>
+      <p>Welcome back {username}!</p>
       {hasLoaded && <div>
         {hasCurrent && <button className='to-game-button' onClick={handleLoadGame}>Continue</button>}
         {!hasCurrent && <button className='to-game-button' onClick={handleNewGame}>New Game</button>}
