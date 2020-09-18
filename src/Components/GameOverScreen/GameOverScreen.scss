@@ -1,8 +1,10 @@
 .game-over-screen{
   display: flex;
   flex-direction: column;
-  height: 545px;
-  width: 522px;
+  width: 100vw;
+  max-width: 520px;
+  height: 105vw;
+  max-height: 540px;
   justify-content: center;
   align-items: center;
   z-index: 12;
