@@ -1,3 +1,5 @@
+@import '../../styles/index.scss'; 
+
 .Header {
   width: 100vw;
 }
@@ -14,10 +16,7 @@
 
 .nav-bar li{
   display: flex;
-  border-top: rgb(196, 196, 196) solid 2px;
-  border-left: rgb(196, 196, 196) solid 2px;
-  border-right: rgb(114, 114, 114) solid 2px;
-  border-bottom: rgb(114, 114, 114) solid 2px;
+  @include borders;
   align-items: center;
   text-align: center;
   justify-content: center;
@@ -29,10 +28,7 @@
 }
 
 .nav-bar li:active{
-  border-top: rgb(114, 114, 114) solid 2px;
-  border-left: rgb(114, 114, 114) solid 2px;
-  border-right: rgb(196, 196, 196) solid 2px;
-  border-bottom: rgb(196, 196, 196) solid 2px;
+  @include borders(rgb(114, 114, 114), rgb(196, 196, 196));
   background-color: #110b47;
 }
 

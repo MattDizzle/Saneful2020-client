@@ -11,11 +11,11 @@ import './Login.scss';
 const Login = (props) => {
   const history = useHistory();
   const userContext = useContext(UserContext);
-  const [startPressed, setStartPressed] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     userContext.setError(null);
+    userContext.setStartClicked(false);
   }, []);
 
   const { values, handleChange, reset } = useForm({ email: "", password: "" });
@@ -47,7 +47,7 @@ const Login = (props) => {
     reset();
   };
 
-  if (startPressed === true) {
+  if (userContext.startClicked === true) {
     return (
       <div className="Login">
         <img src={logo} className="logo" alt="logo" />
@@ -55,27 +55,33 @@ const Login = (props) => {
           <input
             type="email"
             name="email"
-            placeholder="Enter your email..."
+            placeholder="Enter email..."
             onChange={handleChange}
             value={values.email}
           />
           <input
             type="password"
             name="password"
-            placeholder="Enter your password..."
+            placeholder="Enter password..."
             onChange={handleChange}
             value={values.password}
           />
           <button type="submit" className='loginButton'>Log In</button>
+          <div role='alert' className='error-message'>
+            {userContext.error && <p>{userContext.error}</p>}
+          </div>
+          <div className='demo-creds'>
+            <h4>guest account</h4>
+            <p>email: guest@saneful.com</p>
+            <p>password: San3fu!!</p>
+          </div>
         </form>}
-        <div role='alert' className='error-message'>
-          {userContext.error && <p>{userContext.error}</p>}
-        </div>
+
       </div>
     );
   } else {
     return (
-      <StartCutscene startPressed={startPressed} setStartPressed={setStartPressed} />
+      <StartCutscene />
     );
   }
 };

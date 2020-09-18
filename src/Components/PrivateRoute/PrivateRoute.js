@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import UserContext from '../../Context/UserContext';
 
 export default function PrivateRoute({ component, ...props }) {
-  const Component = component
+  const Component = component;
   return (
     <Route
       {...props}
@@ -15,8 +15,8 @@ export default function PrivateRoute({ component, ...props }) {
               : (
                 <Redirect
                   to={{
-                    pathname: '/dashboard',
-                
+                    pathname: '/',
+
                   }}
                 />
               )
@@ -24,5 +24,5 @@ export default function PrivateRoute({ component, ...props }) {
         </UserContext.Consumer>
       )}
     />
-  )
+  );
 };

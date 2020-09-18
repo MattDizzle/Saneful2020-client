@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "expo": "^38.0.10",
     "font-awesome": "^4.7.0",
     "jwt-decode": "^3.0.0-beta.2",
     "node-sass": "^4.14.1",
@@ -14,7 +15,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-test-renderer": "^16.13.1",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "use-sound": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

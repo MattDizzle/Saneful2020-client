@@ -27,16 +27,16 @@ Users lose game when they run out of sanity.
 ## Screenshots
 
 Dash:
-![Saneful Screenshot: Dash]()
+![Saneful Screenshot: Dash](https://github.com/MattDizzle/favicon-host/blob/master/saneful/dashboard.JPG?raw=true)
 
-Login:
-![Saneful Screenshot: Login]()
+Landing:
+![Saneful Screenshot: Landing](https://github.com/MattDizzle/favicon-host/blob/master/saneful/landing-screen.JPG?raw=true)
 
 Game Window:
-![Saneful Screenshot: Game Window]()
+![Saneful Screenshot: Game Window](https://github.com/MattDizzle/favicon-host/blob/master/saneful/gameview.JPG?raw=true)
 
-Signup:
-![Saneful Screenshot: Registration]()
+Leaderboard:
+![Saneful Screenshot: Leaderboard](https://github.com/MattDizzle/favicon-host/blob/master/saneful/leaderboard.JPG?raw=true)
 
 ---
 

@@ -407,11 +407,17 @@ const GameWindow = () => {
       <div className="cells">{renderCells()}</div>
       <Player currentFrame={playerFrameLib[currentPlayerFrame]} />
       <div className='UI'>
-        <TimeMeter currentTime={elapsedTime} />
-        <MoneyMeter currentMoney={money} />
-        <SanityMeter currentSanity={sanity} />
-        <HealthMeter currentHealth={health} />
-        <button onClick={saveGame}>Save</button>
+        <div className='ui-left'>
+          <TimeMeter currentTime={elapsedTime} />
+        </div>
+        <div className='ui-right'>
+          <div className='money-save'>
+            <MoneyMeter currentMoney={money} />
+            <button onClick={saveGame}>Save</button>
+          </div>
+          <SanityMeter currentSanity={sanity} />
+          <HealthMeter currentHealth={health} />
+        </div>
       </div>
       {dialogBoxActive && <DialogBox stateService={stateService} />}
       {onlineStoreWindowActive && console.log('online store window is active')}

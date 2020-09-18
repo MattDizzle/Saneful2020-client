@@ -9,6 +9,7 @@ const UserContext = React.createContext({
   setUser: () => { },
   processLogin: () => { },
   processLogout: () => { },
+  setStartClicked: () => { },
 });
 
 const nullUser = {
@@ -26,6 +27,7 @@ export class UserProvider extends Component {
     const state = {
       user: nullUser,
       error: null,
+      startClicked: true,
     };
 
     const jwtPayload = TokenService.parseAuthToken();
@@ -41,8 +43,11 @@ export class UserProvider extends Component {
   }
 
   setError = error => {
-    console.error(error);
     this.setState({ error });
+  };
+
+  setStartClicked = clicked => {
+    this.setState({ startClicked: clicked });
   };
 
   clearError = () => {
@@ -73,11 +78,13 @@ export class UserProvider extends Component {
     const value = {
       user: this.state.user,
       error: this.state.error,
+      startClicked: this.state.startClicked,
       setError: this.setError,
       clearError: this.clearError,
       setUser: this.setUser,
       processLogin: this.processLogin,
       processLogout: this.processLogout,
+      setStartClicked: this.setStartClicked,
     };
     return (
       <UserContext.Provider value={value}>

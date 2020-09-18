@@ -1,0 +1,34 @@
+.barContainer {
+  width: 100%;
+  background-color: #5F5E7D;
+  margin: 2px 0;
+  border: 3px solid darkgray;
+  border-radius: 11px;
+  border-style: ridge;
+}
+
+.barLabel {
+  color: white;
+  font-size: 0.55rem;
+  margin-right: 5px;
+}
+
+.title-barContainer{
+  display: flex;
+}
+
+
+@media only screen and (min-width: 520px) {
+  .barLabel {
+    font-size: 0.8rem;
+  }
+
+  .barContainer {
+    width: 100%;
+    background-color: #5F5E7D;
+    margin: 5px 0;
+    border: 4px solid darkgray;
+    border-radius: 11px;
+    border-style: ridge;
+  }
+}
