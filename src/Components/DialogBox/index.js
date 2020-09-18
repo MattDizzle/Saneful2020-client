@@ -7,7 +7,9 @@ export default function DialogBox (props) {
 
   const context = useContext(GameContext);
 
-  const [promptId, setPromptId] = useState(props.pendingPromptId);
+  const stateService = props.stateService;
+
+  const [promptId, setPromptId] = useState(stateService.pendingPromptId);
 
   const {
     money_counter,
@@ -17,6 +19,7 @@ export default function DialogBox (props) {
     sanity_points_max,
     elapsed_time,
   } = context.gameData;
+
 
   const promptList = [
     {
@@ -66,6 +69,8 @@ export default function DialogBox (props) {
           shouldExit: true,
           effect: () => {
             console.log('yesss fooddd!!');
+
+            stateService.setHealth(stateService.health + 70);
 
             context.setGameData({
               health_points: health_points + 70,
@@ -129,7 +134,7 @@ export default function DialogBox (props) {
             })
             // missing directiontoface back
 
-            props.setOnlineStoreWindowActive(true);
+            stateService.setOnlineStoreWindowActive(true);
             setPromptId(3);
           }
         },
@@ -177,6 +182,20 @@ export default function DialogBox (props) {
 
   const handleOptionClick = (idx) => {
     prompt.options[idx].effect();
+
+    if (prompt.options[idx].shouldExit) {
+      console.log('next action' + stateService.nextActions);
+      console.log(stateService.nextActions);
+      stateService.setDialogBoxActive(false);
+      stateService.setPlayerHasControl(true);
+      stateService.setNextActions([]);
+      stateService.setPendingActions([]);
+      stateService.setTimeStopped(false);
+
+      setTimeout(() => {
+        console.log('next action' + stateService.nextActions);
+      }, 1000);
+    }
   }
 
   // yes button will be replaced by all action options

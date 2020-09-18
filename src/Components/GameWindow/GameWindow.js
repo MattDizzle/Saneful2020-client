@@ -95,6 +95,26 @@ const GameWindow = () => {
   const [sanityTick, setSanityTick] = useState(0);
   const [moneyTick, setMoneyTick] = useState(0);
 
+  const stateService = {
+    health,
+    sanity,
+    money,
+    pendingPromptId,
+    nextActions,
+    timeStopped, 
+    setHealth,
+    setSanity,
+    setMoney,
+    setElapsedTime,
+    setPendingPromptId,
+    setDialogBoxActive,
+    setOnlineStoreWindowActive,
+    setNextActions,
+    setPendingActions,
+    setPlayerHasControl,
+    setTimeStopped
+  }
+
   /* State End */
 
   let player = document.querySelector('.Player');
@@ -393,7 +413,7 @@ const GameWindow = () => {
         <HealthMeter currentHealth={health} />
         <button onClick={saveGame}>Save</button>
       </div>
-      {dialogBoxActive && <DialogBox pendingPromptId={pendingPromptId} yesClick={yesAction} noClick={noAction} text={pendingActions[0]} setOnlineStoreWindowActive={setOnlineStoreWindowActive} />}
+      {dialogBoxActive && <DialogBox stateService={stateService} />}
       {onlineStoreWindowActive && console.log('online store window is active')}
       {gameOver && <GameOverScreen currentTime={elapsedTime} reason={reasonForDeath} />}
 
