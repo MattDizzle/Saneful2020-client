@@ -16,6 +16,7 @@ const GameContext = React.createContext({
     character_skin: 1,
     elapsed_time: 0,
   },
+
   setGameData: () => { },
   newGame: () => { },
   loadGame: () => { },

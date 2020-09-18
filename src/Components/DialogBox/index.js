@@ -38,7 +38,7 @@ export default function DialogBox (props) {
 
             context.setGameData({
               health_points: health_points - 35,
-              sanity_points: sanity_points + 70,
+              sanity_points: Math.min(sanity_points + 70, context.gameData.sanity_points_max),
               money_counter: money_counter - 20,
               elapsed_time: elapsed_time + 60
             })
@@ -70,14 +70,16 @@ export default function DialogBox (props) {
           effect: () => {
             console.log('yesss fooddd!!');
 
-            stateService.setHealth(stateService.health + 70);
+            stateService.setHealth(Math.min(stateService.health + 70, stateService.maxHealth));
 
             context.setGameData({
-              health_points: health_points + 70,
+              health_points: Math.min(health_points + 70, stateService.maxHealth),
               sanity_points: sanity_points - 20,
               money_counter: money_counter - 35,
               elapsed_time: elapsed_time + 60
             })
+
+            console.log(context.gameData);
             // missing directiontoface back
           }
         },

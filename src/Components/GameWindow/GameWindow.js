@@ -87,7 +87,7 @@ const GameWindow = () => {
 
   // stats
   const [health, setHealth] = useState(health_points);
-  const [sanity, setSanity] = useState(sanity_points);
+  // const [sanity, setSanity] = useState(sanity_points);
   const [money, setMoney] = useState(money_counter);
   const [maxHealth, setMaxHealth] = useState(health_points_max);
   const [maxSanity, setMaxSanity] = useState(sanity_points_max);
@@ -97,13 +97,13 @@ const GameWindow = () => {
 
   const stateService = {
     health,
-    sanity,
     money,
+    maxHealth,
+    maxSanity,
     pendingPromptId,
     nextActions,
-    timeStopped, 
+    timeStopped,
     setHealth,
-    setSanity,
     setMoney,
     setElapsedTime,
     setPendingPromptId,
@@ -140,14 +140,14 @@ const GameWindow = () => {
         setAutoSaveTick(autoSaveTick + 1);
       }
 
-      if (health <= 0 || sanity <= 0) {
-        if (health <= 0)
+      if (gameContext.gameData.health_points <= 0 || gameContext.gameData.sanity_points <= 0) {
+        if (gameContext.gameData.health_points <= 0)
           setReasonForDeath('health');
-        if (sanity <= 0)
+        if (gameContext.gameData.sanity_points <= 0)
           setReasonForDeath('sanity');
         handleGameOver();
       } else {
-        updateGameStateInContext(false);
+        // updateGameStateInContext(false);
         if (!timeStopped) {
           // decrement health due to aging
           if (healthTick === healthInterval) {
@@ -159,7 +159,7 @@ const GameWindow = () => {
 
           // decrement sanity due to being trapped at home
           if (sanityTick === sanityInterval - Math.floor(elapsedTime / 2000)) {
-            setSanity(sanity - 1);
+            gameContext.setGameData({sanity_points: (gameContext.gameData.sanity_points - 1)});
             setSanityTick(0);
           } else {
             setSanityTick(sanityTick + 1);
@@ -220,14 +220,14 @@ const GameWindow = () => {
     };
   });
 
-  const yesAction = () => {
-    DetermineAction(pendingActions[0], executeAction);
-    updateGameStateInContext(false);
-    setTimeStopped(false);
-    setTimeout(() => {
-      saveGame();
-    }, 1000);
-  };
+  // const yesAction = () => {
+  //   DetermineAction(pendingActions[0], executeAction);
+  //   updateGameStateInContext(false);
+  //   setTimeStopped(false);
+  //   setTimeout(() => {
+  //     saveGame();
+  //   }, 1000);
+  // };
 
   const noAction = () => {
     setDialogBoxActive(false);
@@ -240,7 +240,7 @@ const GameWindow = () => {
   const handleGameOver = () => {
     if (live) {
       setGameOver(true);
-      updateGameStateInContext(true);
+      // updateGameStateInContext(true);
       saveGame();
       setTimeStopped(true);
       setLive(false);
@@ -300,30 +300,30 @@ const GameWindow = () => {
       setCurrentPlayerFrame(0);
   };
 
-  const executeAction = (mods) => {
+  // const executeAction = (mods) => {
 
-    // adjust stats
-    let newHealth = mods.healthMod;
-    if (newHealth > maxHealth - health) {
-      newHealth = maxHealth - health;
-    }
+  //   // adjust stats
+  //   let newHealth = mods.healthMod;
+  //   if (newHealth > maxHealth - health) {
+  //     newHealth = maxHealth - health;
+  //   }
 
-    let newSanity = mods.sanityMod;
-    if (newSanity > maxSanity - sanity) {
-      newSanity = maxSanity - sanity;
-    }
+  //   let newSanity = mods.sanityMod;
+  //   if (newSanity > maxSanity - sanity) {
+  //     newSanity = maxSanity - sanity;
+  //   }
 
-    setHealth(health + newHealth);
-    setSanity(sanity + newSanity);
-    setMoney(money + mods.moneyMod);
-    setElapsedTime(elapsedTime + mods.timeMod);
+  //   setHealth(health + newHealth);
+  //   setSanity(sanity + newSanity);
+  //   setMoney(money + mods.moneyMod);
+  //   setElapsedTime(elapsedTime + mods.timeMod);
 
-    // face the correct direction
-    setPlayerFrameLib(c1Frames[mods.directionToFace]);
+  //   // face the correct direction
+  //   setPlayerFrameLib(c1Frames[mods.directionToFace]);
 
-    // complete action
-    noAction();
-  };
+  //   // complete action
+  //   noAction();
+  // };
 
   const handleCellClick = (rowTarget, colTarget, actions, promptId) => {
     if (playerHasControl) {
@@ -357,22 +357,22 @@ const GameWindow = () => {
     }
   };
 
-  const updateGameStateInContext = (deadAlive) => {
-    const gameData = {
-      saved_game_id: gameContext.gameData.saved_game_id,
-      current_x_coord: playerPos.col,
-      current_y_coord: playerPos.row,
-      money_counter: money,
-      health_points: health,
-      health_points_max: maxHealth,
-      sanity_points: sanity,
-      sanity_points_max: maxSanity,
-      dead: deadAlive,
-      character_skin: 1,
-      elapsed_time: elapsedTime
-    };
-    gameContext.setGameData(gameData);
-  };
+  // const updateGameStateInContext = (deadAlive) => {
+  //   const gameData = {
+  //     saved_game_id: gameContext.gameData.saved_game_id,
+  //     current_x_coord: playerPos.col,
+  //     current_y_coord: playerPos.row,
+  //     money_counter: money,
+  //     health_points: health,
+  //     health_points_max: maxHealth,
+  //     sanity_points: sanity,
+  //     sanity_points_max: maxSanity,
+  //     dead: deadAlive,
+  //     character_skin: 1,
+  //     elapsed_time: elapsedTime
+  //   };
+  //   gameContext.setGameData(gameData);
+  // };
 
   const saveGame = () => {
     gameContext.saveGame();
@@ -415,7 +415,7 @@ const GameWindow = () => {
             <MoneyMeter currentMoney={money} />
             <button onClick={saveGame}>Save</button>
           </div>
-          <SanityMeter currentSanity={sanity} />
+          <SanityMeter currentSanity={gameContext.gameData.sanity_points} />
           <HealthMeter currentHealth={health} />
         </div>
       </div>
