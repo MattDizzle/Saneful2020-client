@@ -1,7 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SanityMeter Component Snapshot test Renders the UI as expected 1`] = `
-<p>
-  S:undefined
-</p>
+<div
+  className="title-barContainer"
+>
+  <p>
+    Sanity:
+  </p>
+  <div
+    className="barContainer"
+  >
+    <div
+      style={
+        Object {
+          "backgroundColor": "#250cc7",
+          "borderRadius": "10px",
+          "height": "100%",
+          "textAlign": "right",
+          "transition": "0.25s",
+          "width": "undefined%",
+        }
+      }
+    >
+      <span
+        className="barLabel"
+      >
+        undefined
+      </span>
+    </div>
+  </div>
+</div>
 `;

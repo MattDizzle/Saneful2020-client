@@ -2,6 +2,6 @@
 
 exports[`MoneyMeter Component Snapshot test Renders the UI as expected 1`] = `
 <p>
-  M:$undefined
+  Money: $undefined
 </p>
 `;

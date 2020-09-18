@@ -1,40 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DialogBox Component Snapshot test Renders the UI as expected 1`] = `
-<div
-  className="Login"
->
-  <img
-    alt="logo"
-    className="logo"
-    src="navywhitelogo.png"
-  />
-  <form
-    onSubmit={[Function]}
-  >
-    <input
-      name="email"
-      onChange={[Function]}
-      placeholder="Enter your email..."
-      type="email"
-      value=""
-    />
-    <input
-      name="password"
-      onChange={[Function]}
-      placeholder="Enter your password..."
-      type="password"
-      value=""
-    />
-    <button
-      className="loginButton"
-      type="submit"
-    >
-      Log In
-    </button>
-  </form>
+<section>
   <div
-    role="alert"
+    className="fullscreen-bg"
+  >
+    <video
+      autoPlay={true}
+      className="fullscreen-bg__video"
+      loop={true}
+      muted={true}
+      playsinline={true}
+      src="cutscene_start.mp4"
+      type="video.mp4"
+    />
+    <p>
+      click to start
+    </p>
+  </div>
+  <button
+    className="startButton"
+    onClick={[Function]}
+    type="button"
   />
-</div>
+</section>
 `;

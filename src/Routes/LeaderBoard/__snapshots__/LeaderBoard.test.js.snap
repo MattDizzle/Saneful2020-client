@@ -4,7 +4,10 @@ exports[`LeaderBoard Component Snapshot test Renders the UI as expected 1`] = `
 <section
   className="LeaderBoard"
 >
-  <ul
+  <h2>
+    Those who made it the longest...
+  </h2>
+  <ol
     className="leader-list"
   />
 </section>

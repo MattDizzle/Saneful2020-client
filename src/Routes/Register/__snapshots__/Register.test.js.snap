@@ -15,30 +15,29 @@ exports[`Register Component Snapshot test Renders the UI as expected 1`] = `
     <input
       name="username"
       onChange={[Function]}
-      placeholder="Enter your username..."
+      placeholder="Enter username"
       type="text"
       value=""
     />
     <input
       name="email"
       onChange={[Function]}
-      placeholder="Enter your email..."
+      placeholder="Enter email"
       type="email"
       value=""
     />
     <input
       name="password"
       onChange={[Function]}
-      placeholder="Enter your password..."
+      onKeyUp={[Function]}
+      placeholder="Enter password"
       type="password"
       value=""
     />
-    <button
-      className="registerButton"
-      type="submit"
-    >
-      Register
-    </button>
   </form>
+  <div
+    className="error-message"
+    role="alert"
+  />
 </div>
 `;

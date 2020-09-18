@@ -5,27 +5,25 @@ exports[`Header Component Snapshot test Renders the UI as expected 1`] = `
   className="Header"
 >
   <nav>
-    <ul>
-      <div>
-        <li>
-          <div>
-            <a
-              href="/"
-              onClick={[Function]}
-            >
-              Login
-            </a>
-          </div>
-          <div>
-            <a
-              href="/register"
-              onClick={[Function]}
-            >
-              Sign up
-            </a>
-          </div>
-        </li>
-      </div>
+    <ul
+      className="nav-bar"
+    >
+      <li>
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          Login
+        </a>
+      </li>
+      <li>
+        <a
+          href="/register"
+          onClick={[Function]}
+        >
+          Sign up
+        </a>
+      </li>
     </ul>
   </nav>
 </header>

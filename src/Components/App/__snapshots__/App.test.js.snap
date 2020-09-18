@@ -8,27 +8,25 @@ exports[`App Component Snapshot test Renders the UI as expected 1`] = `
     className="Header"
   >
     <nav>
-      <ul>
-        <div>
-          <li>
-            <div>
-              <a
-                href="/"
-                onClick={[Function]}
-              >
-                Login
-              </a>
-            </div>
-            <div>
-              <a
-                href="/register"
-                onClick={[Function]}
-              >
-                Sign up
-              </a>
-            </div>
-          </li>
-        </div>
+      <ul
+        className="nav-bar"
+      >
+        <li>
+          <a
+            href="/"
+            onClick={[Function]}
+          >
+            Login
+          </a>
+        </li>
+        <li>
+          <a
+            href="/register"
+            onClick={[Function]}
+          >
+            Sign up
+          </a>
+        </li>
       </ul>
     </nav>
   </header>
@@ -47,14 +45,14 @@ exports[`App Component Snapshot test Renders the UI as expected 1`] = `
         <input
           name="email"
           onChange={[Function]}
-          placeholder="Enter your email..."
+          placeholder="Enter email..."
           type="email"
           value=""
         />
         <input
           name="password"
           onChange={[Function]}
-          placeholder="Enter your password..."
+          placeholder="Enter password..."
           type="password"
           value=""
         />
@@ -64,10 +62,24 @@ exports[`App Component Snapshot test Renders the UI as expected 1`] = `
         >
           Log In
         </button>
+        <div
+          className="error-message"
+          role="alert"
+        />
+        <div
+          className="demo-creds"
+        >
+          <h4>
+            guest account
+          </h4>
+          <p>
+            email: guest@saneful.com
+          </p>
+          <p>
+            password: San3fu!!
+          </p>
+        </div>
       </form>
-      <div
-        role="alert"
-      />
     </div>
   </main>
 </div>
