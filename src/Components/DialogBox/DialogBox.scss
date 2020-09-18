@@ -1,3 +1,5 @@
+@import '../../styles/index.scss'; 
+
 .dialog-box-container{
   display: flex;
   flex-direction: column;
@@ -6,10 +8,7 @@
   position: absolute;
   top: 64vw; 
   left: 5vw;
-  border-top: rgb(196, 196, 196) solid 2px;
-  border-left: rgb(196, 196, 196) solid 2px;
-  border-right: rgb(114, 114, 114) solid 2px;
-  border-bottom: rgb(114, 114, 114) solid 2px;
+  @include borders;
   color: white;
   background-color: #171058;
   padding: 8px;
@@ -24,19 +23,13 @@
 
 .dialog-buttons button{
   width: 80px;
-  border-top: rgb(196, 196, 196) solid 2px;
-  border-left: rgb(196, 196, 196) solid 2px;
-  border-right: rgb(114, 114, 114) solid 2px;
-  border-bottom: rgb(114, 114, 114) solid 2px;
+  @include borders;
   color: white;
   background-color: #171058;
 }
 
 .dialog-buttons button:hover{
-  border-top: rgb(114, 114, 114) solid 2px;
-  border-left: rgb(114, 114, 114) solid 2px;
-  border-right: rgb(196, 196, 196) solid 2px;
-  border-bottom: rgb(196, 196, 196) solid 2px;
+  @include borders(rgb(114, 114, 114), rgb(196, 196, 196));
   background-color: #100b3f;
 }
 
