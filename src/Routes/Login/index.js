@@ -11,7 +11,6 @@ import './Login.scss';
 const Login = (props) => {
   const history = useHistory();
   const userContext = useContext(UserContext);
-  const [startPressed, setStartPressed] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -47,7 +46,7 @@ const Login = (props) => {
     reset();
   };
 
-  if (startPressed === true) {
+  if (userContext.startClicked === true) {
     return (
       <div className="Login">
         <img src={logo} className="logo" alt="logo" />
@@ -75,7 +74,7 @@ const Login = (props) => {
     );
   } else {
     return (
-      <StartCutscene startPressed={startPressed} setStartPressed={setStartPressed} />
+      <StartCutscene />
     );
   }
 };

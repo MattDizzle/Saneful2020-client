@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Switch } from "react-router-dom";
-// import GameWindow from '../GameWindow/GameWindow';
 import LeaderBoard from "../../Routes/LeaderBoard";
 import Login from "../../Routes/Login";
 import MainGame from "../../Routes/MainGame";
@@ -9,13 +8,15 @@ import Register from "../../Routes/Register";
 import Header from "../../Components/Header";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import PublicRoute from "../PublicRoute/PublicRoute";
+import UserContext from '../../Context/UserContext';
 
 import "./App.scss";
 
 const App = () => {
+  const context = useContext(UserContext);
   return (
     <div className="App">
-      <Header />
+      {context.startClicked && <Header />}
       <main>
         <Switch>
           <PublicRoute exact path="/" component={Login} />

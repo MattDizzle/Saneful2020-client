@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import UserContext from '../../Context/UserContext';
 import cutscene_start from './cutscene_start.mp4';
 import './StartCutscene.scss';
 
-const StartCutscene = (props) => {
+const StartCutscene = () => {
+  const userContext = useContext(UserContext);
 
   return (
-  <section>
-    <div className="fullscreen-bg">
-      <video autoPlay={true} muted loop src={cutscene_start} className="fullscreen-bg__video" type="video.mp4" />
-    </div>
-    <button className="startButton" type="button" onClick={() => props.setStartPressed(true)}>Start</button>
-  </section>
+    <section>
+      <div className="fullscreen-bg">
+        <video autoPlay={true} muted loop src={cutscene_start} className="fullscreen-bg__video" type="video.mp4" />
+        <p>click to start</p>
+      </div>
+      <button className="startButton" type="button" onClick={() => userContext.setStartClicked(true)}></button>
+
+    </section>
   );
 };
 
