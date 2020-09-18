@@ -8,7 +8,7 @@
 }
 
 .leader-list{
-  max-width: 500px;
+  max-width: 520px;
   margin: 0 auto;
   padding: 0;
 }
@@ -16,7 +16,7 @@
 .leader-list li{
   display: flex;
   flex-direction: row;
-  padding: 0 5%;
+  padding: 0 0 0 4%;
 }
 
 .color-rotate{
@@ -32,7 +32,7 @@
 }
 
 .player-info p{
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: darkgray;
-  padding-left: 52px;
+  padding-left: 42px;
 }
