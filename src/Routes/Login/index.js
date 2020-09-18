@@ -67,10 +67,16 @@ const Login = (props) => {
             value={values.password}
           />
           <button type="submit" className='loginButton'>Log In</button>
+          <div role='alert' className='error-message'>
+            {userContext.error && <p>{userContext.error}</p>}
+          </div>
+          <div className='demo-creds'>
+            <h4>guest account</h4>
+            <p>email: guest@saneful.com</p>
+            <p>password: San3fu!!</p>
+          </div>
         </form>}
-        <div role='alert' className='error-message'>
-          {userContext.error && <p>{userContext.error}</p>}
-        </div>
+
       </div>
     );
   } else {
