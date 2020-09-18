@@ -52,7 +52,7 @@ const Login = (props) => {
   if (userContext.startClicked === true) {
 
 
-  if (startPressed === true) {
+  
 
     return (
       <div className="Login">
@@ -87,11 +87,11 @@ const Login = (props) => {
     );
   } else {
     return (
-
-      <StartCutscene startPressed={startPressed} setStartPressed={setStartPressed} />
+      <StartCutscene />
+      // <StartCutscene startPressed={startPressed} setStartPressed={setStartPressed} />
 
     );
   }
   }
-}
+
 export default Login;
