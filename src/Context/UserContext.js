@@ -27,7 +27,7 @@ export class UserProvider extends Component {
     const state = {
       user: nullUser,
       error: null,
-      startClicked: false,
+      startClicked: true,
     };
 
     const jwtPayload = TokenService.parseAuthToken();

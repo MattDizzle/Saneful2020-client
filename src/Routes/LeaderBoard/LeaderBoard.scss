@@ -4,18 +4,23 @@
 
 .LeaderBoard h2{
   font-size: 1rem;
+  margin: 2.5rem;
 }
 
 .leader-list{
   max-width: 500px;
   margin: 0 auto;
   padding: 0;
-  width: 90%;
 }
 
 .leader-list li{
   display: flex;
   flex-direction: row;
+  padding: 0 5%;
+}
+
+.color-rotate{
+  background-color: rgba(68, 91, 192, 0.274);
 }
 
 .player-info{
@@ -23,11 +28,11 @@
 }
 
 .player-info h3{
-  font-size: 1.1rem;
+  font-size: 0.95rem;
 }
 
 .player-info p{
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: darkgray;
   padding-left: 52px;
 }

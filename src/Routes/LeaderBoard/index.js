@@ -19,15 +19,20 @@ const LeaderBoard = () => {
   }, []);
 
   const renderList = () => {
+    let x = 0;
+    let options = ['', 'color-rotate'];
+
     return list.map((player, index) => {
       let convertedTime = convertTime(player.elapsed_time);
+
+      x = x === 0 ? 1 : 0;
+
       return (
-        <li key={index}>
+        <li key={index} className={options[x]}>
           <div className='player-info'>
             <h3>{`${index + 1}. `}{player.user_name}</h3>
             <p>{`${convertedTime.days} day(s), ${convertedTime.hours} hours ${convertedTime.mins} mins`}  {`(${player.dead ? 'deceased' : 'alive'})`}</p>
           </div>
-
         </li>
       );
     });

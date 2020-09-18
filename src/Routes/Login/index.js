@@ -15,6 +15,7 @@ const Login = (props) => {
 
   useEffect(() => {
     userContext.setError(null);
+    userContext.setStartClicked(false);
   }, []);
 
   const { values, handleChange, reset } = useForm({ email: "", password: "" });
