@@ -10,7 +10,7 @@ const HealthMeter = (props) => {
     borderRadius: '10px',
     transition: '0.25s',
     width: `${currentHealth}%`,
-    backgroundColor: 'red',
+    backgroundColor: '#ab111b',
     textAlign: 'right'
   };
 

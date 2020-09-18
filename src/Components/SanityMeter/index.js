@@ -10,7 +10,7 @@ const SanityMeter = (props) => {
     borderRadius: '10px',
     transition: '0.25s',
     width: `${currentSanity}%`,
-    backgroundColor: 'blue',
+    backgroundColor: '#250cc7',
     textAlign: 'right'
   };
 
