@@ -42,10 +42,10 @@ const Header = () => {
     return (
       <ul className='nav-bar'>
         <li>
-          <div><Link to='/'>Login</Link></div>
+          <Link to='/'>Login</Link>
         </li>
         <li>
-          <div><Link to='/register'>Sign up</Link></div>
+          <Link to='/register'>Sign up</Link>
         </li>
       </ul>
     );

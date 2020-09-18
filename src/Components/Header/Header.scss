@@ -15,26 +15,23 @@
 }
 
 .nav-bar li{
-  display: flex;
-  @include borders;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
   font-size: 0.65rem;
-  padding: 5px;
   line-height: 1.1rem;
   background-color: #171058;
   flex: 1;
 }
 
-.nav-bar li:active{
-  @include borders(rgb(114, 114, 114), rgb(196, 196, 196));
-  background-color: #110b47;
-}
-
 .Header a{
   color: white;
   text-decoration: none;
+  @include borders;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 .Header a:hover{
@@ -45,12 +42,13 @@
 .Header a:active{
   color: gold;
   text-decoration: none;
+  @include borders(rgb(114, 114, 114), rgb(196, 196, 196));
+  background-color: #110b47;
 }
 
 @media only screen and (min-width: 500px) {
   .nav-bar li{
     font-size: 1.1rem;
-    padding: 10px;
     line-height: 1.4rem;
   }
 
