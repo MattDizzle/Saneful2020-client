@@ -5,8 +5,7 @@ import logo from '../../navywhitelogo.png';
 import AuthApiService from '../../services/auth-service';
 import UserContext from '../../Context/UserContext';
 import StartCutscene from '../../Components/StartCutscene/StartCutscene';
-import UIfx from 'uifx';
-import loginAudio from '../../SFX/PremiumBeat_0013_cursor_selection_15.wav';
+
 
 import './Login.scss';
 
@@ -49,13 +48,12 @@ const Login = (props) => {
     reset();
   };
 
-<<<<<<< Updated upstream
+
   if (userContext.startClicked === true) {
-=======
-  const bell = new UIfx(loginAudio, { volume: 0.3, throttleMs: 100});
+
 
   if (startPressed === true) {
->>>>>>> Stashed changes
+
     return (
       <div className="Login">
         <img src={logo} className="logo" alt="logo" />
@@ -89,13 +87,11 @@ const Login = (props) => {
     );
   } else {
     return (
-<<<<<<< Updated upstream
-      <StartCutscene />
-=======
-      <StartCutscene startPressed={startPressed} setStartPressed={setStartPressed} onClick={bell.play()} />
->>>>>>> Stashed changes
+
+      <StartCutscene startPressed={startPressed} setStartPressed={setStartPressed} />
+
     );
   }
-};
-
+  }
+}
 export default Login;
