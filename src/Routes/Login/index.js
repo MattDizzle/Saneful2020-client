@@ -52,7 +52,7 @@ const Login = (props) => {
   if (userContext.startClicked === true) {
 
 
-  
+
 
     return (
       <div className="Login">
@@ -92,6 +92,6 @@ const Login = (props) => {
 
     );
   }
-  }
+};
 
 export default Login;
