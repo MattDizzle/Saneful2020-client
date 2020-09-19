@@ -18,7 +18,11 @@ export default function DialogBox (props) {
     sanity_points,
     sanity_points_max,
     elapsed_time,
-  } = context.gameData;
+    setHealth,
+    setSanity,
+    setMoney,
+    setElapsedTime
+  } = context;
 
   const promptList = [
     {
@@ -35,12 +39,10 @@ export default function DialogBox (props) {
           effect: () => {
             console.log('so relaxing...');
 
-            context.setGameData({
-              health_points: health_points - 35,
-              sanity_points: Math.min(sanity_points + 70, sanity_points_max),
-              money_counter: money_counter - 20,
-              elapsed_time: elapsed_time + 60
-            })
+              setHealth(health_points - 35);
+              setSanity(Math.min(sanity_points + 70, sanity_points_max));
+              setMoney(money_counter - 20);
+              setElapsedTime(elapsed_time + 60);
             // missing directiontoface front
           }
         },
@@ -69,14 +71,11 @@ export default function DialogBox (props) {
           effect: () => {
             console.log('yesss fooddd!!');
 
-            context.setGameData({
-              health_points: Math.min(health_points + 70, health_points_max),
-              sanity_points: sanity_points - 20,
-              money_counter: money_counter - 35,
-              elapsed_time: elapsed_time + 60
-            })
+            setHealth(Math.min(health_points + 70, health_points_max));
+            setSanity(sanity_points - 20);
+            setMoney(money_counter - 35);
+            setElapsedTime(elapsed_time + 60);
 
-            console.log(context.gameData);
             // missing directiontoface back
           }
         },
@@ -105,12 +104,10 @@ export default function DialogBox (props) {
           effect: () => {
             console.log('yay time to work...');
 
-            context.setGameData({
-              health_points: health_points - 20,
-              sanity_points: sanity_points - 35,
-              money_counter: money_counter + 70,
-              elapsed_time: elapsed_time + 60
-            });
+            setHealth(health_points - 20);
+            setSanity(sanity_points - 35);
+            setMoney(money_counter + 70);
+            setElapsedTime(elapsed_time + 60);
             // missing directiontoface back
 
             setPromptId(2);
@@ -125,12 +122,9 @@ export default function DialogBox (props) {
           effect: () => {
             console.log('retail therapy XD');
 
-            context.setGameData({
-              health_points: health_points - 20,
-              sanity_points: Math.min(sanity_points + 10, sanity_points_max),
-              money_counter: money_counter,
-              elapsed_time: elapsed_time + 60
-            })
+            setHealth(health_points - 20);
+            setSanity(Math.min(sanity_points + 10, sanity_points_max));
+            setElapsedTime(elapsed_time + 60);
             // missing directiontoface back
 
             stateService.setOnlineStoreWindowActive(true);
@@ -183,26 +177,17 @@ export default function DialogBox (props) {
     prompt.options[idx].effect();
 
     if (prompt.options[idx].shouldExit) {
-      console.log('next action' + stateService.nextActions);
-      console.log(stateService.nextActions);
       stateService.setDialogBoxActive(false);
       stateService.setPlayerHasControl(true);
       stateService.setNextActions([]);
       stateService.setPendingActions([]);
       stateService.setTimeStopped(false);
-
-      setTimeout(() => {
-        console.log('next action' + stateService.nextActions);
-      }, 1000);
     }
 
     setTimeout(() => {
       context.saveGame();
     }, 1000);
   }
-
-  // yes button will be replaced by all action options
-  // no button will be replaced by a cancel/exit button
 
   return (
     <div className='dialog-box-container'>

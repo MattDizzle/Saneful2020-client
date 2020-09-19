@@ -47,7 +47,7 @@ const GameWindow = () => {
     dead,
     character_skin,
     elapsed_time,
-  } = gameContext.gameData;
+  } = gameContext;
 
   /* State Start */
   const [cells, setCells] = useState(generateCells());
@@ -96,16 +96,9 @@ const GameWindow = () => {
   const [moneyTick, setMoneyTick] = useState(0);
 
   const stateService = {
-    health,
-    money,
-    maxHealth,
-    maxSanity,
     pendingPromptId,
     nextActions,
     timeStopped,
-    setHealth,
-    setMoney,
-    setElapsedTime,
     setPendingPromptId,
     setDialogBoxActive,
     setOnlineStoreWindowActive,
@@ -140,10 +133,10 @@ const GameWindow = () => {
         setAutoSaveTick(autoSaveTick + 1);
       }
 
-      if (gameContext.gameData.health_points <= 0 || gameContext.gameData.sanity_points <= 0) {
-        if (gameContext.gameData.health_points <= 0)
+      if (gameContext.health_points <= 0 || gameContext.sanity_points <= 0) {
+        if (gameContext.health_points <= 0)
           setReasonForDeath('health');
-        if (gameContext.gameData.sanity_points <= 0)
+        if (gameContext.sanity_points <= 0)
           setReasonForDeath('sanity');
         handleGameOver();
       } else {
@@ -151,15 +144,18 @@ const GameWindow = () => {
         if (!timeStopped) {
           // decrement health due to aging
           if (healthTick === healthInterval) {
-            setHealth(health - 1);
+            gameContext.setHealth(gameContext.health_points - 1);
+            // gameContext.setGameData({
+            //   health_points: gameContext.gameData.health_points - 1
+            // })
             setHealthTick(0);
           } else {
             setHealthTick(healthTick + 1);
           }
 
           // decrement sanity due to being trapped at home
-          if (sanityTick === sanityInterval - Math.floor(gameContext.gameData.elapsed_time / 2000)) {
-            gameContext.setGameData({sanity_points: (gameContext.gameData.sanity_points - 1)});
+          if (sanityTick === sanityInterval - Math.floor(gameContext.elapsed_time / 2000)) {
+            gameContext.setSanity(gameContext.sanity_points - 1);
             setSanityTick(0);
           } else {
             setSanityTick(sanityTick + 1);
@@ -168,9 +164,7 @@ const GameWindow = () => {
           // decrement money due to bills
           if (moneyTick === moneyInterval) {
             
-            gameContext.setGameData({
-              money_counter: gameContext.gameData.money_counter - 1
-            });
+            gameContext.setMoney(gameContext.money_counter - 1);
             setMoneyTick(0);
           } else {
             setMoneyTick(moneyTick + 1);
@@ -178,9 +172,7 @@ const GameWindow = () => {
 
           // decrement time because ...time
           if (timeTick === timeInterval) {
-            gameContext.setGameData({
-              elapsed_time: gameContext.gameData.elapsed_time + 1
-            });
+            gameContext.setElapsedTime(gameContext.elapsed_time + 1);
             setTimeTick(0);
           } else {
             setTimeTick(timeTick + 1);
@@ -225,27 +217,9 @@ const GameWindow = () => {
     };
   });
 
-  // const yesAction = () => {
-  //   DetermineAction(pendingActions[0], executeAction);
-  //   updateGameStateInContext(false);
-  //   setTimeStopped(false);
-  //   setTimeout(() => {
-  //     saveGame();
-  //   }, 1000);
-  // };
-
-  const noAction = () => {
-    setDialogBoxActive(false);
-    setPlayerHasControl(true);
-    setNextActions([]);
-    setPendingActions([]);
-    setTimeStopped(false);
-  };
-
   const handleGameOver = () => {
     if (live) {
       setGameOver(true);
-      // updateGameStateInContext(true);
       saveGame();
       setTimeStopped(true);
       setLive(false);
@@ -362,23 +336,6 @@ const GameWindow = () => {
     }
   };
 
-  // const updateGameStateInContext = (deadAlive) => {
-  //   const gameData = {
-  //     saved_game_id: gameContext.gameData.saved_game_id,
-  //     current_x_coord: playerPos.col,
-  //     current_y_coord: playerPos.row,
-  //     money_counter: money,
-  //     health_points: health,
-  //     health_points_max: maxHealth,
-  //     sanity_points: sanity,
-  //     sanity_points_max: maxSanity,
-  //     dead: deadAlive,
-  //     character_skin: 1,
-  //     elapsed_time: elapsedTime
-  //   };
-  //   gameContext.setGameData(gameData);
-  // };
-
   const saveGame = () => {
     gameContext.saveGame();
   };
@@ -413,19 +370,19 @@ const GameWindow = () => {
       <Player currentFrame={playerFrameLib[currentPlayerFrame]} />
       <div className='UI'>
         <div className='ui-left'>
-          <TimeMeter currentTime={gameContext.gameData.elapsed_time} />
+          <TimeMeter currentTime={gameContext.elapsed_time} />
         </div>
         <div className='ui-right'>
           <div className='money-save'>
-            <MoneyMeter currentMoney={gameContext.gameData.money_counter} />
+            <MoneyMeter currentMoney={gameContext.money_counter} />
             <button onClick={saveGame}>Save</button>
           </div>
-          <SanityMeter currentSanity={gameContext.gameData.sanity_points} />
-          <HealthMeter currentHealth={gameContext.gameData.health_points} />
+          <SanityMeter currentSanity={gameContext.sanity_points} />
+          <HealthMeter currentHealth={gameContext.health_points} />
         </div>
       </div>
       {dialogBoxActive && <DialogBox stateService={stateService} />}
-      {gameOver && <GameOverScreen currentTime={gameContext.gameData.elapsed_time} reason={reasonForDeath} />}
+      {gameOver && <GameOverScreen currentTime={gameContext.elapsed_time} reason={reasonForDeath} />}
 
     </section>
   );

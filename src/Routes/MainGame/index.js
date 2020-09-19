@@ -10,7 +10,7 @@ const MainGame = () => {
   const context = useContext(GameContext);
   const history = useHistory();
 
-  if (context.gameData.saved_game_id === 0) {
+  if (context.saved_game_id === 0) {
     context.saveGame();
     history.push('/dashboard');
   }

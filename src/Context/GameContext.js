@@ -3,20 +3,22 @@ import SaveApiService from '../services/save-service';
 
 const GameContext = React.createContext({
 
-  gameData: {
-    saved_game_id: 0,
-    current_x_coord: 0,
-    current_y_coord: 0,
-    money_counter: 0,
-    health_points: 0,
-    health_points_max: 0,
-    sanity_points: 0,
-    sanity_points_max: 0,
-    dead: false,
-    character_skin: 1,
-    elapsed_time: 0,
-  },
+  saved_game_id: 0,
+  current_x_coord: 0,
+  current_y_coord: 0,
+  money_counter: 0,
+  health_points: 0,
+  health_points_max: 0,
+  sanity_points: 0,
+  sanity_points_max: 0,
+  dead: false,
+  character_skin: 1,
+  elapsed_time: 0,
 
+  setHealth: () => { },
+  setSanity: () => { },
+  setMoney: () => { },
+  setElapsedTime: () => { },
   setGameData: () => { },
   newGame: () => { },
   loadGame: () => { },
@@ -30,37 +32,57 @@ export class GameProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameData: {
-        saved_game_id: 0,
-        current_x_coord: 0,
-        current_y_coord: 0,
-        money_counter: 0,
-        health_points: 0,
-        health_points_max: 0,
-        sanity_points: 0,
-        sanity_points_max: 0,
-        dead: false,
-        character_skin: 1,
-        elapsed_time: 0,
-      }
+      saved_game_id: 0,
+      current_x_coord: 0,
+      current_y_coord: 0,
+      money_counter: 0,
+      health_points: 0,
+      health_points_max: 0,
+      sanity_points: 0,
+      sanity_points_max: 0,
+      dead: false,
+      character_skin: 1,
+      elapsed_time: 0,
     };
+  }
+
+  setHealth = (newHealth) => {
+    this.setState({
+      health_points: newHealth
+    });
+  }
+
+  setSanity = (newSanity) => {
+    this.setState({
+      sanity_points: newSanity
+    });
+  }
+
+  setMoney = (newMoney) => {
+    this.setState({
+      money_counter: newMoney
+    });
+  }
+
+  setElapsedTime = (newTime) => {
+    this.setState({
+      elapsed_time: newTime
+    });
   }
 
   setGameData = (gameData) => {
     this.setState({
-      gameData: {
-        saved_game_id: gameData.saved_game_id,
-        current_x_coord: gameData.current_x_coord,
-        current_y_coord: gameData.current_y_coord,
-        money_counter: gameData.money_counter,
-        health_points: gameData.health_points,
-        health_points_max: gameData.health_points_max,
-        sanity_points: gameData.sanity_points,
-        sanity_points_max: gameData.sanity_points_max,
-        dead: gameData.dead,
-        character_skin: gameData.character_skin,
-        elapsed_time: gameData.elapsed_time,
-      }
+      saved_game_id: gameData.saved_game_id,
+      current_x_coord: gameData.current_x_coord,
+      current_y_coord: gameData.current_y_coord,
+      money_counter: gameData.money_counter,
+      health_points: gameData.health_points,
+      health_points_max: gameData.health_points_max,
+      sanity_points: gameData.sanity_points,
+      sanity_points_max: gameData.sanity_points_max,
+      dead: gameData.dead,
+      character_skin: gameData.character_skin,
+      elapsed_time: gameData.elapsed_time,
     });
   };
 
@@ -128,7 +150,7 @@ export class GameProvider extends Component {
 
   saveGame = async () => {
     try {
-      await SaveApiService.patchGameData(this.state.gameData);
+      await SaveApiService.patchGameData(this.state);
     } catch (error) {
       console.error(error);
     }
@@ -136,7 +158,22 @@ export class GameProvider extends Component {
 
   render() {
     const value = {
-      gameData: this.state.gameData,
+      saved_game_id: this.state.saved_game_id,
+      current_x_coord: this.state.current_x_coord,
+      current_y_coord: this.state.current_y_coord,
+      money_counter: this.state.money_counter,
+      health_points: this.state.health_points,
+      health_points_max: this.state.health_points_max,
+      sanity_points: this.state.sanity_points,
+      sanity_points_max: this.state.sanity_points_max,
+      dead: this.state.dead,
+      character_skin: this.state.character_skin,
+      elapsed_time: this.state.elapsed_time,
+
+      setHealth: this.setHealth,
+      setSanity: this.setSanity,
+      setMoney: this.setMoney,
+      setElapsedTime: this.setElapsedTime,
       setGameData: this.setGameData,
       newGame: this.newGame,
       loadGame: this.loadGame,
