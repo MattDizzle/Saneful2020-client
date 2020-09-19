@@ -20,7 +20,6 @@ export default function DialogBox (props) {
     elapsed_time,
   } = context.gameData;
 
-
   const promptList = [
     {
       promptId: 0,
@@ -38,7 +37,7 @@ export default function DialogBox (props) {
 
             context.setGameData({
               health_points: health_points - 35,
-              sanity_points: Math.min(sanity_points + 70, context.gameData.sanity_points_max),
+              sanity_points: Math.min(sanity_points + 70, sanity_points_max),
               money_counter: money_counter - 20,
               elapsed_time: elapsed_time + 60
             })
@@ -70,10 +69,8 @@ export default function DialogBox (props) {
           effect: () => {
             console.log('yesss fooddd!!');
 
-            stateService.setHealth(Math.min(stateService.health + 70, stateService.maxHealth));
-
             context.setGameData({
-              health_points: Math.min(health_points + 70, stateService.maxHealth),
+              health_points: Math.min(health_points + 70, health_points_max),
               sanity_points: sanity_points - 20,
               money_counter: money_counter - 35,
               elapsed_time: elapsed_time + 60
@@ -130,7 +127,7 @@ export default function DialogBox (props) {
 
             context.setGameData({
               health_points: health_points - 20,
-              sanity_points: sanity_points + 10,
+              sanity_points: Math.min(sanity_points + 10, sanity_points_max),
               money_counter: money_counter,
               elapsed_time: elapsed_time + 60
             })
@@ -198,6 +195,10 @@ export default function DialogBox (props) {
         console.log('next action' + stateService.nextActions);
       }, 1000);
     }
+
+    setTimeout(() => {
+      context.saveGame();
+    }, 1000);
   }
 
   // yes button will be replaced by all action options

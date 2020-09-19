@@ -80,17 +80,17 @@ const GameWindow = () => {
 
   // time
   const [timeStopped, setTimeStopped] = useState(false);
-  const [elapsedTime, setElapsedTime] = useState(elapsed_time);
+  // const [elapsedTime, setElapsedTime] = useState(elapsed_time);
   const [timeTick, setTimeTick] = useState(0);
   const [autoSaveTick, setAutoSaveTick] = useState(0);
   const [reasonForDeath, setReasonForDeath] = useState('still alive');
 
   // stats
-  const [health, setHealth] = useState(health_points);
+  // const [health, setHealth] = useState(health_points);
   // const [sanity, setSanity] = useState(sanity_points);
-  const [money, setMoney] = useState(money_counter);
-  const [maxHealth, setMaxHealth] = useState(health_points_max);
-  const [maxSanity, setMaxSanity] = useState(sanity_points_max);
+  // const [money, setMoney] = useState(money_counter);
+  // const [maxHealth, setMaxHealth] = useState(health_points_max);
+  // const [maxSanity, setMaxSanity] = useState(sanity_points_max);
   const [healthTick, setHealthTick] = useState(0);
   const [sanityTick, setSanityTick] = useState(0);
   const [moneyTick, setMoneyTick] = useState(0);
@@ -158,7 +158,7 @@ const GameWindow = () => {
           }
 
           // decrement sanity due to being trapped at home
-          if (sanityTick === sanityInterval - Math.floor(elapsedTime / 2000)) {
+          if (sanityTick === sanityInterval - Math.floor(gameContext.gameData.elapsed_time / 2000)) {
             gameContext.setGameData({sanity_points: (gameContext.gameData.sanity_points - 1)});
             setSanityTick(0);
           } else {
@@ -167,7 +167,10 @@ const GameWindow = () => {
 
           // decrement money due to bills
           if (moneyTick === moneyInterval) {
-            setMoney(money - 1);
+            
+            gameContext.setGameData({
+              money_counter: gameContext.gameData.money_counter - 1
+            });
             setMoneyTick(0);
           } else {
             setMoneyTick(moneyTick + 1);
@@ -175,7 +178,9 @@ const GameWindow = () => {
 
           // decrement time because ...time
           if (timeTick === timeInterval) {
-            setElapsedTime(elapsedTime + 1);
+            gameContext.setGameData({
+              elapsed_time: gameContext.gameData.elapsed_time + 1
+            });
             setTimeTick(0);
           } else {
             setTimeTick(timeTick + 1);
@@ -408,20 +413,19 @@ const GameWindow = () => {
       <Player currentFrame={playerFrameLib[currentPlayerFrame]} />
       <div className='UI'>
         <div className='ui-left'>
-          <TimeMeter currentTime={elapsedTime} />
+          <TimeMeter currentTime={gameContext.gameData.elapsed_time} />
         </div>
         <div className='ui-right'>
           <div className='money-save'>
-            <MoneyMeter currentMoney={money} />
+            <MoneyMeter currentMoney={gameContext.gameData.money_counter} />
             <button onClick={saveGame}>Save</button>
           </div>
           <SanityMeter currentSanity={gameContext.gameData.sanity_points} />
-          <HealthMeter currentHealth={health} />
+          <HealthMeter currentHealth={gameContext.gameData.health_points} />
         </div>
       </div>
       {dialogBoxActive && <DialogBox stateService={stateService} />}
-      {onlineStoreWindowActive && console.log('online store window is active')}
-      {gameOver && <GameOverScreen currentTime={elapsedTime} reason={reasonForDeath} />}
+      {gameOver && <GameOverScreen currentTime={gameContext.gameData.elapsed_time} reason={reasonForDeath} />}
 
     </section>
   );
