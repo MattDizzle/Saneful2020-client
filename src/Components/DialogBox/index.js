@@ -3,7 +3,7 @@ import GameContext from '../../Context/GameContext';
 
 import './DialogBox.scss';
 
-export default function DialogBox (props) {
+export default function DialogBox(props) {
 
   const context = useContext(GameContext);
 
@@ -39,10 +39,10 @@ export default function DialogBox (props) {
           effect: () => {
             console.log('so relaxing...');
 
-              setHealth(health_points - 35);
-              setSanity(Math.min(sanity_points + 70, sanity_points_max));
-              setMoney(money_counter - 20);
-              setElapsedTime(elapsed_time + 60);
+            setHealth(health_points - 35);
+            setSanity(Math.min(sanity_points + 70, sanity_points_max));
+            setMoney(money_counter - 20);
+            setElapsedTime(elapsed_time + 60);
             // missing directiontoface front
           }
         },
@@ -52,11 +52,11 @@ export default function DialogBox (props) {
           pointer: null,
           hasEffect: false,
           shouldExit: true,
-          effect: () => {}
+          effect: () => { }
         }
       ]
     },
-  
+
     {
       promptId: 1,
       name: 'eat food',
@@ -85,11 +85,11 @@ export default function DialogBox (props) {
           pointer: null,
           hasEffect: false,
           shouldExit: true,
-          effect: () => {}
+          effect: () => { }
         }
       ]
     },
-  
+
     {
       promptId: 2,
       name: 'computer decision',
@@ -122,9 +122,9 @@ export default function DialogBox (props) {
           effect: () => {
             console.log('retail therapy XD');
 
-            setHealth(health_points - 20);
-            setSanity(Math.min(sanity_points + 10, sanity_points_max));
-            setElapsedTime(elapsed_time + 60);
+            // setHealth(health_points - 20);
+            // setSanity(Math.min(sanity_points + 10, sanity_points_max));
+            // setElapsedTime(elapsed_time + 60);
             // missing directiontoface back
 
             stateService.setOnlineStoreWindowActive(true);
@@ -137,11 +137,11 @@ export default function DialogBox (props) {
           pointer: null,
           hasEffect: false,
           shouldExit: true,
-          effect: () => {}
+          effect: () => { }
         }
       ]
     },
-  
+
     {
       promptId: 3,
       name: 'go back or finish',
@@ -163,11 +163,11 @@ export default function DialogBox (props) {
           pointer: null,
           hasEffect: false,
           shouldExit: true,
-          effect: () => {}
+          effect: () => { }
         }
       ]
     },
-  ]
+  ];
 
   // need to do a for each for all passed in actions to display each action as a button
 
@@ -187,16 +187,16 @@ export default function DialogBox (props) {
     setTimeout(() => {
       context.saveGame();
     }, 1000);
-  }
+  };
 
   return (
     <div className='dialog-box-container'>
       <p>{prompt.text}</p>
       <div className='prompt-options'>
-        {prompt.options.map((option,idx) => (
+        {prompt.options.map((option, idx) => (
           <button key={idx} className='option-text' onClick={() => handleOptionClick(idx)}>{option.text}</button>
         ))}
       </div>
     </div>
-  ); 
+  );
 };

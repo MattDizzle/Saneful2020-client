@@ -24,6 +24,9 @@ const GameContext = React.createContext({
   loadGame: () => { },
   saveGame: () => { },
   currentGameExists: () => { },
+  setDead: () => { },
+  setX: () => { },
+  setY: () => { }
 });
 
 export default GameContext;
@@ -50,25 +53,37 @@ export class GameProvider extends Component {
     this.setState({
       health_points: newHealth
     });
-  }
+  };
 
   setSanity = (newSanity) => {
     this.setState({
       sanity_points: newSanity
     });
-  }
+  };
 
   setMoney = (newMoney) => {
     this.setState({
       money_counter: newMoney
     });
-  }
+  };
 
   setElapsedTime = (newTime) => {
     this.setState({
       elapsed_time: newTime
     });
-  }
+  };
+
+  setDead = (dead) => {
+    this.setState({ dead });
+  };
+
+  setX = (newX) => {
+    this.setState({ current_x_coord: newX });
+  };
+
+  setY = (newY) => {
+    this.setState({ current_y_coord: newY });
+  };
 
   setGameData = (gameData) => {
     this.setState({
@@ -179,6 +194,9 @@ export class GameProvider extends Component {
       loadGame: this.loadGame,
       saveGame: this.saveGame,
       currentGameExists: this.currentGameExists,
+      setDead: this.setDead,
+      setX: this.setX,
+      setY: this.setY
     };
     return (
       <GameContext.Provider value={value}>

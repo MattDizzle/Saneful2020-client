@@ -9,10 +9,10 @@ const OnlineStoreService = {
   getAvailableItems() {
     return fetch(`${config.API_ENDPOINT}/store`)
       .then(res => res.json())
-        .then(data => {
+      .then(data => {
 
-        })
+      });
   }
-}
+};
 
 export default OnlineStoreService;

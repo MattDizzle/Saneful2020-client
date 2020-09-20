@@ -28,6 +28,7 @@ import SanityMeter from '../SanityMeter';
 import MoneyMeter from '../MoneyMeter';
 import TimeMeter from '../TimeMeter';
 import GameOverScreen from '../GameOverScreen';
+import OnlineStoreWindow from '../OnlineStoreWindow';
 
 //CSS
 import './GameWindow.scss';
@@ -39,14 +40,14 @@ const GameWindow = () => {
   const {
     current_x_coord,
     current_y_coord,
-    money_counter,
-    health_points,
-    health_points_max,
-    sanity_points,
-    sanity_points_max,
-    dead,
-    character_skin,
-    elapsed_time,
+    // money_counter,
+    // health_points,
+    // health_points_max,
+    // sanity_points,
+    // sanity_points_max,
+    // dead,
+    // character_skin,
+    // elapsed_time,
   } = gameContext;
 
   /* State Start */
@@ -80,17 +81,11 @@ const GameWindow = () => {
 
   // time
   const [timeStopped, setTimeStopped] = useState(false);
-  // const [elapsedTime, setElapsedTime] = useState(elapsed_time);
   const [timeTick, setTimeTick] = useState(0);
   const [autoSaveTick, setAutoSaveTick] = useState(0);
   const [reasonForDeath, setReasonForDeath] = useState('still alive');
 
   // stats
-  // const [health, setHealth] = useState(health_points);
-  // const [sanity, setSanity] = useState(sanity_points);
-  // const [money, setMoney] = useState(money_counter);
-  // const [maxHealth, setMaxHealth] = useState(health_points_max);
-  // const [maxSanity, setMaxSanity] = useState(sanity_points_max);
   const [healthTick, setHealthTick] = useState(0);
   const [sanityTick, setSanityTick] = useState(0);
   const [moneyTick, setMoneyTick] = useState(0);
@@ -106,7 +101,7 @@ const GameWindow = () => {
     setPendingActions,
     setPlayerHasControl,
     setTimeStopped
-  }
+  };
 
   /* State End */
 
@@ -163,7 +158,7 @@ const GameWindow = () => {
 
           // decrement money due to bills
           if (moneyTick === moneyInterval) {
-            
+
             gameContext.setMoney(gameContext.money_counter - 1);
             setMoneyTick(0);
           } else {
@@ -220,6 +215,7 @@ const GameWindow = () => {
   const handleGameOver = () => {
     if (live) {
       setGameOver(true);
+      gameContext.setDead(true);
       saveGame();
       setTimeStopped(true);
       setLive(false);
@@ -258,7 +254,12 @@ const GameWindow = () => {
     const newCells = cells.slice(); // copy cells
     const currentCell = newCells[playerPos.row][playerPos.col];
 
-    setPlayerPos({ row: playerPos.row + rowDir, col: playerPos.col + colDir });
+    const newRow = playerPos.row + rowDir;
+    const newCol = playerPos.col + colDir;
+
+    setPlayerPos({ row: newRow, col: newCol });
+    gameContext.setX(newCol);
+    gameContext.setY(newRow);
 
     newCells[playerPos.row][playerPos.col].hasPlayer = true;
 
@@ -382,6 +383,7 @@ const GameWindow = () => {
         </div>
       </div>
       {dialogBoxActive && <DialogBox stateService={stateService} />}
+      {onlineStoreWindowActive && <OnlineStoreWindow />}
       {gameOver && <GameOverScreen currentTime={gameContext.elapsed_time} reason={reasonForDeath} />}
 
     </section>

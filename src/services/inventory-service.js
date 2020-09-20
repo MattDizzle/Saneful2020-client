@@ -9,8 +9,10 @@ const InventoryService = {
   getUsersItems() {
     return fetch(`${config.API_ENDPOINT}/inventory`)
       .then(res => res.json())
-        .then(data => {
-          
-        })
+      .then(data => {
+
+      });
   }
-}
+};
+
+export default InventoryService;

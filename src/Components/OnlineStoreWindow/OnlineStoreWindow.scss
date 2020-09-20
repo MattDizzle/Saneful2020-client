@@ -1,0 +1,84 @@
+@import '../../styles/index.scss'; 
+
+.online-store-window{
+  position: absolute;
+  @include borders();
+  color: white;
+  background-color: #171058;
+  z-index: 15;
+
+  text-align: left;
+
+  width: 95vw;
+  max-width: 500px;
+
+  height: 95vw;
+  max-height: 510px;
+
+  left: 2.5vw;
+  top: 2.5vw;
+  font-size: 0.7rem;
+}
+
+.qty {
+  width: 20%;
+  font-size: 0.6rem;
+  border: none;
+  min-height: 1rem;
+  padding: 0 1vw;
+  margin: 0;
+}
+
+.online-store-form{
+  padding: 5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.online-store-header{
+  flex: 1;
+}
+
+.online-store-footer{
+  flex: 1;
+}
+
+.online-store-items-list{
+  list-style: none;
+  background-color: black;
+  padding: 3vw;
+  overflow: auto;
+  // max-height: 100px;
+  flex: 6;
+}
+
+.online-store-item{
+  margin-bottom: 3vw;
+  line-height: 1rem;
+  padding: 3vw;
+  border: white solid 1px;
+}
+
+@media only screen and (min-width: 520px) {
+  .online-store-window{
+    left: 10px;
+    top: 10px;
+    font-size: 0.85rem;
+  }
+
+  .online-store-form{
+    padding: 20px;
+  }
+
+  .online-store-items-list{
+    padding: 10px;
+    flex: 20;
+  }
+
+  .online-store-item{
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+}
