@@ -31,6 +31,15 @@ const GameContext = React.createContext({
 
 export default GameContext;
 
+// const defaultItem = {
+//   itemID: 1,
+//   name: 'name',
+//   description: 'desc',
+//   qty: 1,
+//   price: 100,
+//   position: 1, // leave this out for now
+// };
+
 export class GameProvider extends Component {
   constructor(props) {
     super(props);
@@ -46,6 +55,8 @@ export class GameProvider extends Component {
       dead: false,
       character_skin: 1,
       elapsed_time: 0,
+      inventory_size: 12,
+      inventory: []
     };
   }
 
@@ -83,6 +94,15 @@ export class GameProvider extends Component {
 
   setY = (newY) => {
     this.setState({ current_y_coord: newY });
+  };
+
+  setInventory = (newItems) => {
+    const newInventory = [
+      ...this.state.inventory,
+      ...newItems
+    ];
+
+    this.setState({ inventory: newInventory });
   };
 
   setGameData = (gameData) => {

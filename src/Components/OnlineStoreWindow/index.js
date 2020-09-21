@@ -9,6 +9,7 @@ export default function OnlineStoreWindow(props) {
   const context = useContext(GameContext);
   const [total, setTotal] = useState(0);
   const [cart, setCart] = useState({});
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     sumTotal();
@@ -39,6 +40,11 @@ export default function OnlineStoreWindow(props) {
     e.preventDefault();
 
     // reduce player money by total
+    if (context.money_counter >= total)
+      context.setMoney(context.money_counter - total);
+    else
+      setError('not enough cash');
+
     // add all items in cart to player inventory
     // use quantity for each item to know how many to add
 
@@ -46,6 +52,8 @@ export default function OnlineStoreWindow(props) {
   };
 
   const quantityChange = e => {
+
+    setError(null);
 
     const currentItem = getItem(Number(e.target.id));
     const itemName = currentItem.name;
@@ -102,6 +110,7 @@ export default function OnlineStoreWindow(props) {
         </ul>
         <div className='online-store-footer'>
           <div>{`Total: $${total}`} </div>
+          <p className='error-message'>{error}</p>
           <input type="submit" value='Place Order' />
         </div>
       </form>
