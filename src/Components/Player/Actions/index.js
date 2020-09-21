@@ -4,7 +4,6 @@ import workOnComp from './workOnComp';
 
 
 const DetermineAction = (actionString, executeAction) => {
-  console.log('determining action...');
   if (actionString === 'do work on the computer') {
     executeAction(workOnComp());
   }

@@ -28,16 +28,6 @@ const Register = () => {
   const handleSubmit = (e) => {
     const { username, email, password, confirmPassword } = values;
     e.preventDefault();
-    console.log(
-      "username: ",
-      username,
-      "email: ",
-      email,
-      "password: ",
-      password,
-      "confirmPassword: ",
-      confirmPassword,
-    );
 
     if (password === confirmPassword) {
       setLoading(true);
@@ -48,14 +38,12 @@ const Register = () => {
         user_password: password
       })
         .then(user => {
-          // console.log(user);
           setLoading(false);
           AuthApiService.postLogin({
             user_email: email,
             user_password: password
           })
             .then(res => {
-              console.log(res);
               userContext.processLogin(res.authToken);
               history.push('/dashboard');
             })

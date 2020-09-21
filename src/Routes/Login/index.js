@@ -28,8 +28,6 @@ const Login = (props) => {
     userContext.setError(null);
     setLoading(true);
 
-    // console.log("email: ", email, "password: ", password);
-
     AuthApiService.postLogin({
       user_email: email,
       user_password: password
@@ -37,7 +35,6 @@ const Login = (props) => {
       .then(res => {
         userContext.processLogin(res.authToken);
         setLoading(false);
-        // console.log('1', useContext.user.user_name);
         history.push('/dashboard');
       })
       .catch(res => {
