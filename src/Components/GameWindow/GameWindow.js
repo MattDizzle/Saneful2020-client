@@ -29,6 +29,7 @@ import MoneyMeter from '../MoneyMeter';
 import TimeMeter from '../TimeMeter';
 import GameOverScreen from '../GameOverScreen';
 import OnlineStoreWindow from '../OnlineStoreWindow';
+import Inventory from '../Inventory';
 
 //CSS
 import './GameWindow.scss';
@@ -72,6 +73,7 @@ const GameWindow = () => {
   // UI
   const [dialogBoxActive, setDialogBoxActive] = useState(false);
   const [onlineStoreWindowActive, setOnlineStoreWindowActive] = useState(false);
+  const [inventoryWindowActive, setInventoryWindowActive] = useState(false);
 
   // actions
   const [nextActions, setNextActions] = useState([]);
@@ -361,6 +363,13 @@ const GameWindow = () => {
     );
   };
 
+  const toggleInventoryWindow = () => {
+    if (inventoryWindowActive)
+      setInventoryWindowActive(false);
+    else
+      setInventoryWindowActive(true);
+  };
+
   // used in .GameWindow element to autoFocus on the div
   const ref1 = useRef();
 
@@ -372,18 +381,20 @@ const GameWindow = () => {
       <div className='UI'>
         <div className='ui-left'>
           <TimeMeter currentTime={gameContext.elapsed_time} />
+          <button onClick={saveGame}>Save</button>
         </div>
         <div className='ui-right'>
           <div className='money-save'>
             <MoneyMeter currentMoney={gameContext.money_counter} />
-            <button onClick={saveGame}>Save</button>
+            <button onClick={toggleInventoryWindow}>Items</button>
           </div>
           <SanityMeter currentSanity={gameContext.sanity_points} />
           <HealthMeter currentHealth={gameContext.health_points} />
         </div>
       </div>
+      {inventoryWindowActive && <Inventory handleClose={setInventoryWindowActive} />}
       {dialogBoxActive && <DialogBox stateService={stateService} />}
-      {onlineStoreWindowActive && <OnlineStoreWindow />}
+      {onlineStoreWindowActive && <OnlineStoreWindow setWindow={setOnlineStoreWindowActive} />}
       {gameOver && <GameOverScreen currentTime={gameContext.elapsed_time} reason={reasonForDeath} />}
 
     </section>

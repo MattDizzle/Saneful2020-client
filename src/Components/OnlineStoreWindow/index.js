@@ -20,14 +20,14 @@ export default function OnlineStoreWindow(props) {
       itemID: 1,
       name: 'Dr.Wiley\'s Self Help Book',
       description: 'A book that will increase the readers max sanity.',
-      price: 2000,
+      price: 2,
       qty: 0
     },
     {
       itemID: 2,
       name: 'Clipp Bar',
       description: 'Tasty snack for people trapped at home.',
-      price: 150,
+      price: 1,
       qty: 0
     }
   ];
@@ -46,9 +46,12 @@ export default function OnlineStoreWindow(props) {
       setError('not enough cash');
 
     // add all items in cart to player inventory
-    // use quantity for each item to know how many to add
+    const cartArr = [
+      ...Object.values(cart)
+    ];
+    context.setInventory(cartArr);
 
-    console.log(total);
+    // use quantity for each item to know how many to add
   };
 
   const quantityChange = e => {
@@ -88,7 +91,10 @@ export default function OnlineStoreWindow(props) {
   return (
     <div className='online-store-window'>
       <form className='online-store-form' onSubmit={handleSubmit}>
-        <div className='online-store-header'>What would you like to buy?</div>
+        <div className='online-store-header'>
+          <p >What would you like to buy?</p>
+          <button onClick={() => props.setWindow(false)}>X</button>
+        </div>
         <ul className='online-store-items-list'>
           {availableStoreItems.map((item, index) => (
             <li className='online-store-item' key={index}>

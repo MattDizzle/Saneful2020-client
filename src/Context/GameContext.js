@@ -14,6 +14,7 @@ const GameContext = React.createContext({
   dead: false,
   character_skin: 1,
   elapsed_time: 0,
+  inventory: [],
 
   setHealth: () => { },
   setSanity: () => { },
@@ -26,7 +27,8 @@ const GameContext = React.createContext({
   currentGameExists: () => { },
   setDead: () => { },
   setX: () => { },
-  setY: () => { }
+  setY: () => { },
+  setInventory: () => { }
 });
 
 export default GameContext;
@@ -55,8 +57,23 @@ export class GameProvider extends Component {
       dead: false,
       character_skin: 1,
       elapsed_time: 0,
-      inventory_size: 12,
-      inventory: []
+      inventory: [
+        {
+          itemID: 1,
+          name: 'Dr.Wiley\'s Self Help Book',
+          description: 'A book that will increase the readers max sanity.',
+          price: 2,
+          qty: 0
+
+        },
+        {
+          itemID: 2,
+          name: 'Clipp Bar',
+          description: 'Tasty snack for people trapped at home.',
+          price: 1,
+          qty: 0
+        }
+      ]
     };
   }
 
@@ -131,7 +148,8 @@ export class GameProvider extends Component {
     sanity_points_max: 100,
     dead: false,
     character_skin: 1, //this will be passed in by a selection by the user when they create a new game
-    elapsed_time: 0
+    elapsed_time: 0,
+    inventory: []
   }) => {
     let result;
 
@@ -180,7 +198,6 @@ export class GameProvider extends Component {
     } catch (error) {
       console.error(error);
     }
-
   };
 
   saveGame = async () => {
@@ -204,6 +221,7 @@ export class GameProvider extends Component {
       dead: this.state.dead,
       character_skin: this.state.character_skin,
       elapsed_time: this.state.elapsed_time,
+      inventory: this.state.inventory,
 
       setHealth: this.setHealth,
       setSanity: this.setSanity,
@@ -216,7 +234,8 @@ export class GameProvider extends Component {
       currentGameExists: this.currentGameExists,
       setDead: this.setDead,
       setX: this.setX,
-      setY: this.setY
+      setY: this.setY,
+      setInventory: this.setInventory
     };
     return (
       <GameContext.Provider value={value}>
