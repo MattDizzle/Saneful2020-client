@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DialogBox Component Snapshot test Renders the UI as expected 1`] = `
+<div
+  className="dialog-box-container"
+>
+  <p>
+    Text for an hour?
+  </p>
+  <div
+    className="dialog-buttons"
+  >
+    <button>
+      Yes
+    </button>
+    <button>
+      No
+    </button>
+  </div>
+</div>
+`;

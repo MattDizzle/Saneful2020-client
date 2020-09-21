@@ -102,7 +102,8 @@ const GameWindow = () => {
   );
 
   const start = () => {
-    ref1.current.focus(); // auto focus on game window div at game load time so that keyboard movement works immediately
+    if (ref1 && ref1.current)
+      ref1.current.focus(); // auto focus on game window div at game load time so that keyboard movement works immediately
     setLive(true);
     setCurrentPlayerFrame(0);
     setPlayerFrameLib(c1Frames.right);
