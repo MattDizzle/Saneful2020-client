@@ -47,10 +47,6 @@ const Login = (props) => {
 
 
   if (userContext.startClicked === true) {
-
-
-
-
     return (
       <div className="Login">
         <img src={logo} className="logo" alt="logo" />
