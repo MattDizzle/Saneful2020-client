@@ -1,7 +1,4 @@
 import config from '../config';
-// const fetch = require("fetch")
-// import fetch from 'node-fetch'
-
 
 const AuthApiService = {
   postUser(user) {
