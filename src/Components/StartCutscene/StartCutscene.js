@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import UserContext from '../../Context/UserContext';
-import cutscene_start from './cutscene_start.mp4';
+import cutscene_start from './saneful-stars.mp4';
 import './StartCutscene.scss';
 
 const StartCutscene = () => {
